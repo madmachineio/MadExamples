@@ -4,7 +4,7 @@
 import SwiftIO
 
 /// Initialize the onboard green LED with other parameters set to default.
-let green = DigitalOut(.GREEN)
+let green = DigitalOut(Id.GREEN)
 
 /// Blink the LED over and over again.
 while true {

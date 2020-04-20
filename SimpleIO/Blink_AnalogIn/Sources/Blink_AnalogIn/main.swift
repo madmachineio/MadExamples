@@ -4,8 +4,8 @@
 import SwiftIO
 
 /// Initialize an analog input and a digital output pin the components are connected to,
-let sensor = AnalogIn(.A0)
-let led = DigitalOut(.D0)
+let sensor = AnalogIn(Id.A0)
+let led = DigitalOut(Id.D0)
 
 /// Enable the LED to blink over and over again.
 while true {

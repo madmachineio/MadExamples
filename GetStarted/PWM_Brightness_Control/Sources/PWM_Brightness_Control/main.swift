@@ -4,7 +4,7 @@
 import SwiftIO
 
 /// Initialize the PWM pin the LED is connected to, with other parameters set to default.
-let led = PWMOut(.PWM0)
+let led = PWMOut(Id.PWM0)
 
 /// Initialize a variable to store the value of duty cycle.
 var value: Float = 0.0

@@ -4,10 +4,10 @@
 import SwiftIO
 
 /// Initialize the red onboard LED.
-let red = DigitalOut(.RED)
+let red = DigitalOut(Id.RED)
 
 /// Initialize a digital input pin D0 the button is connected to.
-let button = DigitalIn(.D0)
+let button = DigitalIn(Id.D0)
 
 /// Allow the button to control the LED all the time.
 while true {

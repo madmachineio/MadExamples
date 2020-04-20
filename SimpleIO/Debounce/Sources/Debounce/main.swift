@@ -4,10 +4,10 @@
 import SwiftIO
 
 /// Initialize the red onboard LED.
-let red = DigitalOut(.RED)
+let red = DigitalOut(Id.RED)
 
 /// Initialize a digital input pin D0 the button is connected to.
-let button = DigitalIn(.D0, mode: .pullUp)
+let button = DigitalIn(Id.D0, mode: .pullUp)
 
 /// Declare the values in order to record and judge the button state.
 var count = 0

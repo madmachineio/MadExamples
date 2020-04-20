@@ -4,7 +4,7 @@
 import SwiftIO
 
 /// Initialize the pin D0 as a digital input pin.
-let pin = DigitalIn(.D0)
+let pin = DigitalIn(Id.D0)
 
 /// read the input every second.
 while true {

@@ -4,7 +4,7 @@
 import SwiftIO
 
 /// Initialize the pin A0 as a analog input pin.
-let pin = AnalogIn(.A0)
+let pin = AnalogIn(Id.A0)
 
 /// Read the input voltage every second.
 while true {

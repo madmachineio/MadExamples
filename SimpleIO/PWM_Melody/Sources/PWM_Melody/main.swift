@@ -4,7 +4,7 @@
 import SwiftIO
 
 /// Initialize a PWM output pin the speaker is connected to.
-let speaker = PWMOut(.PWM0)
+let speaker = PWMOut(Id.PWM0)
 
 /// Specify several frequencies corresponding to each note of the melody. 
 let fre = [

@@ -4,7 +4,7 @@
 import SwiftIO
 
 /// Initialize the red onboard LED and a timer to set interrupt.
-let red = DigitalOut(.RED)
+let red = DigitalOut(Id.RED)
 let timer = Timer()
 
 /// Raise the interrupt to turn on or off the LED every second.

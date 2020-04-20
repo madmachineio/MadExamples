@@ -4,9 +4,9 @@
 import SwiftIO
 
 /// Initialize the pins the LEDs are connected to and put them in a array.
-let red = PWMOut(.PWM0)
-let green = PWMOut(.PWM1)
-let blue = PWMOut(.PWM2)
+let red = PWMOut(Id.PWM0)
+let green = PWMOut(Id.PWM1)
+let blue = PWMOut(Id.PWM2)
 let leds = [red, green, blue]
 
 /// Declare a variable to store the value of duty cycle.
