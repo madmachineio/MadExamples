@@ -16,9 +16,9 @@ let fre = [
 
 /// Allow the speaker to repeat the melody again and again.
 while true {
-    for i in 0..<fre.count {
+    for f in fre {
         // Change the frequency and the duty cycle of output to produce each note.
-        speaker.set(frequency: fre[i], dutycycle: 0.5)
+        speaker.set(frequency: f, dutycycle: 0.5)
         sleep(ms: 250)
     }
 }

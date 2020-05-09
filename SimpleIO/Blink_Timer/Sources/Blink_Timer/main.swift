@@ -13,3 +13,6 @@ timer.setInterrupt(ms: 1000) {
 }
 
 
+while true {
+
+}
