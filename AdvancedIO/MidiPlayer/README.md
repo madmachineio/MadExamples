@@ -1,6 +1,6 @@
-# MidePlayer
+# MidiPlayer
 
-This demo uses multiple PWM channels to prodece audio from MIDI files. A MIDI exporter program is needed to generate a .swift file which is compiled with our project.
+This demo uses multiple PWM channels to produce audio from MIDI file. A MIDI exporter program is needed to generate a .swift file which is compiled with the project.
 
 The PWM outputs are combined and amplified by LM386 audio amplifier.
 
