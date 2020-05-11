@@ -18,11 +18,14 @@ make
 ## Generate MIDI data file
 
 ```
-ExportMidiData TheOldDriver.mid
+cd ExportMidi
+./ExportMidiData TheOldDriver.mid
 mv MidiData.swift ../Sources/MidiPlayer
 ```
 
 
 ## Reference Project
+
 [Tiva-C-Embedded](https://github.com/jspicer-ltu/Tiva-C-Embedded/tree/master/Experiment16-PWM-Music)
+
 [midifile](https://github.com/craigsapp/midifile)
