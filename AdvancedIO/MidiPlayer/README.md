@@ -4,7 +4,7 @@ This demo uses multiple PWM channels to produce audio from MIDI file. A MIDI exp
 
 The PWM outputs are combined and amplified by LM386 audio amplifier.
 
-![image](https://github.com/madmachineio/Examples/tree/master/AdvancedIO/MidiPlayer/Amplifier.png)
+![image](https://raw.githubusercontent.com/madmachineio/Examples/master/AdvancedIO/MidiPlayer/Amplifier.png)
 
 
 ## Compile the ExporterMidiData
