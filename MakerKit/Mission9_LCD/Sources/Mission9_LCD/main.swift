@@ -18,8 +18,11 @@ import SwiftIO
 
 // I2C (I square C) is a two wire protocol to communicate between different devices.    
 let i2c = I2C(Id.I2C0)
-let lcd = LCD16X02(i2c)
+let lcd = LCD1602(i2c)
 
 // print a message to the LCD.
-lcd.print("Hello World!", x: 0, y: 0)         // set up the LCD's number of columns and rows
+lcd.write(x: 0, y: 0, "Hello World!")         // set up the LCD's number of columns and rows
 
+while true {
+
+}
