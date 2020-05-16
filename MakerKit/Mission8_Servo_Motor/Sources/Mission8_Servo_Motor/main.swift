@@ -30,12 +30,12 @@ let a0 = AnalogIn(Id.A0)        // reads the value of the potentiometer
 // the value is LOW. At the beginning of each cycle, the signal is HIGH for a time
 // between 1 and 2 milliseconds. At 1 millisecond it represents 0 degrees and at 2 milliseconds
 // it represents 180 degrees. In between, it represents the value from 0–180.    
-let servo = PWMOut(Id.PWM6, frequency: 20000, dutycycle: 1000)
+let servo = PWMOut(Id.PWM6)
 
 while true {
     let value = a0.readPercent()
     let pulse = Float(500 + 2000 * value)
-    servo.set(frequency: 20000, dutycycle: pulse)        // sets the servo position according to the scaled value
+    servo.set(period:20000,pulse:Int(pulse))        // sets the servo position according to the scaled value
 
     sleep(ms: 100)
 }
