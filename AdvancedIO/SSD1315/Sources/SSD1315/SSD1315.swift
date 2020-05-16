@@ -59,6 +59,7 @@ final class SSD1315{
         config.forEach { item in
             writeConfig(item)
         }
+        clearScreen()
     }
 
     public func reset() {
