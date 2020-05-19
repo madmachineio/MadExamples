@@ -24,13 +24,13 @@ let a0 = AnalogIn(Id.A0)
 // used in various applications. For example, the PWM signal can be used to configure a server,
 // or to control the dimming of a LED light.
 // set PWM parameters:    
-let buzzer = PWMOut(Id.PWM2, frequency: 1000, dutycycle: 500)
+let buzzer = PWMOut(Id.PWM2)
 
 while true {
     // read the input voltage:
     let value = a0.readPercent()
-    let frequencyX = Int(1000 + 2000 * value)		// convert float type to UInt type
-    buzzer.set(frequency: frequencyX, dutycycle: 0.5)        // reset PWM parameters
+    let frequency = Int(1000 + 2000 * value)		// convert float type to UInt type
+    buzzer.set(period: frequency, pulse: frequency/2)       // reset PWM parameters
 
     sleep(ms: 50)
 }
