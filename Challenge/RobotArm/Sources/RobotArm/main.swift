@@ -58,7 +58,6 @@ func getKeyValue() -> KeyValue {
 }
 
 func handlKey(_ action: KeyValue) {
-
     switch action {
         case .forward:
         step0 = -stepValue
@@ -90,8 +89,7 @@ func setServoPulse(_ channel: Int, _ pulse: Int) {
     }
 
     pwms[channel].set(period: 20_000, pulse: pulse)
-} 
-
+}
 
 func timerHandler() {
     if step0 != 0 {
@@ -122,13 +120,12 @@ func timerHandler() {
         setServoPulse(3, pos3)
     }
 }
+timer.setInterrupt(ms: 20, timerHandler)
 
 
 for channel in 0..<pwms.count {
     pwms[channel].set(period: 20_000, pulse: 1500)
 }
-
-timer.setInterrupt(ms: 20, timerHandler)
 
 while true {
     stepValue = Int(100 * knob.readPercent())
