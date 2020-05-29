@@ -19,7 +19,7 @@
 import SwiftIO
 
 let a0 = AnalogIn(Id.A0)
-let motor = PWMOut(Id.PWM2, frequency: 1000, dutycycle: 0)
+let motor = PWMOut(Id.PWM2B, frequency: 1000, dutycycle: 0)
 
 while true {
     let value = a0.readPercent()

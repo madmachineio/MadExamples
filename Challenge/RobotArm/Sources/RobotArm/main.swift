@@ -13,10 +13,10 @@ let keys = [
 ]
 
 let pwms = [
-    PWMOut(Id.PWM2),
-    PWMOut(Id.PWM3),
-    PWMOut(Id.PWM4),
-    PWMOut(Id.PWM5)
+    PWMOut(Id.PWM2B),
+    PWMOut(Id.PWM2A),
+    PWMOut(Id.PWM3B),
+    PWMOut(Id.PWM3A)
 ]
 
 let knob = AnalogIn(Id.A0)

@@ -5,7 +5,7 @@ import SwiftIO
 
 /// Initialize an analog input and a digital output pin the components are connected to.
 let sensor = AnalogIn(Id.A0)
-let led = PWMOut(Id.PWM0)
+let led = PWMOut(Id.PWM0A)
 
 /// Allow the LED brightness control all the time.
 while true {

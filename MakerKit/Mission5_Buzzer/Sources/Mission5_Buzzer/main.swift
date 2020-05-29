@@ -24,7 +24,7 @@ let a0 = AnalogIn(Id.A0)
 // used in various applications. For example, the PWM signal can be used to configure a server,
 // or to control the dimming of a LED light.
 // set PWM parameters:    
-let buzzer = PWMOut(Id.PWM2)
+let buzzer = PWMOut(Id.PWM2B)
 
 while true {
     // read the input voltage:
