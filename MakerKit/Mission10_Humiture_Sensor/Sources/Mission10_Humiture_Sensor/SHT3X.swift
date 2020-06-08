@@ -1,95 +1,61 @@
-/*
-SHT3x-DIS is the next generation of Sensirion’s temperature and humidity sensors. It builds on a new sensor chip that is at the heart of Sensirion’s new humidity and temperature platform.The SHT3x-DIS has increased intelligence, reliability and improved accuracy specifications compared to its predecessor.Its functionality includes enhanced signal processing, two distinctive and user selectable I2C addresses and communication speeds of up to 1 MHz.
-*/
+/// This is the library for SHT31 digital humidity and temperature Sensor. 
+/// It supports I2C protocol. Refer to the datasheet for more detailed information.
 
 import SwiftIO
 
-class SHT3X{
-        
-      private enum Address{
-        static let SHT3X_ADDRESS_A: UInt8 = 0x44
-        static let SHT3X_ADDRESS_B: UInt8 = 0x45
-        static let SHT3X_GENERALL_CALL_ADDRESS: UInt16 = 0x0006
+class SHT3x {
+	// Some common command with 16-bit data used to communicate with the sensor.
+    private enum Command {
+        static let readStatus: UInt16 = 0xF32D
+        static let clearStatus: UInt16 = 0x3041
+        static let softReset: UInt16 = 0x30A2
+        static let heaterEnable: UInt16 = 0x306D
+        static let heaterDisable: UInt16 = 0x3066
+        // high repeatability measurement with clock stretching disabled.
+        static let measurement: UInt16 = 0x2400
+
     }
     
-    private enum Comman{
-        static let Mode_Set_A:UInt16 = 0x2C0D 		// set as Single Shot Mode
-        static let Mode_Set_B:UInt16 = 0x2322		// set shot four times per second
-        static let Fetch_Data:UInt16 = 0xE000		// get the data
-        static let ART_ON:UInt16 = 0x2B32
-        static let Break_Periodoc_mode:UInt16 = 0x3093
-        static let Soft_Reset:UInt16 = 0x30A2 		// soft reset
-        static let Heater_Enable:UInt16 = 0x306D
-        static let Heater_Disable:UInt16 = 0x3066
-        static let Read_Status:UInt16 = 0xF32D
-        static let Clear_status:UInt16 = 0x3041
+    // SHT31 Default Address.
+    let address: UInt8 = 0x44
+	let i2c: I2C
+    
+    // Initialize the I2C bus and reset the sensor to prepare for the following commands.
+    init(_ i2c: I2C) {
+        self.i2c = i2c
+        writeCommand(Command.softReset)
+        sleep(ms: 10)
     }
     
-    private enum Flag{
-        static let R_H:Int = 0
-        static let T_C:Int = 1
-        static let T_F:Int = 2
-        
-        static let CRC_ON:Int = 1
-        static let CRC_OFF:Int = 0
-        
-        static let ACK:Int = 1
-        static let NACK:Int = 0
-        
-        static let write:Int = 0
-        static let read:Int = 1
-        
-        static let Repeatability_Low:Int = 0
-        static let Repeatability_Medium:Int = 1
-        static let Repeatability_High:Int = 2
-        
-        static let MPS_0_5:Int = 0
-        static let MPS_1:Int = 1
-        static let MPS_2:Int = 2
-        static let MPS_4:Int = 3
-        static let MPS_10:Int = 4
-        
-        static let CRC_Statues:Int = 0
-        static let Command_statues:Int = 1
-    }
-        
-   /* private enum Data_Process{
-        static let SHT3X_TC(date) = (175 * (float)date / 65535 -45)
-        static let SHT3X_TC(date) = (315 * (float)date / 65535 -49)
-        static let SHT3X_TC(date) = (100 * (float)date / 65535)
-    }*/
-    
-    private enum etI2cAck{
-        static let ACK:Int = 0
-        static let NACK:Int = 1
+	// Split the 16-bit data into two 8-bit data. 
+    // Write the data to the default address of the sensor.
+    func writeCommand(_ value: UInt16) {
+        let array: [UInt8] = [UInt8(value >> 8), UInt8(value & 0xFF)]
+        i2c.write(array, to: address)
     }
     
-  	let i2c: I2C
-  	let address: UInt8 = 0x44
-  	
-  	init(_ i2c: I2C) {
-      	self.i2c = i2c
-    }
-  
-  	func writeCommand(_ cmd: UInt16) {
-      	let array: [UInt8] = [UInt8(cmd >> 8), UInt8(cmd & 0xFF)]
-      	i2c.write(array, to: address)
-    }
-  
-  	func readStatus() -> UInt32 {
-      	writeCommand(0x3780)
-      	let array = i2c.read(count: 2, from: address)
-      	let value: UInt32 = UInt32(array[0] << 16) | UInt32(array[1])
-      	return value
+	// Send the command to start the measurement. The data returned will be stored in 6 bytes. 
+    // The first two bytes are reserved for temperature.
+    // Convert the data into a float representing the current temperature.
+    func readTemperature() -> Float {
+        writeCommand(Command.measurement)
+        sleep(ms: 20)
+        let array = i2c.read(count: 6, from: address)
+        let value = UInt16(array[0]) << 8 | UInt16(array[1])
+        let temp: Float = 175.0 / 65535.0 * Float(value) - 45.0
+        return temp
     }
     
-	func Init(){
-        writeCommand(0x44)
-        sleep(ms: 1)
-   		writeCommand(0x2322)
-   		sleep(ms: 1)
-   		writeCommand(0x89)
-   		sleep(ms: 1)
-     	writeCommand(0xE000)
+	// Send the command to start the measurement. The data returned will be stored in 6 bytes. 
+    // The fourth and fifth bytes are reserved for humidity.
+    // Convert the data into a float representing the current humidity.
+    func readHumidity() -> Float {
+        writeCommand(Command.measurement)
+        sleep(ms: 20)
+        let array = i2c.read(count: 6, from: address)
+        let value = UInt16(array[3]) << 8 | UInt16(array[4])
+        let humidity: Float = 100.0 * Float(value) / 65535.0
+        return humidity
     }
+
 }

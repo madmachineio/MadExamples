@@ -1,8 +1,7 @@
 /*
   Mission7 DC Motor
 
-  What you should see?
-  Turning the potentiometer will cause the motor rotate in a different speed.
+  Turn the potentiometer and the motor will rotate in a different speed.
 
   The circuit:
   - Use Potentiometer Module, and connect it to an Analog Jack.
@@ -11,18 +10,20 @@
   created 2019
   by Orange J
 
-  Try changing the motor rotate in a diverse direction. What else can you do?
+  Try to change the motor rotate in a diverse direction.
   This example code is in the public domain.
-  Visit madmachine.io for more.
+  Visit madmachine.io for more info.
 */
 
 import SwiftIO
 
+// Initialize the analog pin and the PWM pin 
 let a0 = AnalogIn(Id.A0)
-let motor = PWMOut(Id.PWM2B, frequency: 1000, dutycycle: 0)
+let motor = PWMOut(Id.PWM2B)
 
 while true {
+    // Read the input value and use it to set the duty cycle of pwm.
     let value = a0.readPercent()
-    motor.setDutycycle(value)        // public func setDutycycle(_ dutycycle: Float)
+    motor.setDutycycle(value) 
     sleep(ms: 50)
 }

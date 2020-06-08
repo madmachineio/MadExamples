@@ -1,35 +1,35 @@
 /*
-  Mission1 Blinking RGB LED
+  Mission1 Blink RGB LED
 
-  What you should see?
-  The LED will flash on for 1 second, then off for 1 second. The color is blue.
+  The blue LED will flash on for 1 second, then off for 1 second.
 
   The circuit:
   - Use the onboard RGB LED.
   - Note: SwiftIO have an on-board RGB LED you can control.
+    The onboard LED will be on when the value is set to false.
 
   created 2019
   by Orange J
 
-  Try changing the RGB Led’s color to Red, Green, and Blue. 
+  Try to change the RGB Led’s color to Red, Green, and Blue. 
   Add a blinking loop and see what will happen. This example code is in the 
-  public domain. Visit madmachine.io for more.
+  public domain. Visit madmachine.io for more info.
 */
 
 import SwiftIO
 
 
-// initiate the blue LED and set led as Blue:
+// initialize the blue LED
 let led = DigitalOut(Id.BLUE)
 
 while true {
-     // here is where you'd put code that needs to be running all the time.
+     // The code here will run all the time.
 
-     // set Blue LED off
+     // Set Blue LED off
      led.write(true)
-     sleep(ms: 1000)	// interval at which to blink (milliseconds)
+     sleep(ms: 1000)	// Interval of LED blink (milliseconds)
 
-     // set Blue LED on
+     // Set Blue LED on
      led.write(false)
      sleep(ms: 1000)
 }
