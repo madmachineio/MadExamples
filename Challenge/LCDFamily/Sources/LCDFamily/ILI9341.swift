@@ -132,15 +132,15 @@ final class ILI9341 {
         let x1 = UInt16(x + w - 1)
         let y1 = UInt16(y + h - 1)
 
-        writeCommand(Command.COLUMN_ADDR.rawValue)
+        writeCommand(Command.COLUMN_ADDR)
         writeData(x0)
         writeData(x1)
 
-        writeCommand(Command.PAGE_ADDR.rawValue)
+        writeCommand(Command.PAGE_ADDR)
         writeData(y0)
         writeData(y1)
 
-        writeCommand(Command.MEM_WRITE.rawValue)
+        writeCommand(Command.MEM_WRITE)
     }
 }
 
@@ -191,15 +191,15 @@ extension ILI9341 {
     }
 
     private func writeConfig(_ config: (Command, [UInt8])) {
-        writeCommand(config.0.rawValue)
+        writeCommand(config.0)
         if config.1.count > 0 {
             writeData(config.1)
         }
     }
 
-    private func writeCommand(_ command: UInt8) {
+    private func writeCommand(_ command: Command) {
         dc.write(false)
-        spi.write(command)
+        spi.write(command.rawValue)
     }
 
     private func writeData(_ data: UInt16) {

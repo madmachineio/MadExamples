@@ -140,20 +140,15 @@ final class SSD1315{
     }
 
     private func writeConfig(_ config: (Command, UInt8?)) {
-        writeCommand(config.0.rawValue)
+        writeCommand(config.0)
         if let value = config.1 {
-            writeCommand(value)
+            spi.write(value)
         }
     }
 
-    private func writeCommand(_ data: UInt8) {
+    private func writeCommand(_ data: Command) {
         dc.write(false)
-        spi.write(data)
-    }
-
-    private func writeCommand(_ data: [UInt8]) {
-        dc.write(false)
-        spi.write(data)
+        spi.write(data.rawValue)
     }
 
     private func writeData(_ data: [UInt8]) {
