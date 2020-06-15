@@ -72,7 +72,7 @@ public final class ST7789 {
                 yOffset = 0
                 madctlConfig = [.pageBottomToTop, .leftToRight, .reverseMode, .lineTopToBottom, .RGB]
             }
-        } else {
+        } else if width == 240 && height == 320 {
             xOffset = 0
             yOffset = 0
             switch rotation {
@@ -86,6 +86,21 @@ public final class ST7789 {
             case .angle270:
                 swap(&width, &height)
                 madctlConfig = [.pageBottomToTop, .leftToRight, .reverseMode, .lineTopToBottom, .RGB]
+            }
+        } else {
+            xOffset = 0
+            yOffset = 0
+            switch rotation {
+            case .angle0:
+                madctlConfig = [.pageTopToBottom, .rightToLeft, .reverseMode, .lineTopToBottom, .RGB]
+            case .angle90:
+                swap(&width, &height)
+                madctlConfig = [.pageBottomToTop, .rightToLeft, .normalMode, .lineTopToBottom, .RGB]
+            case .angle180:
+                madctlConfig = [.pageBottomToTop, .leftToRight, .reverseMode, .lineTopToBottom, .RGB]
+            case .angle270:
+                swap(&width, &height)
+                madctlConfig = [.pageTopToBottom, .leftToRight, .normalMode, .lineTopToBottom, .RGB]
             }
         }
 

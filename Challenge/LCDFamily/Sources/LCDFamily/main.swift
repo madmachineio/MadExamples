@@ -3,7 +3,10 @@ import SwiftIO
 let spi = SPI(Id.SPI0, speed: 36000000)
 let dc = DigitalOut(Id.D0)
 let rst = DigitalOut(Id.D1)
-let tft = ILI9341(spi: spi, dc: dc, rst: rst)
+//let tft = ILI9341(spi: spi, dc: dc, rst: rst)
+let bl = DigitalOut(Id.D2)
+let tft = ST7789(spi: spi, dc: dc, rst: rst, bl: bl,
+            width: 320, height: 240, rotation: .angle270)
 
 let spi1 = SPI(Id.SPI1, speed: 10000000)
 let dc1 = DigitalOut(Id.D38)
@@ -319,7 +322,6 @@ func drawCatAlone() {
 }
 
 while true {
-    /*
     countDown()
     sayHello()
     drawLines()
@@ -327,7 +329,7 @@ while true {
     randomCircle()
     drawCat()
     sayGoodbye()
-    */
-    drawCatAlone()
+    
+    //drawCatAlone()
 }
 
