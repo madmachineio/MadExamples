@@ -1,14 +1,14 @@
 # Examples
 
-## GetStarted
+## GettingStarted
 
-* [Blink](https://github.com/madmachineio/Examples/tree/master/GetStarted/Blink) - output 3.3 volts and 0 volt on a digital pin alternatively to blink the onboard led.
+* [Blink](https://github.com/madmachineio/Examples/tree/master/GettingStarted/Blink) - output 3.3 volts and 0 volt on a digital pin alternatively to blink the onboard led.
 
-* [PWMBrightnessControl](https://github.com/madmachineio/Examples/tree/master/GetStarted/PWMBrightnessControl) - brighten and dim the led continuously by increasing and decreasing the duty cycle of the PWM output.
+* [PWMBrightnessControl](https://github.com/madmachineio/Examples/tree/master/GettingStarted/PWMBrightnessControl) - brighten and dim the led continuously by increasing and decreasing the duty cycle of the PWM output.
 
-* [ReadDigitalInput](https://github.com/madmachineio/Examples/tree/master/GetStarted/ReadDigitalInput) - read and print the input value of digital pin D0, either true or false.
+* [ReadDigitalInput](https://github.com/madmachineio/Examples/tree/master/GettingStarted/ReadDigitalInput) - read and print the input value of digital pin D0, either true or false.
 
-* [ReadAnalogInput](https://github.com/madmachineio/Examples/tree/master/GetStarted/ReadAnalogInput) - read and print the input voltage of analog pin A0. The value is a float number between 0.0 and 3.3.
+* [ReadAnalogInput](https://github.com/madmachineio/Examples/tree/master/GettingStarted/ReadAnalogInput) - read and print the input voltage of analog pin A0. The value is a float number between 0.0 and 3.3.
 
 
 ## SimpleIO
