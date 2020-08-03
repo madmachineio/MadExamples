@@ -19,7 +19,7 @@
 
 * [BlinkTimer](https://github.com/madmachineio/Examples/tree/master/SimpleIO/BlinkTimer) - use the timer to set intereupt and every second the led will be toggled.
 
-* [LEDsBrightnessControl](https://github.com/madmachineio/Examples/tree/master/SimpleIO/LEDsBrightnessControl) - brighten and dim three LEDs alternatively by cincreasing and decreasing the duty cycle of the PWM output.
+* [LEDsBrightnessControl](https://github.com/madmachineio/Examples/tree/master/SimpleIO/LEDsBrightnessControl) - brighten and dim three LEDs alternatively by increasing and decreasing the duty cycle of the PWM output.
 
 * [BrightnessAnalogIn](https://github.com/madmachineio/Examples/tree/master/SimpleIO/BrightnessAnalogIn) - set the duty cycle of the PWM output with the float number between 0.0 and 1.0 read from the analog pin.
 
@@ -59,7 +59,7 @@
 
 * [Mission6_Seven_Segment_Display](https://github.com/madmachineio/Examples/tree/master/MakerKit/Mission6_Seven_Segment_Display) - use seven digital input siganl to print a number on 7-segment display.
 
-* [Mission7_DC_Motors](https://github.com/madmachineio/Examples/tree/master/MakerKit/Mission7_DC_Motors) - turn the potentiometer and read the input value. Set the duty clycle of PWM output to set the speed of the motor.
+* [Mission7_DC_Motors](https://github.com/madmachineio/Examples/tree/master/MakerKit/Mission7_DC_Motors) - turn the potentiometer and read the input value. Set the duty cycle of PWM output to set the speed of the motor.
 
 * [Mission8_Servo_Motor](https://github.com/madmachineio/Examples/tree/master/MakerKit/Mission8_Servo_Motor) - turn the potentiometer and read the input value. Set the PWM output to change the angle of the servo between 0 and 180 degree.
 
