@@ -1,12 +1,12 @@
-/// Read the input voltage on a specified analog pin. The value you get will be a decimal between 0.0 and 3.3.
+// Read the input voltage on a specified analog pin. The value you get will be a decimal between 0.0 and 3.3.
 
-/// Import the library to enable the relevant classes and functions.
+// Import the library to enable the relevant classes and functions.
 import SwiftIO
 
-/// Initialize the pin A0 as a analog input pin.
+// Initialize the pin A0 as a analog input pin.
 let pin = AnalogIn(Id.A0)
 
-/// Read the input voltage every second.
+// Read the input voltage every second.
 while true {
     // Declare a constant to store the value you read from the analog pin.
     let value = pin.readVoltage()

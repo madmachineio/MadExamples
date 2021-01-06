@@ -1,15 +1,15 @@
-/// Produce different notes by changing the frequency of PWM signal.
+// Produce different notes by changing the frequency of PWM signal.
 
-/// Import the library to enable the relevant classes and functions.
+// Import the library to enable the relevant classes and functions.
 import SwiftIO
 
-/// Initialize a PWM output pin the speaker is connected to.
+// Initialize a PWM output pin the speaker is connected to.
 let speaker = PWMOut(Id.PWM0A)
 
-/// Specify several frequencies to produce different sound.
-let fre = [262, 294, 330]
+// Specify several frequencies to produce different sound.
+let fre = [262, 294, 330, 349, 392, 440, 494]
 
-/// Play recurrently these notes.
+// Play recurrently these notes.
 while true {
     for f in fre {
         // Set the frequency and the duty cycle of output to produce each note.

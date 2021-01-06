@@ -1,15 +1,15 @@
-/// Check if the button is definitely pressed.
+// Check if the button is definitely pressed.
 
-/// Import the library to enable the relevant classes and functions.
+// Import the library to enable the relevant classes and functions.
 import SwiftIO
 
-/// Initialize the red onboard LED.
+// Initialize the red onboard LED.
 let red = DigitalOut(Id.RED)
 
-/// Initialize a digital input pin D0 the button is connected to.
+// Initialize a digital input pin D0 the button is connected to.
 let button = DigitalIn(Id.D0, mode: .pullUp)
 
-/// Declare the values in order to record and judge the button state.
+// Declare the values in order to record and judge the button state.
 var count = 0
 var triggered = false
 

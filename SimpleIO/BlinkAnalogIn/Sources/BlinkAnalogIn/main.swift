@@ -1,13 +1,13 @@
-/// Read the analog input and use it to set the rate of LED blink.
+// Read the analog input and use it to set the rate of LED blink.
 
-/// Import the library to enable the relevant classes and functions.
+// Import the library to enable the relevant classes and functions.
 import SwiftIO
 
-/// Initialize an analog input and a digital output pin the components are connected to,
+// Initialize an analog input and a digital output pin the components are connected to,
 let sensor = AnalogIn(Id.A0)
 let led = DigitalOut(Id.D0)
 
-/// Enable the LED to blink over and over again.
+// Enable the LED to blink over and over again.
 while true {
     // Read the input voltage in percentage.
     let value = sensor.readRawValue()

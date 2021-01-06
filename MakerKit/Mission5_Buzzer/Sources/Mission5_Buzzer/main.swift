@@ -27,7 +27,7 @@ let buzzer = PWMOut(Id.PWM2B)
 
 while true {
     // Read the input voltage.
-	value = a0.readPercent()
+    let value = a0.readPercent()
     
     //let value = a0.readPercent()
     let frequency = Int(1000 + 2000 * value) // calculate the float value into Int type to serve as frequency.

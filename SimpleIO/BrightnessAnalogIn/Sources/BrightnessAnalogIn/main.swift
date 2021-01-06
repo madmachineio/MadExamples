@@ -1,13 +1,13 @@
-/// Read the analog input value and use it to set the PWM output in order to change the LED brightness.
+// Read the analog input value and use it to set the PWM output in order to change the LED brightness.
 
-/// Import the library to enable the relevant classes and functions.
+// Import the library to enable the relevant classes and functions.
 import SwiftIO
 
-/// Initialize an analog input and a digital output pin the components are connected to.
+// Initialize an analog input and a digital output pin the components are connected to.
 let sensor = AnalogIn(Id.A0)
 let led = PWMOut(Id.PWM0A)
 
-/// Allow the LED brightness control all the time.
+// Allow the LED brightness control all the time.
 while true {
     // Read the input voltage in percentage.
     let value = sensor.readPercent()

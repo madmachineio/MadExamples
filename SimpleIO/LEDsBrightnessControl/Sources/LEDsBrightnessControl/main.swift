@@ -1,19 +1,21 @@
-/// Change the LED state every second by setting the interrupt.
+// Change the LED state every second by setting the interrupt.
 
-/// Import the library to enable the relevant classes and functions.
+// Import the library to enable the relevant classes and functions.
 import SwiftIO
 
-/// Initialize the pins the LEDs are connected to and put them in a array.
+// Initialize the pins the LEDs are connected to and put them in a array.
 let red = PWMOut(Id.PWM0A)
 let green = PWMOut(Id.PWM1A)
 let blue = PWMOut(Id.PWM2B)
 let leds = [red, green, blue]
 
-/// Declare a variable to store the value of duty cycle.
+// Declare a variable to store the value of duty cycle.
 var value: Float = 0.0
 
-/// Change the brightness of each LED over and over again.
+// Change the brightness of each LED over and over again.
 while true {
+    // Iterate each LED in the array. 
+    // This allows the LED to go through the following process one by one.
     for led in leds {
         // Brighten the LED in two seconds.
         while value <= 1.0 {
