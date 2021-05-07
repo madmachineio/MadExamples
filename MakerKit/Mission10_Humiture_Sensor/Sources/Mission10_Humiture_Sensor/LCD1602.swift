@@ -1,6 +1,6 @@
 import SwiftIO
 
-class LCD16X02 {
+final class LCD1602 {
 
 	private enum Command {
 		static let clearDisplay: UInt8 = 0x01
@@ -46,7 +46,6 @@ class LCD16X02 {
 	}
     
   	let address: UInt8 = 0x3E
-  
 
   	let i2c: I2C
   
@@ -79,14 +78,14 @@ class LCD16X02 {
           	displayFunctionState |= Mode._5x10Dots
         }
       
-      	command(Command.functionSet | displayFunctionState)
+      	writeCommand(Command.functionSet | displayFunctionState)
       	wait(us: 4500)
     
-      	command(Command.functionSet | displayFunctionState)
+      	writeCommand(Command.functionSet | displayFunctionState)
       	wait(us: 150)
       
-      	command(Command.functionSet | displayFunctionState)
-      	command(Command.functionSet | displayFunctionState)
+      	writeCommand(Command.functionSet | displayFunctionState)
+      	writeCommand(Command.functionSet | displayFunctionState)
       
       	displayControlState = 	Control.displayOn | Control.cursorOff | Control.blinkOff
       	turnOn()
@@ -94,103 +93,99 @@ class LCD16X02 {
       	clear()
       	
       	displayModeState = EntryMode.entryLeft | EntryMode.entryShiftDecrement
-      	command(Command.entryModeSet | displayModeState)
+      	writeCommand(Command.entryModeSet | displayModeState)
     }
   
 
-  
   	func turnOn() {
       	displayControlState |= Control.displayOn
-      	command(Command.displayControl | displayControlState)
+      	writeCommand(Command.displayControl | displayControlState)
     }
 
   	func turnOff() {
       	displayControlState &= ~Control.displayOn;
-      	command(Command.displayControl | displayControlState)
+      	writeCommand(Command.displayControl | displayControlState)
     }
   
   	func clear() {
-      	command(Command.clearDisplay)
+      	writeCommand(Command.clearDisplay)
       	wait(us: 2000)
     }
 
 	func home() {
-		command(Command.returnHome)
+		writeCommand(Command.returnHome)
 		wait(us: 2000)
 	}
   
-
-
-  	func setCursor(_ x: UInt8, _ y: UInt8) {
-      	let val: UInt8 = y == 0 ? x | 0x80 : x | 0xc0
-      	command(val)
-    }
-
 	func noCursor() {
 		displayControlState &= ~Control.cursorOn
-		command(Command.displayControl | displayControlState)
+		writeCommand(Command.displayControl | displayControlState)
 	}
 
 	func cursor() {
 		displayControlState |= Control.cursorOn
-		command(Command.displayControl | displayControlState)
+		writeCommand(Command.displayControl | displayControlState)
 	}
 
 	func noBlink() {
 		displayControlState &= ~Control.blinkOn
-		command(Command.displayControl | displayControlState)
+		writeCommand(Command.displayControl | displayControlState)
 	}
 
 	func blink() {
 		displayControlState |= Control.blinkOn
-		command(Command.displayControl | displayControlState)
+		writeCommand(Command.displayControl | displayControlState)
 	}
 	
 	func scrollLeft() {
-      	command(Command.cursorShift | Shift.displayMove | Shift.moveLeft)
+      	writeCommand(Command.cursorShift | Shift.displayMove | Shift.moveLeft)
     }
   
   	func scrollRight() {
-      	command(Command.cursorShift | Shift.displayMove | Shift.moveRight)
+      	writeCommand(Command.cursorShift | Shift.displayMove | Shift.moveRight)
     }
 
 	func leftToRight() {
 		displayModeState |= EntryMode.entryLeft
-		command(Command.entryModeSet | displayModeState)
+		writeCommand(Command.entryModeSet | displayModeState)
 	}
 
 	func rightToLeft() {
 		displayModeState &= ~EntryMode.entryLeft
-		command(Command.entryModeSet | displayModeState)
+		writeCommand(Command.entryModeSet | displayModeState)
 	}
 
 	func autoScroll() {
 		displayModeState |= EntryMode.entryShiftIncrement
-		command(Command.entryModeSet | displayModeState)
+		writeCommand(Command.entryModeSet | displayModeState)
 	}
 
 	func noAutoScroll() {
 		displayModeState &= ~EntryMode.entryShiftIncrement
-		command(Command.entryModeSet | displayModeState)
+		writeCommand(Command.entryModeSet | displayModeState)
 	}
 
-  	func command(_ value: UInt8) {
+  	func writeCommand(_ value: UInt8) {
     	let data: [UInt8] = [0x80, value]
       	i2c.write(data, to: address)
     }
 
-	func clear(_ count: UInt8, x: UInt8, y: UInt8) {
+	func clear(x: Int, y: Int, _ count: Int) {
 		let data: [UInt8] = [0x40, 0x20]
 
-		setCursor(x, y)
+		setCursor(x: x, y: y)
 		for _ in 1...count {
 			i2c.write(data, to: address)
 		}
-		setCursor(x, y)
+		setCursor(x: x, y: y)
 	}
 
-    
-  	func print(_ str: String) {
+  	func setCursor(x: Int, y: Int) {
+      	let val: UInt8 = y == 0 ? UInt8(x) | 0x80 : UInt8(x) | 0xc0
+      	writeCommand(val)
+    }
+
+  	func write(_ str: String) {
       	let array: [UInt8] = Array(str.utf8)
       	var data: [UInt8] = [0x40, 0]	
       
@@ -200,14 +195,12 @@ class LCD16X02 {
         }
     }
 
-    func print(_ num: Int, x: UInt8, y: UInt8) {
-        print(String(num), x: x, y: y)
+    func write(x: Int, y: Int, _ num: Int) {
+        write(x: x, y: y, String(num))
     }
     
-  	func print(_ str: String, x: UInt8, y: UInt8) {
-      	setCursor(x, y)
-      	print(str)
+  	func write(x: Int, y: Int, _ str: String) {
+      	setCursor(x: x, y: y)
+      	write(str)
     }
-    
-
 }
