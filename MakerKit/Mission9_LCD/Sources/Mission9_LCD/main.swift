@@ -15,6 +15,9 @@
 
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 // Initialize the I2C0 and the lcd.
 let i2c = I2C(Id.I2C0)
 let lcd = LCD1602(i2c)

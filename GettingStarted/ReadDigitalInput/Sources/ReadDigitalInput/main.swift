@@ -3,6 +3,9 @@
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 // Initialize the pin D0 as a digital input pin.
 let pin = DigitalIn(Id.D0)
 

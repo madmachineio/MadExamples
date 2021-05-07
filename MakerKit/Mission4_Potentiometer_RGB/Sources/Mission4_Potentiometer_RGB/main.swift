@@ -17,6 +17,9 @@
 
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 let a0 = AnalogIn(Id.A0) // Initialize an AnalogIn pin A0.
 let led = DigitalOut(Id.RED) // Initialize the red onboard led.
 

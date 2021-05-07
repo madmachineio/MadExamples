@@ -18,6 +18,9 @@
 
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 let a0 = AnalogIn(Id.A0)
 
 // PWM, also known as Pulse Width Modulation is a type of digital signal.

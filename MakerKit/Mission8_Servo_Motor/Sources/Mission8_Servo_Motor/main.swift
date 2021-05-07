@@ -23,6 +23,9 @@
 
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 let a0 = AnalogIn(Id.A0) // Initialize the analog pin.
 
 // Each cycle of the signal lasts for 20 milliseconds.

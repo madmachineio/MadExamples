@@ -16,6 +16,9 @@
 
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 // Get a number with one decimal place.
 extension Float {
     func format(_ f: Int) -> Float {

@@ -18,6 +18,8 @@
 
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
 
 let led = DigitalOut(Id.RED) // Initialize the red onboard led.
 let button = DigitalIn(Id.D10) // Initialize an input pin D10 on board.

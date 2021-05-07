@@ -3,6 +3,9 @@
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 // Initialize a PWM output pin the speaker is connected to.
 let speaker = PWMOut(Id.PWM0A)
 

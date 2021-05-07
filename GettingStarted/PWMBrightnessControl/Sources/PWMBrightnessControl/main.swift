@@ -3,6 +3,9 @@
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
 
+// Import the board library to use the Id of the specific board.
+import SwiftIOBoard
+
 // Initialize the PWM pin the LED is connected to, with other parameters set to default.
 let led = PWMOut(Id.PWM0A)
 
