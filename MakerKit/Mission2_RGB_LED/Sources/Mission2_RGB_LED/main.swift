@@ -4,7 +4,7 @@
   The Red, Green and Blue LED blink one by one. The delay between each flash is 1s.
 
   The circuit:
-  - Connect the anode (long leg) of each LED to digital pins D16, D17 and D18 (via a 330 ohm resistor).
+  - Connect the anode (long leg) of each LED to digital pins D16, D17 and D18 (via a 1k ohm resistor).
   - Connect the cathodes (short leg) to the SwiftIO’s ground.
 
   created 2019
@@ -38,7 +38,7 @@ while true {
     green.write(false)
 
     // Turn on blue LED for 1 second, then off.
-    blue.write(true)
+    blue.high()
     sleep(ms: 1000)
-    blue.write(false)
+    blue.low()
 }

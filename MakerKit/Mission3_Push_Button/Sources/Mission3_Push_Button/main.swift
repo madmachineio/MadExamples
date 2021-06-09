@@ -32,4 +32,6 @@ while true {
     } else {
         led.write(true)
     }
+
+    sleep(ms: 10)
 }

@@ -24,10 +24,12 @@ let a0 = AnalogIn(Id.A0) // Initialize an AnalogIn pin A0.
 let led = DigitalOut(Id.RED) // Initialize the red onboard led.
 
 while true {
-    // Return the percentage of the voltage in the range of 0.0 to 1.0.
-    let value = a0.readPercent()
     led.toggle()
 
+    // Return the percentage of the voltage in the range of 0.0 to 1.0.
+    let analogValue = a0.readPercent()
+    let delayTime = Int(analogValue * 500)
+
     // Stop the program for a certain period based on the value to keep current led state.
-    sleep(ms: Int(value*500))
+    sleep(ms: delayTime)
 }

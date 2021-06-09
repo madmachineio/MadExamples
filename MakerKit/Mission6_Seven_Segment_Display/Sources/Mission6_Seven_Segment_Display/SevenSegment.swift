@@ -14,7 +14,7 @@ E |   | C
 
 import SwiftIO
 
-class SevenSegment {
+final class SevenSegment {
     // Initialize the seven digital pins which are connected to the segment pins.
     static let a = DigitalOut(Id.D8)
     static let b = DigitalOut(Id.D7)
@@ -28,8 +28,8 @@ class SevenSegment {
     // Use a binary data to store the status of each segment for the number from 0 to 9.
     // For each data, the last bit represents A and the second bit represents G.
 	let ledState: [UInt8] = [
-        00111111, 00000110, 01011011, 01001111, 01100110, 
-        01101101, 01111101, 00000111, 01111111, 01101111
+            00111111, 00000110, 01011011, 01001111, 01100110, 
+            01101101, 01111101, 00000111, 01111111, 01101111
         ]
     
     public func print(_ number: Int) {
