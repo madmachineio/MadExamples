@@ -34,18 +34,18 @@ extension Float {
 
 // Initialize the LCD and sensor to use the I2C communication.
 let i2c = I2C(Id.I2C0)
-let lcd = LCD16X02(i2c)
+let lcd = LCD1602(i2c)
 let sht = SHT3x(i2c)
 
 while true{
     // Read and display the temperature on the LCD and update the value every 1s.
 
-    let temp = sht.readTemperature()
+    let temp = sht.readCelsius()
 
-    lcd.print("Temperature:",x:0,y:0)
-    lcd.print(String(temp.format(1)),x: 0,y: 1)
-    lcd.print(" ",x:4,y:1)
-    lcd.print("C",x:5,y:1)
+    lcd.write(x:0, y:0, "Temperature:")
+    lcd.write(x: 0, y: 1, String(temp.format(1)))
+    lcd.write(x:4, y:1, " ")
+    lcd.write(x:5, y:1, "C")
 
     sleep(ms: 1000)
 }

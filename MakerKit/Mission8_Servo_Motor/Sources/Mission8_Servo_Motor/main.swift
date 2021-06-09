@@ -39,6 +39,6 @@ while true {
     let pulse = Int(500 + 2000 * value) // Calculate the value to get the pulse duration.
     servo.set(period: 20000, pulse: pulse) // Set the servo position according to the scaled value.
 
-    sleep(ms: 100)
+    sleep(ms: 20)
 }
 
