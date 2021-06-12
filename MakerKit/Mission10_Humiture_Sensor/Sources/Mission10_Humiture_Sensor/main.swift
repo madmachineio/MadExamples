@@ -19,18 +19,6 @@ import SwiftIO
 // Import the board library to use the Id of the specific board.
 import SwiftIOBoard
 
-// Get a number with one decimal place.
-extension Float {
-    func format(_ f: Int) -> Float {
-        guard f > 0 else {return self}
-        var mul = 10
-        for _ in 1..<f {
-            mul *= 10
-        }
-        let data = Int(self * Float(mul))
-        return Float(data) / Float(mul)
-    }
-}
 
 // Initialize the LCD and sensor to use the I2C communication.
 let i2c = I2C(Id.I2C0)
@@ -43,7 +31,7 @@ while true{
     let temp = sht.readCelsius()
 
     lcd.write(x:0, y:0, "Temperature:")
-    lcd.write(x: 0, y: 1, String(temp.format(1)))
+    lcd.write(x: 0, y: 1, temp)
     lcd.write(x:4, y:1, " ")
     lcd.write(x:5, y:1, "C")
 
