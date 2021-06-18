@@ -33,8 +33,8 @@ while true {
     let value = a0.readPercent()
     
     //let value = a0.readPercent()
-    let frequency = Int(1000 + 2000 * value) // calculate the float value into Int type to serve as frequency.
-    buzzer.set(period: frequency, pulse: frequency / 2) // Set PWM parameters.
+    let frequency = Int(400 + 2000 * value) // calculate the float value into Int type to serve as frequency.
+    buzzer.set(frequency: frequency, dutycycle: 0.5) // Set PWM parameters.
 
-    sleep(ms: 50) // Set the duration of the notes.
+    sleep(ms: 20) // Set the duration of the notes.
 }
