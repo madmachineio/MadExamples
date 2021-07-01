@@ -7,9 +7,9 @@ let package = Package(
     name: "Mission10_Humiture_Sensor",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/madmachineio/SwiftIO.git", .upToNextMajor(from: "0.0.1")),
-        .package(url: "https://github.com/madmachineio/MadBoards.git", .upToNextMajor(from: "0.0.1")),
-        .package(url: "https://github.com/madmachineio/MadDrivers.git", .upToNextMajor(from: "0.0.1")),
+        .package(url: "https://github.com/madmachineio/SwiftIO.git", from: "0.0.1"),
+        .package(url: "https://github.com/madmachineio/MadBoards.git", from: "0.0.1"),
+        .package(url: "https://github.com/madmachineio/MadDrivers.git", from: "0.0.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
