@@ -7,10 +7,10 @@ import SwiftIOFeather
 let buzzer = PWMOut(Id.PWM5A)
 
 // Specify the frequencies to produce different sounds.
-let fre = [262, 294, 330, 349, 392, 440, 494, 523]
-for f in fre {
+let frequencies = [262, 294, 330, 349, 392, 440, 494, 523]
+for frequency in frequencies {
     // Set the frequency and the duty cycle to produce each note.
-    buzzer.set(frequency: f, dutycycle: 0.5)
+    buzzer.set(frequency: frequency, dutycycle: 0.5)
     // Play each note for one second.
     sleep(ms: 1000)
 }
