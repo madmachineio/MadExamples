@@ -16,9 +16,7 @@
 */
 
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Initialize the analog pin and the PWM pin 
 let a0 = AnalogIn(Id.A0)

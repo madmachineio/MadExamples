@@ -2,9 +2,7 @@
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Initialize the onboard green LED with other parameters set to default.
 let green = DigitalOut(Id.GREEN)

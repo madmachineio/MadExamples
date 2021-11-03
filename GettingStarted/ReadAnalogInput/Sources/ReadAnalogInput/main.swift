@@ -2,9 +2,7 @@
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Initialize the pin A0 as a analog input pin.
 let pin = AnalogIn(Id.A0)

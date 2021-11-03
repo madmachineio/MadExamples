@@ -17,9 +17,7 @@
 */
 
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // initialize the blue LED
 let led = DigitalOut(Id.BLUE)

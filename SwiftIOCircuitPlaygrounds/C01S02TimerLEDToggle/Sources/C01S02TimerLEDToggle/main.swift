@@ -1,5 +1,5 @@
 import SwiftIO
-import SwiftIOFeather
+import MadBoard
 
 let led = DigitalOut(Id.D19)
 let timer = Timer()

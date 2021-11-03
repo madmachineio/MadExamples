@@ -1,7 +1,7 @@
 // Import the SwiftIO library to control input and output.
 import SwiftIO
 // Import the SwiftIOFeather to use the id of the pins.
-import SwiftIOFeather
+import MadBoard
 
 // Initialize the digital output pin the LED connects to.
 let led = DigitalOut(Id.D19)

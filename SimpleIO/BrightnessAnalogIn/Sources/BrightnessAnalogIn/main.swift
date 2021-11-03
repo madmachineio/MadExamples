@@ -2,9 +2,7 @@
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Initialize an analog input and a digital output pin the components are connected to.
 let sensor = AnalogIn(Id.A0)

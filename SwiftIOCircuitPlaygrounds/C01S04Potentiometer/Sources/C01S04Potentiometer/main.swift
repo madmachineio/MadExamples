@@ -1,7 +1,7 @@
 // Import the SwiftIO library to control input and output.
 import SwiftIO
 // Import the SwiftIOFeather to use the id of the pins.
-import SwiftIOFeather
+import MadBoard
 
 // Initialize the pin A0 as an analog input pin.
 let knob = AnalogIn(Id.A0)

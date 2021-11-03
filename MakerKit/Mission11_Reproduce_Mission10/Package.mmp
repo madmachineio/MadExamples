@@ -3,12 +3,15 @@
 # Edit this file would change the behavior of the building/downloading procedure
 # Those project files in the dependent libraries would be IGNORED
 
-# Specify the board name below, there are "SwiftIOBoard" and "SwiftIOFeather" now
+# Specify the board name below
+# There are "SwiftIOBoard" and "SwiftIOFeather" now
 board = "SwiftIOBoard"
 
-# Specifiy the floating-point type below, there are "soft" and "hard"
-# If your code use significant floating-point calculation, plz set it to "hard"
-float-type = "soft"
+# Specifiy the target triple below
+# There are "thumbv7em-unknown-none-eabi" and "thumbv7em-unknown-none-eabihf" now
+# If your code use significant floating-point calculation,
+# plz set it to "thumbv7em-unknown-none-eabihf"
+triple = "thumbv7em-unknown-none-eabi"
 
 # Reserved for future use 
 version = 1

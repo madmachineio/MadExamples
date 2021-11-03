@@ -2,9 +2,7 @@
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Initialize the pins the LEDs are connected to and put them in a array.
 let red = PWMOut(Id.PWM0A)

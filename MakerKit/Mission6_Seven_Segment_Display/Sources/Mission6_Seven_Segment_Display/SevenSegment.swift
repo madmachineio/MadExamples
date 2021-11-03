@@ -13,7 +13,7 @@ E |   | C
  */
 
 import SwiftIO
-import SwiftIOBoard
+import MadBoard
 
 final class SevenSegment {
     // Initialize the seven digital pins which are connected to the segment pins.

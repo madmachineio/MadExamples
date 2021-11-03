@@ -14,9 +14,7 @@
 */
 
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Initialize the I2C0 and the lcd.
 let i2c = I2C(Id.I2C0)

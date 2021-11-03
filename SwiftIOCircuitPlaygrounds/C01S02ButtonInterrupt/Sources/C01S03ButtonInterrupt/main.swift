@@ -1,5 +1,5 @@
 import SwiftIO
-import SwiftIOFeather
+import MadBoard
 
 let button = DigitalIn(Id.D1)
 let led = DigitalOut(Id.D19)

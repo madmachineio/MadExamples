@@ -17,9 +17,7 @@
 */
 
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 let a0 = AnalogIn(Id.A0)
 

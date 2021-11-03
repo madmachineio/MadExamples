@@ -1,7 +1,7 @@
 // Import the SwiftIO library to control input and output.
 import SwiftIO
 // Import the SwiftIOFeather to use the id of the pins.
-import SwiftIOFeather
+import MadBoard
 
 // Initialize a PWM output pin the buzzer connects.
 let buzzer = PWMOut(Id.PWM5A)

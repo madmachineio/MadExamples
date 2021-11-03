@@ -6,9 +6,7 @@
 */
 
 import SwiftIO
-
-// Import the board library to use the Id of the specific board.
-import SwiftIOBoard
+import MadBoard
 
 // Import LCD1602 and SHT3x driver from MadDrivers which is an online git repo
 import LCD1602
