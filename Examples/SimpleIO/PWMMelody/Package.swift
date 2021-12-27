@@ -17,7 +17,7 @@ let package = Package(
             name: "PWMMelody",
             dependencies: [
                 "SwiftIO",
-                "MadBoards"),
+                "MadBoards"]),
         .testTarget(
             name: "PWMMelodyTests",
             dependencies: ["PWMMelody"]),
