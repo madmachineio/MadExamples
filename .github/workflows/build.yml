@@ -129,6 +129,12 @@ jobs:
             example_path=$(dirname "${item}")
             cd $example_path
 
+            if [ -f "$GITHUB_WORKSPACE/Package.swift"]; then
+              echo "Modify example package dependency to: $GITHUB_SHA"
+              LINE_NUMBER=$(sed -n "/$REPO_ADDR/=" ./Package.swift)
+              sed -i'.bak' -e ""$LINE_NUMBER"s/branch(\"main\")/revision(\"$GITHUB_SHA\")/g" ./Package.swift
+            fi
+
             rm -rf .build
             rm -rf Package.resolved
             ~/mm-sdk/usr/mm/mm cibuild
