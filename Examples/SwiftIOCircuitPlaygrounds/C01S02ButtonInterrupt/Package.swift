@@ -17,7 +17,7 @@ let package = Package(
             name: "C01S03ButtonInterrupt",
             dependencies: [
                 "SwiftIO",
-                "MadBoards"),
+                "MadBoards"]),
         .testTarget(
             name: "C01S03ButtonInterruptTests",
             dependencies: ["C01S03ButtonInterrupt"]),
