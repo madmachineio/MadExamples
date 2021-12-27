@@ -6,10 +6,10 @@ import MadBoard
 
 // Initialize the red onboard LED and a timer to set interrupt.
 let red = DigitalOut(Id.RED)
-let timer = Timer()
+let timer = Timer(period: 1000)
 
 // Raise the interrupt to turn on or off the LED every second.
-timer.setInterrupt(ms: 1000) {
+timer.setInterrupt() {
     red.toggle()
 }
 
