@@ -94,6 +94,7 @@ jobs:
           for item in "${dirarray[@]}"; do
             example_path=$(dirname "${item}")
             cd $example_path
+            echo "In example path: $example_path"
 
             if [ -f "$GITHUB_WORKSPACE/Package.swift"]; then
               echo "Modify example package dependency to: $GITHUB_SHA"
@@ -128,6 +129,7 @@ jobs:
           for item in "${dirarray[@]}"; do
             example_path=$(dirname "${item}")
             cd $example_path
+            echo "In example path: $example_path"
 
             if [ -f "$GITHUB_WORKSPACE/Package.swift"]; then
               echo "Modify example package dependency to: $GITHUB_SHA"

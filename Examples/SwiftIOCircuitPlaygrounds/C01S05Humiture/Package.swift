@@ -19,7 +19,7 @@ let package = Package(
             dependencies: [
                 "SwiftIO",
                 "MadBoards",
-                .product(name: "ADXL345", package: "MadDrivers")
+                .product(name: "SHT3x", package: "MadDrivers")
             ]),
         .testTarget(
             name: "C01S05HumitureTests",
