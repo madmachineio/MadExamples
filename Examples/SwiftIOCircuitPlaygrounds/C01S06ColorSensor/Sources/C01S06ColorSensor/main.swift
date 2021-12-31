@@ -11,7 +11,7 @@ let color = VEML6040(i2c)
 
 // Send the command to the sensor to obtain the value and print it every second.
 while true {
-    let lux = color.readAmbientLight()
+    let lux = color.readLux()
     print("Lux: \(lux)lux")
     sleep(ms: 1000)
 }
