@@ -12,7 +12,7 @@ let acc = LIS3DH(i2c)
 
 // Send the command to the sensor to obtain the value and print it every second.
 while true {
-    let value = acc.readValue()
+    let value = acc.readXYZ()
     print("x: \(value.x)g")
     print("y: \(value.y)g")
     print("z: \(value.z)g")

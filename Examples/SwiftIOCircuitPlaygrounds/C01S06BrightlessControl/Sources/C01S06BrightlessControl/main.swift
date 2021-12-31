@@ -13,7 +13,7 @@ let led = PWMOut(Id.PWM4A)
 
 // Send the command to the sensor to obtain the value and print it every second.
 while true {
-    let lux = color.readAmbientLight()
+    let lux = color.readLux()
     var rate: Float = Float(lux) / 600.0
     rate = min(1.0, rate)
     rate = max(0.0, rate)
