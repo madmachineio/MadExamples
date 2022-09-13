@@ -1,4 +1,4 @@
-// Change the LED state every second by setting the interrupt.
+// Make red, green, blue LEDs to gradually brighten and dim one by one.
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
