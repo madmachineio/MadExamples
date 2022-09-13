@@ -6,7 +6,7 @@ import MadBoard
 
 // Initialize an analog input and a digital output pin the components are connected to,
 let sensor = AnalogIn(Id.A0)
-let led = DigitalOut(Id.D0)
+let led = DigitalOut(Id.D1)
 
 // Enable the LED to blink over and over again.
 while true {
