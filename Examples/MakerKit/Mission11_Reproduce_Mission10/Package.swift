@@ -19,7 +19,8 @@ let package = Package(
             dependencies: [
                 "SwiftIO",
                 "MadBoards",
-                "MadDrivers"]),
+                .product(name: "SHT3x", package: "MadDrivers"),
+                .product(name: "LCD1602", package: "MadDrivers")]),
         .testTarget(
             name: "Mission11_Reproduce_Mission10Tests",
             dependencies: ["Mission11_Reproduce_Mission10"]),

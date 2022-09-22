@@ -6,7 +6,7 @@ var halfStep = 0
 var bpm = 60
 let player = PWMTone(PWMOut(Id.PWM2B), bpm: bpm)
 
-while true {
+for _ in 0..<3 {
     player.play(track: Music.twinkle)
 
     bpm += 40
@@ -15,5 +15,9 @@ while true {
     halfStep += 12
     player.setFixedHalfStep(halfStep)
 
+    sleep(ms: 1000)
+}
+
+while true {
     sleep(ms: 1000)
 }
