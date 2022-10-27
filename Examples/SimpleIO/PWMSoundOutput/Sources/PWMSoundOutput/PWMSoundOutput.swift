@@ -8,15 +8,15 @@ import MadBoard
 public struct PWMSoundOutput {
 
     public static func main() {
-        // Initialize a PWM output pin the speaker is connected to.
+        // Initialize a PWM output pin that the speaker is connected to.
         let speaker = PWMOut(Id.PWM0A)
 
-        // Specify several frequencies to produce different sound.
-        let fre = [262, 294, 330, 349, 392, 440, 494]
+        // Specify several frequencies to produce different notes.
+        let frequencies = [262, 294, 330, 349, 392, 440, 494]
 
         // Play recurrently these notes.
         while true {
-            for f in fre {
+            for f in frequencies {
                 // Set the frequency and the duty cycle of output to produce each note.
                 speaker.set(frequency: f, dutycycle: 0.5)
                 // Play each note for one second.

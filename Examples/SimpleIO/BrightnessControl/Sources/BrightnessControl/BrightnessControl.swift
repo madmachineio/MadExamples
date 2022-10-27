@@ -8,7 +8,7 @@ import MadBoard
 public struct BrightnessControl {
 
     public static func main() {
-        // Initialize an analog input and a digital output pin the components are connected to.
+        // Initialize an analog input and a digital output pin that the components are connected to.
         let sensor = AnalogIn(Id.A0)
         let led = PWMOut(Id.PWM0A)
 
@@ -18,7 +18,7 @@ public struct BrightnessControl {
             let value = sensor.readPercent()
             // Light the LED by setting the duty cycle.
             led.setDutycycle(value)
-            // Keep the current LED state for 200 millisecond.
+            // Keep the current LED state for 200 milliseconds.
             sleep(ms: 200)
         }
     }

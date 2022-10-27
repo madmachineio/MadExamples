@@ -13,7 +13,7 @@ public struct Blink {
 
         // Blink the LED over and over again.
         while true {
-            // Apply a high votage and turn off the LED.
+            // Apply a high voltage and turn off the LED.
             green.write(true)
             // Keep the light off for a minute.
             sleep(ms: 1000)

@@ -11,7 +11,7 @@ public struct Debounce {
         // Initialize the red onboard LED.
         let red = DigitalOut(Id.RED)
 
-        // Initialize a digital input pin D0 the button is connected to.
+        // Initialize a digital input pin D0 that the button is connected to.
         let button = DigitalIn(Id.D0, mode: .pullUp)
 
         // Declare the values in order to record and judge the button state.
@@ -30,7 +30,7 @@ public struct Debounce {
                 triggered = false
             }
             
-            // Wait a certain period to check if the button is definitely pressed. 
+            // Wait a certain period to check if the button is indeed pressed. 
             // Toggle the LED and then reset the value for next press.
             if count > 50 && !triggered {
                 red.toggle()

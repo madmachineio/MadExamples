@@ -11,7 +11,7 @@ public struct LEDSwitch {
         // Initialize the red onboard LED.
         let red = DigitalOut(Id.RED)
 
-        // Initialize a digital input pin D0 the button is connected to.
+        // Initialize a digital input pin D0 that the button is connected to.
         let button = DigitalIn(Id.D0)
 
         // Allow the button to control the LED all the time.

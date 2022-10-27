@@ -1,4 +1,4 @@
-// Brighten or dimming the LED by changing the duty cycle of PWM signal.
+// Brighten or dim the LED by changing the duty cycle of PWM signal.
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO

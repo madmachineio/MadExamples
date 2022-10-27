@@ -1,3 +1,3 @@
-# C01S10Microphone
+# C01S07AccelerometerDice
 
 A description of this package.

@@ -8,7 +8,7 @@ import MadBoard
 public struct BlinkRate {
 
     public static func main() {
-       // Initialize an analog input and a digital output pin the components are connected to,
+       // Initialize an analog input and a digital output pin that the components are connected to.
         let sensor = AnalogIn(Id.A0)
         let led = DigitalOut(Id.D1)
 
@@ -18,7 +18,7 @@ public struct BlinkRate {
             let value = sensor.readRawValue()
             // Change the current LED state.
             led.toggle()
-            // Keep the led on or off for a certain period determined by the value you get.
+            // Keep the LED on or off for a certain period determined by the value you get.
             sleep(ms: value)
         }
     }

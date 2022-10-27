@@ -8,7 +8,7 @@ import MadBoard
 public struct ReadAnalogInput {
 
     public static func main() {
-        // Initialize the pin A0 as a analog input pin.
+        // Initialize the pin A0 as an analog input pin.
         let pin = AnalogIn(Id.A0)
 
         // Read the input voltage every second.

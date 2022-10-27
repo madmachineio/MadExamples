@@ -1,4 +1,4 @@
-// Make red, green, blue LEDs to gradually brighten and dim one by one.
+// Make red, green, blue LEDs gradually brighten and dim one by one.
 
 // Import the library to enable the relevant classes and functions.
 import SwiftIO
@@ -8,7 +8,7 @@ import MadBoard
 public struct RGBBreathingLEDs {
 
     public static func main() {
-        // Initialize the pins the LEDs are connected to and put them in a array.
+        // Initialize the pins the LEDs are connected to and put them in an array.
         let red = PWMOut(Id.PWM0A)
         let green = PWMOut(Id.PWM1A)
         let blue = PWMOut(Id.PWM2B)
