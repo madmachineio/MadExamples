@@ -84,6 +84,7 @@ public class Player {
 
     /// The table is listed to raise note pitch more easily.
     private let frequencyTable: [Int: Float] = [
+        0    :    0         ,
         1    :    27.5      ,
         2    :    29.1352   ,
         3    :    30.8677   ,
@@ -277,7 +278,6 @@ extension Player {
         data: inout [Int16]
     ) {
         guard noteInfo.noteValue > 0 else { return }
-
         let duration  = calculateNoteDuration(noteInfo.noteValue)
         let frequency = frequencyTable[noteInfo.note.rawValue + halfStep]!
 
@@ -329,10 +329,10 @@ extension Player {
         var index = 0
         var sum: Float = 0
 
-        while sum < Float(timeSignature.beatsPerBar * (barIndex + 1)) && index < track.count {
+        while Float(timeSignature.beatsPerBar * (barIndex + 1)) - sum > 0.1 && index < track.count {
             sum += Float(timeSignature.noteValuePerBeat) / Float(track[index].noteValue)
 
-            if sum > Float(timeSignature.beatsPerBar * barIndex) {
+            if sum - Float(timeSignature.beatsPerBar * barIndex) > 0.1 {
                 indices.append(index)
             }
 
@@ -341,7 +341,6 @@ extension Player {
 
         return indices
     }
-
 
     /// Calculate samples of all notes in a bar.
     func getBarSamples(
@@ -358,15 +357,15 @@ extension Player {
         for track in tracks {
             let noteIndices = getNotesInBar(at: barIndex, in: track)
             var start = 0
+            print(noteIndices)
 
             for index in noteIndices {
+                print(track[index])
                 getBothNotesSamples(noteInfo: track[index], startIndex: start, fade: fadeDuration, halfStep: halfStep, data: &data)
                 start += Int(calculateNoteDuration(track[index].noteValue) * sampleRate * 2)
             }
         }
     }
-
-
 
     /// Send the generated samples using I2S protocol to play the sound.
     func sendData(data: [Int16], count: Int) {
@@ -390,6 +389,8 @@ extension Player {
         noteDuration: Float,
         fadeDuration: Float
     ) -> Int16 {
+        if frequency == 0 { return 0 }
+
         let sampleCount = Int(noteDuration * sampleRate)
         guard index < sampleCount else { return 0 }
 
@@ -415,8 +416,10 @@ extension Player {
     func getTriangleSample(
         at index: Int,
         frequency: Float,
-        amplitudeRatio: Float = 0.1
+        amplitudeRatio: Float = 0.3
     ) -> Float {
+        if frequency == 0 { return 0 }
+
         let period = sampleRate / frequency
 
         let sawWave = Float(index) / period - Float(Int(Float(index) / period + 0.5))

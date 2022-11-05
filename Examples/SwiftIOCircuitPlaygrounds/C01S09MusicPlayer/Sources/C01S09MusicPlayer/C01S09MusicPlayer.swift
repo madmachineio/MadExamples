@@ -1,4 +1,4 @@
-// Play a song fragment Twinkle twinkle little star.
+// Play a song using a speaker.
 import SwiftIO
 import MadBoard
 
@@ -12,10 +12,10 @@ public struct C01S09MusicPlayer {
 
         // BPM is beat count per minute. 
         // Timer signature specifies beats per bar and note value of a beat.
-        let player = Player(speaker, bpm: 120, sampleRate: 16_000, timeSignature: (4,2))
+        let player = Player(speaker, bpm: Mario.bpm, sampleRate: 16_000, timeSignature: Mario.timeSignature)
 
-        // Raise the song an octave and play it.
-        player.playTracks([track, track2], halfStep: 12)
+        // Play the music using the tracks.
+        player.playTracks(Mario.tracks)
 
         while true {
             sleep(ms: 1000)
