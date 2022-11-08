@@ -6,10 +6,16 @@ public class Player {
     public typealias NoteInfo = (note: Note, noteValue: Int)
     public typealias TimeSignature = (beatsPerBar: Int, noteValuePerBeat: Int)
 
-    var bpm: Int = 60
-    var timeSignature: TimeSignature = (4,4)
-    let amplitude = 16383
+    /// Beats per minute. It sets the speed of the music.
+    public var bpm: Int = 60
+    /// The beat count per bar and the note value for a beat.
+    public var timeSignature: TimeSignature = (4,4)
+    /// Set the overall note pitch. 12 half steps constitute an octave.
+    public var halfStep = 0
+    /// Fade in/out duration for each note in second.
+    public var fadeDuration: Float = 0.01
 
+    let amplitude = 16383
     var beatDuration: Float { 60.0 / Float(bpm) }
 
     var sampleRate: Float
@@ -34,25 +40,13 @@ public class Player {
     ///   - tracks: different tracks of a piece of music. A track consists of
     ///   notes and note value. For example, note value of a quarter note is 4,
     ///   note value of a half note is 2.
-    ///   - bpm: beats per minute. It sets the speed of the music.
-    ///   - timeSignature: time signature of the music.
-    ///   It specifies the beat count per bar and the note value for a note.
-    ///   - fadeDuration: fade duration for each note in second.
-    ///   - halfStep: raise the overall note pitch. 12 half steps constitute an octave.
     ///   - waveforms: the waveforms for each track used to generate sound samples.
     ///   - amplitudeRatios: the ratios used to control the sound loudness of each track.
     public func playTracks(
         _ tracks: [[NoteInfo]],
-        bpm: Int,
-        timeSignature: TimeSignature,
-        fadeDuration: Float = 0.01,
-        halfStep: Int = 0,
         waveforms: [Waveform],
         amplitudeRatios: [Float]
     ) {
-        self.bpm = bpm
-        self.timeSignature = timeSignature
-
         let beatCount = tracks[0].reduce(0) {
             $0 + Float(timeSignature.noteValuePerBeat) / Float($1.noteValue)
         }
@@ -60,7 +54,7 @@ public class Player {
         let barCount = Int(beatCount / Float(timeSignature.beatsPerBar))
 
         for barIndex in 0..<barCount {
-            getBarData(tracks, barIndex: barIndex, fadeDuration: fadeDuration, halfStep: halfStep, waveforms: waveforms, amplitudeRatios: amplitudeRatios, data: &buffer32)
+            getBarData(tracks, barIndex: barIndex, waveforms: waveforms, amplitudeRatios: amplitudeRatios, data: &buffer32)
 
             let count = Int(Float(timeSignature.beatsPerBar) * beatDuration * sampleRate * 2)
             for i in 0..<count {
@@ -75,27 +69,15 @@ public class Player {
     /// - Parameters:
     ///   - track: score of a melody in forms of notes and note value.
     ///   For example, note value of a quarter note is 4, note value of a half note is 2.
-    ///   - bpm: beats per minute. It sets the speed of the music.
-    ///   - timeSignature: time signature of the music.
-    ///   It specifies the beat count per bar and the note value for a note.
-    ///   - fadeDuration: fade duration in second.
-    ///   - halfStep: raise the overall note pitch. 12 half steps constitute an octave.
     ///   - waveform: the waveform used to generate sound samples.
     ///   - amplitudeRatio: the ratio used to control the sound loudness.
     public func playTrack(
         _ track: [NoteInfo],
-        bpm: Int,
-        timeSignature: TimeSignature,
-        fadeDuration: Float = 0.01,
-        halfStep: Int = 0,
         waveform: Waveform,
         amplitudeRatio: Float
     ) {
-        self.bpm = bpm
-        self.timeSignature = timeSignature
-
         for noteInfo in track {
-            playNote(noteInfo, bpm: bpm, timeSignature: timeSignature, halfStep: halfStep, waveform: waveform, amplitudeRatio: amplitudeRatio)
+            playNote(noteInfo, waveform: waveform, amplitudeRatio: amplitudeRatio)
         }
     }
 
@@ -103,25 +85,13 @@ public class Player {
     /// Generate data for specified note and play the sound.
     /// - Parameters:
     ///   - noteInfo: the notes and its note value.
-    ///   - bpm: beats per minute. It sets the speed of the music.
-    ///   - timeSignature: time signature of the music.
-    ///   It specifies the beat count per bar and the note value for a note.
-    ///   - fadeDuration: fade duration in second.
-    ///   - halfStep: raise the overall note pitch. 12 half steps constitute an octave.
     ///   - waveform: the waveform used to generate sound samples.
     ///   - amplitudeRatio: the ratio used to control the sound loudness.
     public func playNote(
         _ noteInfo: NoteInfo,
-        bpm: Int,
-        timeSignature: TimeSignature,
-        fadeDuration: Float = 0.01,
-        halfStep: Int = 0,
         waveform: Waveform,
         amplitudeRatio: Float
     ) {
-        self.bpm = bpm
-        self.timeSignature = timeSignature
-
         let duration  = calculateNoteDuration(noteInfo.noteValue)
 
         var frequency: Float = 0
@@ -138,7 +108,6 @@ public class Player {
             let sample = getNoteSample(
                 at: i, frequency: frequency,
                 noteDuration: duration,
-                fadeDuration: fadeDuration,
                 waveform: waveform,
                 amplitudeRatio: amplitudeRatio)
 
@@ -157,8 +126,6 @@ extension Player {
     func getBarData(
         _ tracks: [[NoteInfo]],
         barIndex: Int,
-        fadeDuration: Float,
-        halfStep: Int,
         waveforms: [Waveform],
         amplitudeRatios: [Float],
         data: inout [Int32]
@@ -176,8 +143,6 @@ extension Player {
                 getNoteData(
                     noteInfo: track[index],
                     startIndex: start,
-                    fade: fadeDuration,
-                    halfStep: halfStep,
                     waveform: waveforms[trackIndex],
                     amplitudeRatio: amplitudeRatios[trackIndex],
                     data: &data)
@@ -191,8 +156,6 @@ extension Player {
     func getNoteData(
         noteInfo: NoteInfo,
         startIndex: Int,
-        fade: Float,
-        halfStep: Int,
         waveform: Waveform,
         amplitudeRatio: Float,
         data: inout [Int32]
@@ -209,7 +172,7 @@ extension Player {
         }
 
         for i in 0..<Int(duration * sampleRate) {
-            let sample = Int32(getNoteSample(at: i, frequency: frequency, noteDuration: duration, fadeDuration: fade, waveform: waveform, amplitudeRatio: amplitudeRatio))
+            let sample = Int32(getNoteSample(at: i, frequency: frequency, noteDuration: duration, waveform: waveform, amplitudeRatio: amplitudeRatio))
 
             data[i * 2 + startIndex] += sample
             data[i * 2 + startIndex + 1] += sample
@@ -255,7 +218,6 @@ extension Player {
         at index: Int,
         frequency: Float,
         noteDuration: Float,
-        fadeDuration: Float,
         waveform: Waveform,
         amplitudeRatio: Float
     ) -> Int16 {
@@ -304,8 +266,7 @@ extension Player {
 
     /// Calculate the raw sample of a specified point from a square wave.
     /// The sound from it will sound a little sharp.
-    func getSquareSample(
-        at index: Int,
+    func getSquareSample(at index: Int,
         frequency: Float,
         amplitudeRatio: Float
     ) -> Float {
