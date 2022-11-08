@@ -12,10 +12,10 @@ public struct C01S09MusicPlayer {
 
         // BPM is beat count per minute. 
         // Timer signature specifies beats per bar and note value of a beat.
-        let player = Player(speaker, bpm: Mario.bpm, sampleRate: 16_000, timeSignature: Mario.timeSignature)
+        let player = Player(speaker, sampleRate: 16_000)
 
         // Play the music using the tracks.
-        player.playTracks(Mario.tracks)
+        player.playTracks(Mario.tracks, bpm: Mario.bpm, timeSignature: Mario.timeSignature, waveforms: Mario.trackWaveforms, amplitudeRatios: Mario.amplitudeRatios)
 
         while true {
             sleep(ms: 1000)
