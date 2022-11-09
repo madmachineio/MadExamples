@@ -1,3 +1,3 @@
-# C01S06BrightlessControl
+# C01S06BrightnessControl
 
 A description of this package.
