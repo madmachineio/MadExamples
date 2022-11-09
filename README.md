@@ -33,7 +33,7 @@ These examples show some basic usages and concepts to get started with the board
 
 ### SimpleIO
 
-These examples try more interesting projects after getting started. This part is based on any type of our board and you may need some other frequently-used components.
+These examples introduce more interesting projects after GettingStated. This part is based on any type of our board and you may need some other frequently-used components.
 
 * [BlinkRate](./Examples/SimpleIO/BlinkRate) - adjust the blink rate using a potentiometer.
 
@@ -54,7 +54,7 @@ These examples try more interesting projects after getting started. This part is
 
 ### MakerKit
 
-follow dozens of missions that come with the SwiftIO Maker kit to try all the modules.
+These examples provide dozens of missions that come with the SwiftIO Maker kit to explore all modules.
 
 * [Mission1_Blink](./Examples/MakerKit/Mission1_Blink) - blink the onboard blue LED every second by changing the output voltage.
 
