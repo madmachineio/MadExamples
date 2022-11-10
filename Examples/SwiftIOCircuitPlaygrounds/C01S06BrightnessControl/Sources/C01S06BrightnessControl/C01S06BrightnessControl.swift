@@ -5,7 +5,7 @@ import MadBoard
 import VEML6040
 
 @main
-public struct C01S06BrightlessControl {
+public struct C01S06BrightnessControl {
     public static func main() {
         // Initialize the I2C bus and the sensor.
         let i2c = I2C(Id.I2C0)
