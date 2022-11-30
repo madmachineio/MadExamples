@@ -9,9 +9,6 @@ public struct C01S04PotentiometerLED {
         let knob = AnalogIn(Id.A0)
         let led = PWMOut(Id.PWM4A)
 
-        // Set the PWM to control the LED. 
-        led.set(frequency: 1000, dutycycle: 0)
-
         // Read the input value. 
         // The value is represented in percentage, while the duty cycle is also between 0 and 1, 
         // so you can directly use the reading value to set the PWM.
