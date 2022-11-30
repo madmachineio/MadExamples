@@ -13,12 +13,16 @@ public struct C01S02ButtonLED {
         while true {
             // Read the input pin to check the button state.
             let value = button.read()
+
             // If the value is true which means the button is pressed, turn on the LED. Otherwise, turn off the LED.
             if value == true {
                 led.write(true)
             } else {
                 led.write(false)
             }
+            
+            // Alternatively
+            // led.write(button.read())
         }
     }
 }

@@ -37,11 +37,13 @@ public struct C01S03PWMLed {
                 dutycycle += stepDutycycle
                 if dutycycle >= maxDutycycle {
                     upDirection = false
+                    dutycycle = maxDutycycle
                 }
             } else {
                 dutycycle -= stepDutycycle
                 if dutycycle <= minDutycycle {
                     upDirection = true
+                    dutycycle = minDutycycle
                 }
             }
         }

@@ -3,7 +3,7 @@ import SwiftIO
 import MadBoard
 
 @main
-public struct C01S02TimerLEDToggle {
+public struct C01S01TimerLEDToggle {
     public static func main() {
         // Initialize a digital pin for LED module.
         let led = DigitalOut(Id.D19)
