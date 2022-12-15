@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug C01S08Rainbow",
+            "program": "${workspaceFolder:C01S08Rainbow}/.build/debug/C01S08Rainbow",
+            "args": [],
+            "cwd": "${workspaceFolder:C01S08Rainbow}",
+            "preLaunchTask": "swift: Build Debug C01S08Rainbow"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release C01S08Rainbow",
+            "program": "${workspaceFolder:C01S08Rainbow}/.build/release/C01S08Rainbow",
+            "args": [],
+            "cwd": "${workspaceFolder:C01S08Rainbow}",
+            "preLaunchTask": "swift: Build Release C01S08Rainbow"
+        }
+    ]
+}
