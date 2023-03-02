@@ -1,3 +1,5 @@
+// Toggle the LED after you press the buttton by detecting the rising edge.
+
 // Import the SwiftIO library to control input and output and the MadBoard to use the id of the pins.
 import SwiftIO
 import MadBoard

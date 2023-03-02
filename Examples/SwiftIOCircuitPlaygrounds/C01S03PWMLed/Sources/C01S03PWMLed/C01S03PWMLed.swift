@@ -8,11 +8,6 @@ public struct C01S03PWMLed {
         // Initialize a PWM output pin for the LED.
         let led = PWMOut(Id.PWM4A)
 
-        // Set the PWM output to control the LED. 
-        // The frequency is set to 1000Hz or can be other value. 
-        // The duty cycle is 0 in the beginning so LED keeps turning off.
-        led.set(frequency: 1000, dutycycle: 0)
-
         // Store the maximum and minimum values of the duty cycle to two constants. 
         let maxDutycycle: Float = 1.0
         let minDutycycle: Float = 0.0

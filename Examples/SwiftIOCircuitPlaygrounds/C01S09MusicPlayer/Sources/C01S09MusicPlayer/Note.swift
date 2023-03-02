@@ -1,8 +1,3 @@
-public enum Waveform {
-    case square
-    case triangle
-}
-
 /// The table is listed to raise note pitch more easily by changing half steps.
 let frequencyTable: [Int: Float] = [
     0    :    0         ,

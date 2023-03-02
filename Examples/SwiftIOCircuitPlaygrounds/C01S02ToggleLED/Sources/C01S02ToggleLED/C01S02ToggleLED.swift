@@ -1,3 +1,5 @@
+// After the button (D1) is pressed and released, the LED (D19) is toggled.
+
 // Import the SwiftIO library to control input and output and 
 // the MadBoard to use the id of the pins.
 import SwiftIO
@@ -23,7 +25,7 @@ public struct C01S02ToggleLED {
             }
             // Store the latest button state.
             lastState = currentState
-            sleep(ms: 20)
+            sleep(ms: 10)
         }
     }
 }

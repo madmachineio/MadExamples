@@ -64,7 +64,6 @@ public class Player {
         }
     }
 
-
     /// Calculate all data of the track and play the sound.
     /// - Parameters:
     ///   - track: score of a melody in forms of notes and note value.
@@ -280,3 +279,7 @@ extension Player {
     }
 }
 
+public enum Waveform {
+    case square
+    case triangle
+}

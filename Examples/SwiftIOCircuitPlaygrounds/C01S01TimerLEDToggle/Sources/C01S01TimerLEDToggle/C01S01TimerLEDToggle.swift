@@ -9,7 +9,7 @@ public struct C01S01TimerLEDToggle {
         let led = DigitalOut(Id.D19)
 
         // Initialize the onboard blue LED.
-        let blueLed = DigitalOut(Id.BLUE)
+        let blueLed = DigitalOut(Id.BLUE, value: true)
 
         // Initialize a timer for 1500ms.
         let timer = Timer(period: 1500)
@@ -24,10 +24,10 @@ public struct C01S01TimerLEDToggle {
 
         // Blink onboard blue LED.
         while true {
-            blueLed.high()
+            blueLed.low()
             sleep(ms: 500)
 
-            blueLed.low()
+            blueLed.high()
             sleep(ms: 500)
         }
     }

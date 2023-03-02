@@ -8,7 +8,7 @@ import LIS3DH
 public struct C01S07Accelerometer {
     public static func main() {
         // Initialize the I2C pins and the sensor.
-        let i2c = I2C(Id.I2C0)
+        let i2c = I2C(Id.I2C0, speed: .fast)
         let acc = LIS3DH(i2c)
 
         // Read the accelerations and each of them.

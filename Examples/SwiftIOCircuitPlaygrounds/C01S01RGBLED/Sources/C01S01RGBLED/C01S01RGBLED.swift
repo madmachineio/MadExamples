@@ -4,7 +4,7 @@ import MadBoard
 @main
 public struct C01S01RGBLED {
     public static func main() {
-        // Initalize the built-in red, green, blue LED.
+        // Initialize the built-in red, green, blue LED.
         // They need a low level to be turned on.
         // So set the digital value of true to turn them off in the beginning.
         let red = DigitalOut(Id.RED, value: true)
@@ -30,6 +30,7 @@ public struct C01S01RGBLED {
             setRGB(false, false, false)
         }
 
+        // Control red, green and blue LED with the given values.
         // Apply low voltage to turn on the built-in LEDs. 
         // For example, if you want the red LED on, you should write false.
         func setRGB(_ redOn: Bool, _ greenOn: Bool, _ blueOn: Bool) {

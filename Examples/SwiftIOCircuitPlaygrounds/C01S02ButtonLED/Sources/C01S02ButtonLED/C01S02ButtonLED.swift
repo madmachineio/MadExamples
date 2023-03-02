@@ -1,3 +1,7 @@
+// When you press the button, the LED turns on. 
+// If yo continue to hold it, the LED stays on.
+// After you release it, the LED turns off.
+
 // Import the SwiftIO library to control input and output and the MadBoard to use the id of the pins.
 import SwiftIO
 import MadBoard
@@ -23,6 +27,8 @@ public struct C01S02ButtonLED {
             
             // Alternatively
             // led.write(button.read())
+
+            sleep(ms: 10)
         }
     }
 }

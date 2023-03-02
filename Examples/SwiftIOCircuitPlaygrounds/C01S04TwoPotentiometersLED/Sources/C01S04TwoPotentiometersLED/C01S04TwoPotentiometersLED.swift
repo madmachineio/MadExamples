@@ -1,5 +1,5 @@
 // In this project, two potentiometers control the LED brightness.
-// One controls the overall intensity and the other gradually adjusts the brightness.
+// One controls the maximum intensity and the other adjusts the brightness between the minimum and the maximum.
 
 // Import SwiftIO to control input and output.
 import SwiftIO
@@ -23,7 +23,7 @@ public struct C01S04TwoPotentiometersLED {
         while true {
             // Map the analog value from the range 0-1 to the range minIntensity-maxIntensity. 
             // It decides the max duty cycle for the PWM signal.
-            // That's to say, it changes the overall intensity of the LED.
+            // That's to say, it changes the maximum intensity of the LED.
             let maxDutycycle = intensityPot.readPercent() * (maxIntensity - minIntensity) + minIntensity
 
             // Read the analog value (0-1) from the pin A0.

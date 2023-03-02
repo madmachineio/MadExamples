@@ -1,3 +1,6 @@
+// Switch the LED pattern by pressing the button.
+// The LED patterns are: constant off, constant on, blink, breathing.
+
 import SwiftIO
 import MadBoard
 
@@ -18,7 +21,7 @@ public struct C01S03LEDPatternChange {
         let duration = 10
         // Make the LED on for 500ms and off for 500ms.
         let blinkPeriod = 1000
-        var blinkCount = 0
+        var blinkTime = 0
 
         var patternIndex = 0
         var changePattern = false
@@ -26,20 +29,18 @@ public struct C01S03LEDPatternChange {
         // Set the duty cycle depending on the pattern.
         resetDutycycle()
 
-        // Button states for debounce.
-        var detected = false
-        var releaseDuration = 0
-        let debounceDuration = 40
+        var pressed = false
 
         // If the button is pressed and released, change to the next pattern.
         button.setInterrupt(.falling) {
-            detected = true
+            pressed = true
         }
 
         while true { 
             if changePattern {
                 // Reset the duty cycle after changing the pattern.
                 resetDutycycle()
+                changePattern = false
             } else {
                 // Update duty cycle depending on the current LED pattern.
                 updateDutycycle()
@@ -49,56 +50,49 @@ public struct C01S03LEDPatternChange {
             led.setDutycycle(dutycycle)
             sleep(ms: duration) 
 
-            // Debounce.
-            if detected {
-                releaseDuration += duration
-            }
-
-            if releaseDuration == debounceDuration {
-                releaseDuration = 0
-                detected = false
-
-                // Update pattern index.
+            // Update pattern index after button is pressed and released.
+            if pressed {
                 changePattern = true
                 patternIndex += 1
-                if patternIndex == 4 { 
+                if patternIndex == LEDPattern.allCases.count { 
                     patternIndex = 0
                 }
+
+                pressed = false
             }
         }
 
+        // Reset the duty cycle for a new LED pattern.
         func resetDutycycle() {
-            switch patternIndex {
-            case 0: 
+            switch LEDPattern(rawValue: patternIndex)! {
+            case .off: 
                 dutycycle = minDutycycle
-            case 1: 
+            case .on: 
                 dutycycle = maxDutycycle
-            case 2:  
+            case .blink:  
                 dutycycle = maxDutycycle
-                blinkCount = 0
-            case 3: 
+                blinkTime = 0
+            case .breathing: 
                 dutycycle = minDutycycle
                 stepDutycycle = abs(stepDutycycle)
-            default: break
-            }
-
-            changePattern = false
+            }  
         }
-
         
+        // Update the duty cycle of the PWM signal according to the current LED pattern.
         func updateDutycycle() {
-            switch patternIndex {
-            case 2: 
-                // Blink LED.
-                // The duty cycle changes between 0.0 and 1.0 to turn off and on the LED in turn.
-                blinkCount += 1
-                dutycycle = blinkCount % 100 < (blinkPeriod / 2 / duration) ? maxDutycycle : minDutycycle
-            case 3: 
-                // Fade LED.
+            switch LEDPattern(rawValue: patternIndex)! {
+            case .blink: 
+                // For the first half of blinkPeriod, turn on the LED.
+                // For the second half of blinkPeriod, turn off the LED.
+                // The duty cycle changes between 0.0 and 1.0 to turn on and off the LED in turn.
+                blinkTime += duration
+                dutycycle = blinkTime % blinkPeriod < (blinkPeriod / 2) ? maxDutycycle : minDutycycle
+            case .breathing: 
                 // The duty cycle gradually increases to the maximum, then decrease to the mininum.
                 // Therefore, the LED brightens and dims in turn.
                 dutycycle += stepDutycycle
             
+                // Check if LED brightness is increaed to the max or decreased to min. 
                 if stepDutycycle > 0 && dutycycle >= maxDutycycle {
                     stepDutycycle.negate()
                     dutycycle = maxDutycycle
@@ -108,6 +102,13 @@ public struct C01S03LEDPatternChange {
                 }
             default: break
             }
+        }
+
+        enum LEDPattern: Int, CaseIterable {
+            case off
+            case on
+            case blink
+            case breathing
         }
     }
 }

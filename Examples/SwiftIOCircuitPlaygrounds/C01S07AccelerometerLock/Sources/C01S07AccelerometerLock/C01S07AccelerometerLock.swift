@@ -32,16 +32,18 @@ public struct C01S07AccelerometerLock {
         var password = [Direction](repeating: .left, count: 3)
         updatePassword()
 
-        // Keep track of the index of next direction.
+        // Keep track of the index of direction.
         var currentIndex = 0
 
         var reset = false
         var start = false
 
-        // If time is up, it's time to reset the game.
+        // If time is up, reset the game.
         timer.setInterrupt(start: false) {
             reset = true
         }
+
+        print("Tilt/move your board to start.")
 
         while true {
             if currentIndex < password.count {
@@ -60,7 +62,7 @@ public struct C01S07AccelerometerLock {
                     } else {
                         // If not, restart from the first direction.
                         currentIndex = 0
-                        print("Wrong! Restart...")
+                        print("Wrong! Restart from the first one...")
                     }
                 }
             } else if currentIndex == password.count {
@@ -68,15 +70,17 @@ public struct C01S07AccelerometerLock {
                 led.high()
                 print("Unlocked!")
                 timer.stop()
-                currentIndex = password.count + 1
+                // End the game.
+                currentIndex += 1
             }
 
-            // If reset button is pressed, 
+            // If reset button is pressed, it's time to reset the game.
             if resetButton.read() {
                 reset = true
             }
 
             // Generate 3 random directions as a new password and reset the game.
+            // The buzzer will beep as an indicator.
             if reset {
                 updatePassword()
                 timer.stop()
@@ -88,7 +92,7 @@ public struct C01S07AccelerometerLock {
                 led.low()
                 beep()
 
-                print("Timeout or reset button is pressed. Password is reset.")
+                print("Timeout or reset button is pressed. Password is reset. Tilt/move your board to restart.")
             }
 
             sleep(ms: 20)
@@ -110,7 +114,7 @@ public struct C01S07AccelerometerLock {
 
         // Replace the previous password with a new one. 
         func updatePassword() {
-            for i in 0..<3 {
+            for i in 0..<password.count {
                 password[i] = Direction(rawValue: Int.random(in: 0..<4))!
             }
         }

@@ -39,7 +39,7 @@ public struct C01S05TemperatureMeasurement {
                 }
 
                 // Print the average temperature in celsius.
-                print("Temperature: \(sum / 20.0)°C")
+                print("Temperature: \(sum / 20.0)C")
                 start = false
                 // Turn off the indicator.
                 led.low()

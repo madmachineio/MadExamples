@@ -1,5 +1,5 @@
-// Control the LED with two specified buttons.
-// The button D1 is used to turn on it and D21 is to turn off it.
+// Control the LED with two dedicated buttons.
+// The button D1 is used to turn on LED and D21 is to turn off it.
 
 // SwiftIO is used to set all input and output.
 import SwiftIO

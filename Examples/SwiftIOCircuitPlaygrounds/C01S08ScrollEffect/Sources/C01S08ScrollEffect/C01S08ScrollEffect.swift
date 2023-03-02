@@ -1,4 +1,4 @@
-// Create a scroll effect.
+// Create a scroll effect to update the display with rainbow colors in turn.
 import SwiftIO
 import MadBoard
 import ST7789

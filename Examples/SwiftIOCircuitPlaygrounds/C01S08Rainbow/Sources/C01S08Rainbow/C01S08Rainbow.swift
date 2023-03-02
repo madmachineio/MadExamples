@@ -25,9 +25,9 @@ public struct C01S08Rainbow {
         let indigo: UInt32 = 0x4B0082
         let violet: UInt32 = 0x9400D3
         let colors888 = [red, orange, yellow, green, blue, indigo, violet]
-
         // Get 16bit color data.
         let colors565: [UInt16] = colors888.map { getRGB565LE($0) }
+        
         // The width for each color bar.
         let width = screen.width / colors565.count
 

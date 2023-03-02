@@ -1,3 +1,8 @@
+// Press the button D1 to start the game.
+// Once you see the red LED turns on, press the button D21 immediately.
+// Then the LED turns off and you can see your reflex time in serial monitor.
+// To restart the game, press button D1 again.
+
 import SwiftIO
 import MadBoard
 
@@ -23,18 +28,18 @@ public struct C01S03ReflexGame {
                 // Turn on the red LED as a sign of start.
                 led.high()
                 // Store the current clock cycle.
-                let startTime = getClockCycle()
+                let start = getClockCycle()
 
                 // Wait until the button is pressed.
                 while !player.read() {
-
+                    sleep(ms: 1)
                 }
 
                 // Calculate the time in ns.
-                let finalTime = cyclesToNanoseconds(start: startTime, stop: getClockCycle())
+                let duration = cyclesToNanoseconds(start: start, stop: getClockCycle())
                 // Turn off the indicator.
                 led.low()
-                print("Reflex time: \(Float(finalTime) / 1000_000)ms")
+                print("Reflex time: \(Float(duration) / 1000_000)ms")
             }
 
             sleep(ms: 10)
