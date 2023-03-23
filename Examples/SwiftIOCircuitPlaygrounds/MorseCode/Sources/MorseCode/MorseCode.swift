@@ -1,26 +1,12 @@
-// Import the SwiftIO library to set SPI communication and MadBoard to use pin id.
+// Import the SwiftIO library to set input/output and MadBoard to use pin id.
 import SwiftIO
 import MadBoard
-// Import the driver for the screen and graphical library for display.
+// Import the driver for the screen.
 import ST7789
-import MadDisplay
 
 @main
 public struct MorseCode {
     public static func main() {
-        // Initialize the pins for the screen.
-        let spi = SPI(Id.SPI0, speed: 30_000_000)
-        let cs = DigitalOut(Id.D9)
-        let dc = DigitalOut(Id.D10)
-        let rst = DigitalOut(Id.D14)
-        let bl = DigitalOut(Id.D2)
-
-        // Initialize the screen with the pins above.
-        let screen = ST7789(spi: spi, cs: cs, dc: dc, rst: rst, bl: bl, rotation: .angle90)
-        // Create an instance using the screen for dispay later.
-        let display = MadDisplay(screen: screen)
-        let group = Group()
-
         // Initialize an LED as an indicator.
         let led = DigitalOut(Id.D19)
         // Initialize a button used to type characters.
@@ -51,10 +37,6 @@ public struct MorseCode {
         // Store all characters.
         var text = ""
 
-        // Create a label to display the input text.
-        var label = Label(y: 10, color: Color.orange)
-        group.append(label)
-
         // A threshold for a long press which matches a dah.
         let longPressCount = 30
 
@@ -69,6 +51,10 @@ public struct MorseCode {
         // Store the states of the button.
         var justPressed = false
         var justReleased = false
+
+        var buzzerCount = 0
+
+        var lastLetter = ""
 
         timer.setInterrupt() {
             if button.read() {
@@ -100,11 +86,6 @@ public struct MorseCode {
             }
         }
 
-        var buzzerCount = 0
-
-        var lastLetter = ""
-
-
         while true {
             // Check if you finish typing a single character or a word.
             if releaseCount > wordReleaseCount {
@@ -113,10 +94,10 @@ public struct MorseCode {
                 // The buzzer produces a higher sound as a notification.
                 if lastLetter != "" && lastLetter != " "{
                     text += " "
-                    label.updateText(text)
-                    display.update(group)
+
+                    print("Message: \"\(text)\"")
                     
-                    buzzer.set(frequency: 2000, dutycycle: 0.5)
+                    //buzzer.set(frequency: 2000, dutycycle: 0.5)
                     buzzerCount = 0
                     lastLetter = " "
                 }
@@ -127,13 +108,12 @@ public struct MorseCode {
                 if let letter = dict[morseCode] {
                     text += letter
 
-                    label.updateText(text)
-                    display.update(group)
+                    print("Message: \"\(text)\"")
                     
                     lastLetter = letter
                     
                     morseCode = ""
-                    buzzer.set(frequency: 1200, dutycycle: 0.5)
+                    //buzzer.set(frequency: 1200, dutycycle: 0.5)
                     buzzerCount = 0
                 }
             }
