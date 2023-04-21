@@ -14,7 +14,7 @@ public struct C01S05TemperatureMeasurement {
         let sht = SHT3x(i2c)
 
         // Initialize the LED indicator pin.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
         // Initialize the button pin.
         let button = DigitalIn(Id.D1)
 

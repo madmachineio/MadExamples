@@ -6,7 +6,7 @@ import MadBoard
 public struct C01S01LEDBlink {
     public static func main() {
         // Initialize the specified pin used for digital output.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         // The code in the loop will run over and over again. 
         while true {

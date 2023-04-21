@@ -12,9 +12,9 @@ public struct Pong {
         let spi = SPI(Id.SPI0, speed: 30_000_000)
         
         // Initialize the pins used for the screen.
-        let cs = DigitalOut(Id.D9)
-        let dc = DigitalOut(Id.D10)
-        let rst = DigitalOut(Id.D14)
+        let cs = DigitalOut(Id.D5)
+        let dc = DigitalOut(Id.D4)
+        let rst = DigitalOut(Id.D3)
         let bl = DigitalOut(Id.D2)
         // Initialize the LCD using the pins above. 
         // Rotate the screen to keep the original at the upper left.

@@ -20,7 +20,7 @@ public struct C01S03ButtonPWM {
 
         // Initialize the digital pins. downButton is to dim the LED and the upButton is to brighten the LED.
         let downButton = DigitalIn(Id.D1)
-        let upButton = DigitalIn(Id.D21)
+        let upButton = DigitalIn(Id.D19)
 
         var changed = false
 

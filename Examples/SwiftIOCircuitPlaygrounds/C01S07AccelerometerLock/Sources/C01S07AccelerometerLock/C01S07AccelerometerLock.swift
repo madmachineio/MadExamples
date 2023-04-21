@@ -19,7 +19,7 @@ public struct C01S07AccelerometerLock {
         let acc = LIS3DH(i2c)
 
         // Initialize LED and buzzer as indicators.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
         let buzzer = PWMOut(Id.PWM5A)
 
         // Initialize the button to change the password.

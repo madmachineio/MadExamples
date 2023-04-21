@@ -6,7 +6,7 @@ import MadBoard
 public struct C01S01LEDMorseCode {
     public static func main() {
         // Initialize the digital output pin.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         // Define the LED states to represent the letter s and o.
         let sSignal = [false, false, false]

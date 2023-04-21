@@ -9,7 +9,7 @@ import MadBoard
 public struct C01S02ToggleLED {
     public static func main() {
         // Initialize the input pin for the button and output pin for the LED.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
         let button = DigitalIn(Id.D1)
 
         var lastState = false

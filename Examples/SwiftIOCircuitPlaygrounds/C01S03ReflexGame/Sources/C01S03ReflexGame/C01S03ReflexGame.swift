@@ -1,5 +1,5 @@
 // Press the button D1 to start the game.
-// Once you see the red LED turns on, press the button D21 immediately.
+// Once you see the red LED turns on, press the button D19 immediately.
 // Then the LED turns off and you can see your reflex time in serial monitor.
 // To restart the game, press button D1 again.
 
@@ -10,9 +10,9 @@ import MadBoard
 public struct C01S03ReflexGame {
     public static func main() {
         let startButton = DigitalIn(Id.D1)
-        let player = DigitalIn(Id.D21)
+        let player = DigitalIn(Id.D19)
         let buzzer = PWMOut(Id.PWM5A)
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         while true {
             // Press the start button to begin the game.

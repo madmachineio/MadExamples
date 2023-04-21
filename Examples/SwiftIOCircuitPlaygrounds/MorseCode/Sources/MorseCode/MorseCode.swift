@@ -8,7 +8,7 @@ import ST7789
 public struct MorseCode {
     public static func main() {
         // Initialize an LED as an indicator.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
         // Initialize a button used to type characters.
         let button = DigitalIn(Id.D1)
         // Initialize a buzzer used to tell typing states.

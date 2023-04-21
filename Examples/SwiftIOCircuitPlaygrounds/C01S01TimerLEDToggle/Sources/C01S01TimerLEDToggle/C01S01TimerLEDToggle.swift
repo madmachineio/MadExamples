@@ -6,7 +6,7 @@ import MadBoard
 public struct C01S01TimerLEDToggle {
     public static func main() {
         // Initialize a digital pin for LED module.
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         // Initialize the onboard blue LED.
         let blueLed = DigitalOut(Id.BLUE, value: true)

@@ -9,7 +9,7 @@ public struct C01S02ButtonInterrupt {
     public static func main() {
         // Initialize the input pin for the button and output pin for the LED.
         let button = DigitalIn(Id.D1)
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         // Define a new function used to toggle the LED.
         func toggleLed() {

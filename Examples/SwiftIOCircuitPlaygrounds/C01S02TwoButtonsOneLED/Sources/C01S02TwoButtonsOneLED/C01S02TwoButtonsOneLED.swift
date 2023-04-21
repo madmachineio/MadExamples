@@ -1,4 +1,4 @@
-// Pressing any of the two buttons (D1, D21) will toggle the LED. 
+// Pressing any of the two buttons (D1, D19) will toggle the LED. 
 // The LED state is updated after that button is pressed.
 
 // SwiftIO is used to set input and output of the pins.
@@ -11,8 +11,8 @@ public struct C01S02TwoButtonsOneLED {
     public static func main() {
         // Initialize the pins for two buttons and the LED.
         let button0 = DigitalIn(Id.D1)
-        let button1 = DigitalIn(Id.D21)
-        let led = DigitalOut(Id.D19)
+        let button1 = DigitalIn(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         // Store if a button has been pressed.
         var pressed = false

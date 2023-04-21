@@ -19,8 +19,8 @@ public struct C01S06ReadTime {
         // Please use current time to adjust the RTC time if it has been lost power.
         // The day of week is from 0 to 6. In this case, 0 refers to Monday.
         let currentTime = PCF8563.Time(
-            year: 2023, month: 3, day: 1, hour: 16,
-            minute: 20, second: 0, dayOfWeek: 2
+            year: 2023, month: 4, day: 9, hour: 10,
+            minute: 26, second: 0, dayOfWeek: 6
         )
         // If the RTC has lost power, its time will be updated.
         // If not, its time should be accurate and thus won't be changed.

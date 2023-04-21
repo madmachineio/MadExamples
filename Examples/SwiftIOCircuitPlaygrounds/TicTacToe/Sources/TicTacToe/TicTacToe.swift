@@ -9,9 +9,9 @@ public struct TicTacToe {
     public static func main() {
         // Initialize the SPI pin and the digital pins for the LCD.
         let spi = SPI(Id.SPI0, speed: 30_000_000)
-        let cs = DigitalOut(Id.D9)
-        let dc = DigitalOut(Id.D10)
-        let rst = DigitalOut(Id.D14)
+        let cs = DigitalOut(Id.D5)
+        let dc = DigitalOut(Id.D4)
+        let rst = DigitalOut(Id.D3)
         let bl = DigitalOut(Id.D2)
 
         // Initialize the LCD using the pins above. Rotate the screen to keep the original at the upper left.
@@ -27,7 +27,7 @@ public struct TicTacToe {
 
         let player2 = Player(
             pot: AnalogIn(Id.A11),
-            button: DigitalIn(Id.D21),
+            button: DigitalIn(Id.D19),
             color: Color.lime
         )
 

@@ -16,9 +16,9 @@ public struct MovingBall {
 
         // Initialize the pins for the screen.
         let spi = SPI(Id.SPI0, speed: 30_000_000)
-        let cs = DigitalOut(Id.D9)
-        let dc = DigitalOut(Id.D10)
-        let rst = DigitalOut(Id.D14)
+        let cs = DigitalOut(Id.D5)
+        let dc = DigitalOut(Id.D4)
+        let rst = DigitalOut(Id.D3)
         let bl = DigitalOut(Id.D2)
 
         // Initialize the screen with the pins above.

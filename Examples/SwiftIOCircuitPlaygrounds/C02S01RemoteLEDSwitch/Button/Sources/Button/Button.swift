@@ -1,5 +1,6 @@
 // This code is downloaded to board connected to a button.
-// Detect if the button is pressed or released and send message to another board via UART bus.
+// Detect if the button is pressed/released and send message to another board via UART bus.
+// Connect UART0 (RX/TX) of this board to the UART0 (TX/RX) of the other board.
 
 import SwiftIO
 import MadBoard

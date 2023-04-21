@@ -13,7 +13,7 @@ public struct C01S07AccelerometerDice {
         let dice = LIS3DH(i2c)
 
         // Initialize an LED used as an indicator when shaking the sensor.
-        let indicator = DigitalOut(Id.D19)
+        let indicator = DigitalOut(Id.D18)
 
         // Create a variable to store the time after the sensor stops movement.
         var steadyCount = 999

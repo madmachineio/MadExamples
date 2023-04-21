@@ -1,5 +1,5 @@
 // Control the LED with two dedicated buttons.
-// The button D1 is used to turn on LED and D21 is to turn off it.
+// The button D1 is used to turn on LED and D19 is to turn off it.
 
 // SwiftIO is used to set all input and output.
 import SwiftIO
@@ -12,8 +12,8 @@ public struct C01S02OnOffButtons {
         // Initialize the pin for the button used to turn on LED.
         let onButton = DigitalIn(Id.D1)
         // Initialize the pin for the button used to turn off the LED.
-        let offButton = DigitalIn(Id.D21)
-        let led = DigitalOut(Id.D19)
+        let offButton = DigitalIn(Id.D19)
+        let led = DigitalOut(Id.D18)
 
         // Store the current LED state.
         var ledState = false
@@ -39,7 +39,7 @@ public struct C01S02OnOffButtons {
                     ledState = true
                 }
             } else {
-                // If the LED is on, check if the off button (D21) is pressed. 
+                // If the LED is on, check if the off button (D19) is pressed. 
                 // If so, turn off the LED after the button is released.
 
                 // Update the button state if it is pressed. 

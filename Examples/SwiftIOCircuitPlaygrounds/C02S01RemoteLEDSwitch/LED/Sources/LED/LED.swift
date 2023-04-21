@@ -1,5 +1,6 @@
 // This code is downloaded to board connected to an LED.
 // Wait UART data from other board to turn on/off LED.
+// Connect UART0 (RX/TX) of this board to the UART0 (TX/RX) of the other board.
 
 import SwiftIO
 import MadBoard
@@ -8,7 +9,7 @@ import MadBoard
 public struct LED {
     public static func main() {
         let uart = UART(Id.UART0)
-        let led = DigitalOut(Id.GREEN, value: true)
+        let led = DigitalOut(Id.D18)
 
         var buffer: [UInt8] = []
 
@@ -32,11 +33,9 @@ public struct LED {
 
                 switch str {
                 case "on": 
-                    led.low()
-                    print("LED " + str)
-                case "off": 
                     led.high()
-                    print("LED " + str)
+                case "off": 
+                    led.low()
                 default: break
                 }
             }

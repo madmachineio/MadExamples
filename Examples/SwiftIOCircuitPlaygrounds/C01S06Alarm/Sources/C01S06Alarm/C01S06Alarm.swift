@@ -11,7 +11,7 @@ public struct C01S06Alarm {
         let i2c = I2C(Id.I2C0)
         let rtc = PCF8563(i2c)
 
-        let led = DigitalOut(Id.D19)
+        let led = DigitalOut(Id.D18)
         let stopButton = DigitalIn(Id.D1)
         let buzzer = PWMOut(Id.PWM5A)
 
