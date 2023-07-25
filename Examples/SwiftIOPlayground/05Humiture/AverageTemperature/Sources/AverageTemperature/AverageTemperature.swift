@@ -11,7 +11,7 @@ public struct AverageTemperature {
     public static func main() {
         // Initialize the I2C interface and use it to initialize the sensor.
         let i2c = I2C(Id.I2C0)
-        let sht = SHT3x(i2c)
+        let humiture = SHT3x(i2c)
 
         // Initialize the LED indicator pin.
         let led = DigitalOut(Id.D18)
@@ -34,7 +34,7 @@ public struct AverageTemperature {
                 // Read the value 20 times to calculate the average.
                 var sum: Float = 0
                 for _ in 0..<20 {
-                    sum += sht.readCelsius()
+                    sum += humiture.readCelsius()
                     sleep(ms: 3)
                 }
 
