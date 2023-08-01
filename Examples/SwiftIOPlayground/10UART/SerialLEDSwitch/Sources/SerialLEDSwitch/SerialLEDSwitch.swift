@@ -22,7 +22,7 @@ public struct SerialLEDSwitch {
                 
                 // Decode the data since the text from computer is sent in UTF8 format.
                 let command = String(decoding: buffer, as: UTF8.self)
-                // Connect the port on your feather board in serial monitor to see printed message
+                // Connect the port on your micro board in serial monitor to see printed message
                 print(command)
                 
                 // Set digital output according to the command from computer.

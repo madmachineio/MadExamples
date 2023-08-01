@@ -4,8 +4,8 @@
 # Those project files in the dependent libraries would be IGNORED
 
 # Specify the board name below
-# There are "SwiftIOBoard" and "SwiftIOFeather" now
-board = "SwiftIOFeather"
+# There are "SwiftIOBoard" and "SwiftIOMicro" now
+board = "SwiftIOMicro"
 
 # Specifiy the target triple below
 # There are "thumbv7em-unknown-none-eabi" and "thumbv7em-unknown-none-eabihf" now
