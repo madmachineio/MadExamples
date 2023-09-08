@@ -66,9 +66,9 @@ struct PongGame {
             screen: screen
         )
 
-        hitBallSound = readSoundData(from: "/SD:/Sound/hitball.wav")
-        hitWallSound = readSoundData(from: "/SD:/Sound/hitwall.wav")
-        scoreSound = readSoundData(from: "/SD:/Sound/score.wav")
+        hitBallSound = readSoundData(from: "/SD:/Resources/Sounds/hitball.wav")
+        hitWallSound = readSoundData(from: "/SD:/Resources/Sounds/hitwall.wav")
+        scoreSound = readSoundData(from: "/SD:/Resources/Sounds/score.wav")
 
         leftPlayer.y = getPaddleY(leftPot)
         rightPlayer.y = getPaddleY(rightPot)
