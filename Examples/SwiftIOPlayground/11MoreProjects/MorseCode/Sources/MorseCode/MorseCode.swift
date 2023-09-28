@@ -1,8 +1,6 @@
 // Import the SwiftIO library to set input/output and MadBoard to use pin id.
 import SwiftIO
 import MadBoard
-// Import the driver for the screen.
-import ST7789
 
 @main
 public struct MorseCode {
