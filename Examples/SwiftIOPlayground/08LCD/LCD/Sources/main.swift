@@ -6,21 +6,21 @@ import ST7789
 
 
 // Initialize the SPI pin and the digital pins for the LCD.
-let spi = SPI(Id.SPI0, speed: 30_000_000)
-let cs = DigitalOut(Id.D5)
-let dc = DigitalOut(Id.D4)
-let rst = DigitalOut(Id.D3)
 let bl = DigitalOut(Id.D2)
+let rst = DigitalOut(Id.D12)
+let dc = DigitalOut(Id.D13)
+let cs = DigitalOut(Id.D5)
+let spi = SPI(Id.SPI0, speed: 30_000_000)
 
 // Initialize the LCD using the pins above. Rotate the screen to keep the original at the upper left.
 let screen = ST7789(spi: spi, cs: cs, dc: dc, rst: rst, bl: bl, rotation: .angle90)
 
 // Store some color values for easier reference later.
-let black: UInt16 = 0x0000
-let red: UInt16 = 0xF800
-let green: UInt16 = 0x07E0
-let blue: UInt16 = 0x001F
-let white: UInt16 = 0xFFFF
+let black = UInt16(0x0000).byteSwapped
+let red   = UInt16(0xF800).byteSwapped
+let green = UInt16(0x07E0).byteSwapped
+let blue = UInt16(0x001F).byteSwapped
+let white = UInt16(0xFFFF).byteSwapped
 
 // Fill the whole screen with red, green, blue, white, and black in turns. 
 // The color changes every second. 
