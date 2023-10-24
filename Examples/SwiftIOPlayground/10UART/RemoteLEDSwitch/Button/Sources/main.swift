@@ -7,7 +7,12 @@ import MadBoard
 
 
 let uart = UART(Id.UART0)
+
+#if SWIFTIOMICRO
 let button = DigitalIn(Id.DL)
+#else
+let button = DigitalIn(Id.D0)
+#endif
 
 var buttonPressed = false
 
