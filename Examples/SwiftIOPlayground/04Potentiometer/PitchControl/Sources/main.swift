@@ -11,7 +11,7 @@ let buzzer = PWMOut(Id.PWM5A)
 // Then calculate the value into the frequency. 
 // Set the PWM with the frequency and a duty cycle.
 while true {
-    let potPercentage = pot.readPercent()
+    let potPercentage = pot.readPercentage()
     let frequency = 50 + Int(1000 * potPercentage)
     buzzer.set(frequency: frequency, dutycycle: 0.5)
     sleep(ms: 20)
