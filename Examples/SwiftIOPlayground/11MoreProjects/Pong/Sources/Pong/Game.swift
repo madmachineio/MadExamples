@@ -177,15 +177,26 @@ struct PongGame {
     func readSoundData(from path: String) -> [UInt8] {
         let headerSize = 0x2C
 
-        let file = FileDescriptor.open(path)
-        defer { file.close() }
+        let _file = try? FileDescriptor.open(path)
+        guard let file = _file else {
+            print("Read sound data \(path) failed!")
+            return []
+        }
 
-        file.seek(offset: 0, from: FileDescriptor.SeekOrigin.end)
-        let size = file.tell() - headerSize
+        var buffer = [UInt8]()
 
-        var buffer = [UInt8](repeating: 0, count: size)
-        buffer.withUnsafeMutableBytes { rawBuffer in 
-            _ = file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
+        do {
+            try file.seek(offset: 0, from: FileDescriptor.SeekOrigin.end)
+            let size = try file.tell() - headerSize
+
+            buffer = [UInt8](repeating: 0, count: size)
+            try buffer.withUnsafeMutableBytes { rawBuffer in 
+                _ = try file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
+            }
+            try file.close()
+        } catch {
+            print("File \(path) handle error: \(error)")
+            return []
         }
 
         return buffer
