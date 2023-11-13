@@ -177,8 +177,7 @@ struct PongGame {
     func readSoundData(from path: String) -> [UInt8] {
         let headerSize = 0x2C
 
-        let _file = try? FileDescriptor.open(path)
-        guard let file = _file else {
+        guard let file = try? FileDescriptor.open(path) else {
             print("Read sound data \(path) failed!")
             return []
         }
