@@ -37,7 +37,7 @@ public struct Mission8_Servo_Motor {
         let servo = PWMOut(Id.PWM4A)
 
         while true {
-            let value = a0.readPercent() // Read the analog value and return a value between 0.0 and 1.0.
+            let value = a0.readPercentage() // Read the analog value and return a value between 0.0 and 1.0.
             let pulse = Int(500 + 2000 * value) // Calculate the value to get the pulse duration.
             servo.set(period: 20000, pulse: pulse) // Set the servo position according to the scaled value.
 

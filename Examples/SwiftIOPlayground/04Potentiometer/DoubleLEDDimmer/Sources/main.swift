@@ -22,10 +22,10 @@ while true {
     // Map the analog value from the range 0-1 to the range minIntensity-maxIntensity. 
     // It decides the max duty cycle for the PWM signal.
     // That's to say, it changes the maximum intensity of the LED.
-    let maxDutycycle = intensityPot.readPercent() * (maxIntensity - minIntensity) + minIntensity
+    let maxDutycycle = intensityPot.readPercentage() * (maxIntensity - minIntensity) + minIntensity
 
     // Read the analog value (0-1) from the pin A0 which serves as ratio for final duty cycle.
-    let dutycycleRatio = brightnessPot.readPercent()
+    let dutycycleRatio = brightnessPot.readPercentage()
 
     // Calculate the final duty cycle value (0-maxDutycycle).
     // Set the PWM output using the result.

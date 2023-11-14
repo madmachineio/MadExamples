@@ -32,9 +32,9 @@ public struct Mission5_Buzzer {
 
         while true {
             // Read the input voltage.
-            let value = a0.readPercent()
+            let value = a0.readPercentage()
             
-            //let value = a0.readPercent()
+            //let value = a0.readPercentage()
             let frequency = Int(400 + 2000 * value) // calculate the float value into Int type to serve as frequency.
             buzzer.set(frequency: frequency, dutycycle: 0.5) // Set PWM parameters.
 

@@ -11,7 +11,7 @@ let led = PWMOut(Id.PWM4A)
 // The value is represented in percentage, while the duty cycle is also between 0 and 1, 
 // so you can directly use the reading value to set the PWM.
 while true {
-    let dutycycle = pot.readPercent()
+    let dutycycle = pot.readPercentage()
     led.setDutycycle(dutycycle)
 
     sleep(ms: 20)

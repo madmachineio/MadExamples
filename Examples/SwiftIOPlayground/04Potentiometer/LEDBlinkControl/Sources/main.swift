@@ -20,7 +20,7 @@ while true {
 
     // Read value from the analog pin. 
     // It serves as duty cycle for PWM to set LED brightness.
-    led.setDutycycle(brightnessPot.readPercent())
+    led.setDutycycle(brightnessPot.readPercentage())
     sleep(ms: blinkTime)
 
     // After a specified time, suspend the output to turn off the LED.

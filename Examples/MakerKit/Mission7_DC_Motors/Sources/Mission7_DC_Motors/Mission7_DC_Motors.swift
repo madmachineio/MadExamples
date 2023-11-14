@@ -28,7 +28,7 @@ public struct Mission7_DC_Motors {
 
         while true {
             // Read the input value and use it to set the duty cycle of pwm.
-            let value = a0.readPercent()
+            let value = a0.readPercentage()
             motor.setDutycycle(value) 
             sleep(ms: 50)
         }

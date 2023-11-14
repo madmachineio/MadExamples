@@ -29,7 +29,7 @@ public struct Mission4_Potentiometer_RGB {
             led.toggle()
 
             // Return the percentage of the voltage in the range of 0.0 to 1.0.
-            let analogValue = a0.readPercent()
+            let analogValue = a0.readPercentage()
             let delayTime = Int(analogValue * 500)
 
             // Stop the program for a certain period based on the value to keep current led state.
