@@ -19,7 +19,7 @@ do {
     print("ESP32 WiFi mode: \(wifiMode)")
 
     // Fill the SSID and password below.
-    try esp.joinAP(ssid: "TP-LINK_CD1C", password: "q1w2e3r4", timeout: 20000)
+    try esp.joinAP(ssid: "", password: "", timeout: 20000)
     print("ESP32 WiFi status: \(esp.wifiStatus)")
 
     let ipInfo = try esp.getStationIP()
