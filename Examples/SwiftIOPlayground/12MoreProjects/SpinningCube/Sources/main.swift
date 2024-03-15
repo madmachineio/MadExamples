@@ -33,7 +33,7 @@ let points: [[Float]] = [
 ]
 
 // The coordinates on 2D plan of cube vertices.
-var projectedPoints: [Point] = Array(repeating: Point(x: 0, y: 0), count: points.count)
+var projectedPoints = [Point](repeating: Point(x: 0, y: 0), count: points.count)
 var lastProjectedPoints = projectedPoints
 
 var angle: Float = 0
