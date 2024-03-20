@@ -10,7 +10,7 @@ let package = Package(
         .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "main"),
         .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "main"),
         .package(url: "https://github.com/madmachineio/MadDrivers.git", branch: "main"),
-        .package(path: "https://github.com/madmachineio/MadGraphics.git"),
+        .package(url: "https://github.com/madmachineio/MadGraphics.git", branch: "main"),
         .package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
     ],
     targets: [
