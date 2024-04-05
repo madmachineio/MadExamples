@@ -6,17 +6,35 @@
 [![twitter](https://img.shields.io/twitter/follow/madmachineio?label=%40madmachineio&style=social)](https://twitter.com/madmachineio)
 
 
-The MadExamples repository contains a set of examples for you to dive into physical programming and learn how to program the boards using Swift.
+The MadExamples repository offers a collection of examples designed to help you delve into embedded Swift programming. Explore these resources to master programming microcontrollers using Swift.
 
-## Tutorials
+## Get started
 
-These examples come with [detailed tutorials](https://docs.madmachine.io/projects/overview) about background knowledge, circuit connection and code explanation. It's a good idea to follow these guides and then try the examples.
+Refer to [this step-by-step tutorial](https://docs.madmachine.io/overview/getting-started/software-prerequisite) for setting up the required software environment and working on a "Hello, World" project.
 
-As for how to run these examples on your board, check [this step-by-step guide](https://docs.madmachine.io/overview/advanced/run-example).
 
-## Examples
+## SwiftIOPlayground
 
-### MakerKit
+Immerse yourself and become thoroughly acquainted with embedded Swift programming by leveraging the [SwiftIO Playground kit](https://madmachine.io/products/swiftio-playground-kit).
+
+![SwiftIO Playground Kit](https://madmachine.io/cdn/shop/files/UseKit_fee8d964-e9cf-4d13-bf2e-daa4bc53c165.jpg?v=1709822154&width=1680)
+
+It contains a series of demo projects to guide you from fundamental concepts, including electronics and Swift programming, and to progressively advanced use cases such as sound generation and graphic display. Additionally, it is complemented by a series of comprehensive [tutorials](https://docs.madmachine.io/learn/introduction) to provide detailed guidance throughout your learning journey.
+
+* [01LED](./Examples/SwiftIOPlayground/01LED) - start by learning how to blink an LED, which will help you become familiar with digital output. 
+* [02Button](./Examples/SwiftIOPlayground/02Button) - interact with a button to grasp digital input concepts.
+* [03Buzzer](./Examples/SwiftIOPlayground/03Buzzer) - create sound with a buzzer to understand PWM (Pulse Width Modulation).
+* [04Potentiometer](./Examples/SwiftIOPlayground/04Potentiometer) - rotate a potentiometer to control an LED or buzzer and explore analog input concepts.
+* [05Humiture](./Examples/SwiftIOPlayground/05Humiture) - measure temperature and humidity while learning to utilize I2C communication.
+* [06RTC](./Examples/SwiftIOPlayground/06RTC) - retrieve the current time using an RTC via I2C communication.
+* [07Accelerometer](./Examples/SwiftIOPlayground/07Accelerometer) - detect movement by reading acceleration data using I2C communication.
+* [08LCD](./Examples/SwiftIOPlayground/08LCD) - create graphics on a small screen and explore SPI communication.
+* [09Speaker](./Examples/SwiftIOPlayground/09Speaker) - play music through a speaker, grasp essential sound principles, and delve into I2S communication.
+* [10UART](./Examples/SwiftIOPlayground/10UART) - learn how to utilize a USB-serial converter to establish communication between your board and other USB devices.
+* [11WiFi](./Examples/SwiftIOPlayground/11WiFi) - utilize ESP32 to establish a WiFi connection and transmit/receive data from the internet.
+* [12MoreProjects](./Examples/SwiftIOPlayground/12MoreProjects) - engage in more advanced projects by incorporating different modules from the kit. This allows you to apply what you've learned and explore a wider range of possibilities.
+
+## MakerKit
 
 These examples provide dozens of missions that come with the SwiftIO Maker kit to explore all modules.
 
@@ -32,12 +50,3 @@ These examples provide dozens of missions that come with the SwiftIO Maker kit t
 * [Mission10_Humiture_Sensor](./Examples/MakerKit/Mission10_Humiture_Sensor) - use I2C protocol to read the current temperature and communicate with 16x2 LCD to display the temperature.
 * [Mission11_Reproduce_Mission10](./Examples/MakerKit/Mission11_Reproduce_Mission10) - display temperature on a 16x2 LCD using external libraries.
 * [Mission12_Buzzer_Music](./Examples/MakerKit/Mission12_Buzzer_Music) - play a piece of music according to the score.
-
-
-### SwiftIOPlayground
-
-[These examples](./Examples/SwiftIOPlayground) allow you to get fully acquainted with hardware programming in Swift using the SwiftIO Playground kit. 
-
-A series of demo projects walk you through the most basic knowledge and gradually increase in complexity to show more advanced use cases, like sound and graphic display. It comes with a series of detailed [tutorials](https://docs.madmachine.io/learn/introduction).
-
-More to come 👀. 
