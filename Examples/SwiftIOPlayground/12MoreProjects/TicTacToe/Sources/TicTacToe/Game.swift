@@ -359,7 +359,7 @@ struct TicTacToeView {
             }
         }
 
-        screenBuffer.withUnsafeBytes { screen.writeScreen($0) }
+        screen.writeScreen(screenBuffer)
     }
 }
 
