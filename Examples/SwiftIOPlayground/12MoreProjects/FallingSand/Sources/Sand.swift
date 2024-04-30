@@ -175,9 +175,7 @@ extension ST7789 {
             }
         }
 
-        buffer.withUnsafeBytes {
-            screen.writeBitmap(x: point.x, y: point.y, width: width, height: height, data: $0)
-        }
+        screen.writeBitmap(x: point.x, y: point.y, width: width, height: height, data: buffer)
     }
 
     func drawEmptyRect(at point: Point, width: Int, height: Int, stroke: Int, color: UInt16) {        

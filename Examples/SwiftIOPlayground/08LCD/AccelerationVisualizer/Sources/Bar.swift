@@ -21,9 +21,7 @@ struct Bar {
         x = (screen.width - width) / 2
 
         let data = [UInt16](repeating: color, count: width * height)
-        data.withUnsafeBytes {
-            screen.writeBitmap(x: x, y: y, width: width, height: height, data: $0)
-        }
+        screen.writeBitmap(x: x, y: y, width: width, height: height, data: data)
     }
 
     // Update indicator's position in the bar with the latest value.

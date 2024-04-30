@@ -38,9 +38,7 @@ while true {
 
             // Send the data to the screen using SPI to update the specified area.
             let x = screen.width - i * scrollStep - 1
-            buffer.withUnsafeBytes {
-                screen.writeBitmap(x: x, y: 0, width: scrollStep, height: screen.height, data: $0)
-            }
+            screen.writeBitmap(x: x, y: 0, width: scrollStep, height: screen.height, data: buffer)
 
             sleep(ms: 30)
         }
