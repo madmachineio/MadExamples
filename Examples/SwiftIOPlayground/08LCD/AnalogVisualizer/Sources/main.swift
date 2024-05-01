@@ -55,7 +55,5 @@ while true {
 // Draw a vertical line on the screen.
 func drawLine(x: Int, y: Int, height: Int, color: UInt16) {
     let buffer = [UInt16](repeating: color, count: height)
-    buffer.withUnsafeBytes {
-        screen.writeBitmap(x: x, y: y, width: 1, height: height, data: $0)
-    }
+    screen.writeBitmap(x: x, y: y, width: 1, height: height, data: buffer)
 }

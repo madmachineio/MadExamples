@@ -79,7 +79,5 @@ func updateScreen(_ states: [[Int]]) {
         }
     }
 
-    screenBuffer.withUnsafeBytes {
-        screen.writeScreen($0)
-    }
+    screen.writeScreen(screenBuffer)
 }
