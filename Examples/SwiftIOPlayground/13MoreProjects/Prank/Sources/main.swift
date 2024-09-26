@@ -42,13 +42,13 @@ func readSoundData(from path: String) -> [UInt8] {
 
     var buffer = [UInt8]()
 
-    do {
+    do throws(Errno) {
         try file.seek(offset: 0, from: FileDescriptor.SeekOrigin.end)
         let size = try file.tell() - headerSize
 
         buffer = [UInt8](repeating: 0, count: size)
-        try buffer.withUnsafeMutableBytes { rawBuffer in 
-            _ = try file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
+        try? buffer.withUnsafeMutableBytes { rawBuffer in 
+            _ = try? file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
         }
         try file.close()
     } catch {
