@@ -41,8 +41,8 @@ public struct WritingCSVFile {
 
                     // Write time and temperature to the csv file.
                     // CSV uses commas to separate values and newlines to separate records. 
-                    let temp = humiture.readCelsius()
-                    let string = formatDateTime(time) + ", " + String(temp) + "\n"
+                    let temp = getFloatString(humiture.readCelsius())
+                    let string = formatDateTime(time) + ", " + temp + "\n"
                     try file.write(string)
 
                     // Read the file content and print it out.
@@ -72,6 +72,12 @@ public struct WritingCSVFile {
             string += "\(time.year)" + "/" + formatNum(time.month) + "/" + formatNum(time.day) + " "
             string += formatNum(time.hour) + ":" + formatNum(time.minute) + ":" + formatNum(time.second)
             return string
+        }
+
+        func getFloatString(_ num: Float) -> String {
+            let int = Int(num)
+            let frac = Int((num - Float(int)) * 100)
+            return "\(int).\(frac)"
         }
     }
 }

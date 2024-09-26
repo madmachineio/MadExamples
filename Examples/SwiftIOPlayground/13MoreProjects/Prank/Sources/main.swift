@@ -24,7 +24,8 @@ while true {
     // Once the acceleration exceeds the threshold, the speaker will play a sound effect.
     // Adjust the threshold to suit your situation.
     if acceleration.z > 0.25 {
-        print(acceleration.z)
+        let zString = getFloatString(acceleration.z)
+        print(zString)
         speaker.write(sounds[index])
         index = (index + 1) % sounds.count
     }
@@ -41,13 +42,13 @@ func readSoundData(from path: String) -> [UInt8] {
 
     var buffer = [UInt8]()
 
-    do {
+    do throws(Errno) {
         try file.seek(offset: 0, from: FileDescriptor.SeekOrigin.end)
         let size = try file.tell() - headerSize
 
         buffer = [UInt8](repeating: 0, count: size)
-        try buffer.withUnsafeMutableBytes { rawBuffer in 
-            _ = try file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
+        try? buffer.withUnsafeMutableBytes { rawBuffer in 
+            _ = try? file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
         }
         try file.close()
     } catch {
@@ -56,4 +57,11 @@ func readSoundData(from path: String) -> [UInt8] {
     }
 
     return buffer
+}
+
+
+func getFloatString(_ num: Float) -> String {
+    let int = Int(num)
+    let frac = Int((num - Float(int)) * 100)
+    return "\(int).\(frac)"
 }

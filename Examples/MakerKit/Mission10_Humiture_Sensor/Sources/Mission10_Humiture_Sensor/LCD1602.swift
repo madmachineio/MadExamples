@@ -243,9 +243,11 @@ final public class LCD1602 {
                 mul *= 10
             }
             let expandValue = Int(num * Float(mul))
-            write(x: x, y: y, String(Float(expandValue) / Float(mul)))
+            let str = getFloatString(Float(expandValue) / Float(mul))
+            write(x: x, y: y, str)
         } else {
-            write(x: x, y: y, String(num))
+            let str = getFloatString(num)
+            write(x: x, y: y, str)
         }
     }
 }
@@ -278,4 +280,11 @@ extension LCD1602 {
             i2c.write(data, to: address)
         }
     }
+}
+
+
+func getFloatString(_ num: Float) -> String {
+    let int = Int(num)
+    let frac = Int((num - Float(int)) * 100)
+    return "\(int).\(frac)"
 }

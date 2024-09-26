@@ -111,7 +111,7 @@ struct PongGame {
                     ball.updateAfterHitWall(window: window)
                     speaker.write(hitWallSound)
                 }
-                print(ball.x, ball.y)
+                print("\(ball.x), \(ball.y)")
 
                 // If the ball hits left/right paddle, change the ball's
                 // direction to bounce it in an opposite direction.
@@ -189,8 +189,8 @@ struct PongGame {
             let size = try file.tell() - headerSize
 
             buffer = [UInt8](repeating: 0, count: size)
-            try buffer.withUnsafeMutableBytes { rawBuffer in 
-                _ = try file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
+            buffer.withUnsafeMutableBytes { rawBuffer in 
+                _ = try? file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
             }
             try file.close()
         } catch {

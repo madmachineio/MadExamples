@@ -20,15 +20,15 @@ public struct Album {
 
             var buffer = [UInt16](repeating: 0, count: 240 * 240)
 
-            try buffer.withUnsafeMutableBytes() {
-                try file.read(fromAbsoluteOffest: 0, into: $0)
+            buffer.withUnsafeMutableBytes() {
+                _ = try? file.read(fromAbsoluteOffest: 0, into: $0)
             }
 
             screen.writeScreen(buffer)
 
             try file.close()
         } catch {
-            print(error)
+            print("File handle error: \(error)")
         }
 
         while true {
