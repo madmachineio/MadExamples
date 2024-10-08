@@ -12,9 +12,21 @@ let accelerometer = LIS3DH(i2c)
 // Read the accelerations and each of them.
 while true {
     let accelerations = accelerometer.readXYZ()
-    print("x: \(accelerations.x)g")
-    print("y: \(accelerations.y)g")
-    print("z: \(accelerations.z)g")
+    let xValue = getFloatString(accelerations.x) + "g"
+    let yValue = getFloatString(accelerations.y) + "g"
+    let zValue = getFloatString(accelerations.z) + "g"
+
+    print("x: " + xValue)
+    print("y: " + yValue)
+    print("z: " + zValue)
     print("\n")
+
     sleep(ms: 1000)
+}
+
+
+func getFloatString(_ num: Float) -> String {
+    let int = Int(num)
+    let frac = Int((num - Float(int)) * 100)
+    return "\(int).\(frac)"
 }

@@ -15,11 +15,18 @@ let buzzer = PWMOut(Id.PWM5A)
 // Stop the alarm after it goes off.
 let stopButton = DigitalIn(Id.D1)
 
+let daysOfWeek = [
+    "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday",
+    "Sunday"
+]
+
 // Set the alarm time.
 let alarm = AlarmTime(hour: 10, minute: 40)
 // Calculate the time when the alarm will stop sounding.
 let stopAlarm = getStopAlarm(alarm, after: 1)
 var isAlarmed = false
+
 
 while true {
     let time = rtc.readTime()
@@ -29,7 +36,7 @@ while true {
         // if it's time to stop sounding or you press the stop button,
         // stop the sound and turn off the LED.
         if stopAlarm.isTimeUp(time) || stopButton.read() {
-            print("Current time: \(time)")
+            print("Current time: " + formatDateTime(time))
             led.low()
             buzzer.suspend()
             isAlarmed = false
@@ -37,7 +44,7 @@ while true {
     } else {
         // If the time comes, start the sound and turn on the LED.
         if alarm.isTimeUp(time) {
-            print("Current time: \(time)")
+            print("Current time: " + formatDateTime(time))
             led.high()
             buzzer.set(frequency: 500, dutycycle: 0.5)
             isAlarmed = true
@@ -45,6 +52,21 @@ while true {
     }
 
     sleep(ms: 10)
+}
+
+// Add leading zero if number is one-digit.
+// For example, number 1 will be 01.
+func formatNum(_ number: UInt8) -> String {
+    return number < 10 ? "0\(number)" : "\(number)"
+}
+
+// Format the date and time, i.e. 2023/03/01 Wednesday 16:20:00.
+func formatDateTime(_ time: PCF8563.Time) -> String {
+    var string = ""
+    string += "\(time.year)" + "/" + formatNum(time.month) + "/" + formatNum(time.day)
+    string += " " + daysOfWeek[Int(time.dayOfWeek)] + " "
+    string += formatNum(time.hour) + ":" + formatNum(time.minute) + ":" + formatNum(time.second)
+    return string
 }
 
 // Calculate the time for alarm to stop sounding after specified minutes.

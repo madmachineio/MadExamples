@@ -9,15 +9,9 @@ public struct WritingCSVFile {
         let i2c = I2C(Id.I2C0)
         let humiture = SHT3x(i2c)
         let rtc = PCF8563(i2c)
+        let led = DigitalOut(Id.D18, value: true)
 
-        // Update the RTC time if it is not current.
-        let currentTime = PCF8563.Time(
-            year: 2024, month: 6, day: 3, hour: 15,
-            minute: 0, second: 0, dayOfWeek: 0
-        )
-        rtc.setTime(currentTime)
-
-        var written = false
+        sleep(ms: 500)
 
         do {
             // Create a csv file on SD card.
@@ -29,11 +23,22 @@ public struct WritingCSVFile {
             print(error)
         }
 
+        // Update the RTC time if it is not current.
+        let currentTime = PCF8563.Time(
+            year: 2024, month: 6, day: 3, hour: 15,
+            minute: 0, second: 0, dayOfWeek: 0
+        )
+        let startMinute = currentTime.minute
+        var previousSecond = currentTime.second
+
+        rtc.setTime(currentTime)
+
         while true {
             let time = rtc.readTime()
 
-            // Read and store the temperature at the start of every minute.
-            if time.second == 0 && !written {
+            // Read and store the temperature every second for a duration of 1 minute.
+            if time.second != previousSecond && time.minute == startMinute {
+                previousSecond = time.second
                 do {
                     let file = try FileDescriptor.open("/SD:/temperature.csv")
                     // Move file offset to the end in order to store new values.
@@ -53,14 +58,14 @@ public struct WritingCSVFile {
 
                     try file.close() 
                 } catch {
+                    led.low()
                     print(error)
                 }
-                written = true
-            } else if time.second == 59 && written {
-                written = false
+            } else if time.minute != startMinute {
+                led.low()
             }
             
-            sleep(ms: 10)
+            sleep(ms: 50)
         }
 
         func formatNum(_ number: UInt8) -> String {

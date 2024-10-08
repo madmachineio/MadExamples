@@ -35,13 +35,22 @@ while true {
             sum += humiture.readCelsius()
             sleep(ms: 3)
         }
+        let temperature = sum / 20.0
+        let string = getFloatString(temperature)
 
         // Print the average temperature in celsius.
-        print("Temperature: \(sum / 20.0)C")
+        print("Temperature: " + string + "C")
         startMeasurement = false
         // Turn off the indicator.
         led.low()
     }
 
     sleep(ms: 20)
+}
+
+
+func getFloatString(_ num: Float) -> String {
+    let int = Int(num)
+    let frac = Int((num - Float(int)) * 100)
+    return "\(int).\(frac)"
 }
