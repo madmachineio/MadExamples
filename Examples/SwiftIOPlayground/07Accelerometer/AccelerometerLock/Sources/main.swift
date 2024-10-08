@@ -42,6 +42,7 @@ timer.setInterrupt(start: false) {
     reset = true
 }
 
+sleep(ms: 1000)
 print("Tilt/move your board to start.")
 
 while true {

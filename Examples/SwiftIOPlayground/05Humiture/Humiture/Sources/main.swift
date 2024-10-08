@@ -14,7 +14,16 @@ let humiture = SHT3x(i2c)
 while true {
     let temp = humiture.readCelsius()
     let humidity = humiture.readHumidity()
-    print("Temperature: \(temp)C")
-    print("Humidity: \(humidity)%")
+    let tempStr = getFloatString(temp)
+    let humidityStr = getFloatString(humidity)
+
+    print("Temperature: " + tempStr + "C")
+    print("Humidity: " + humidityStr + "%")
     sleep(ms: 1000)
+}
+
+func getFloatString(_ num: Float) -> String {
+    let int = Int(num)
+    let frac = Int((num - Float(int)) * 100)
+    return "\(int).\(frac)"
 }

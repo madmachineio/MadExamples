@@ -7,7 +7,7 @@ import MadBoard
 
 
 let uart = UART(Id.UART0)
-let led = DigitalOut(Id.BLUE)
+let led = DigitalOut(Id.BLUE, value: true)
 
 var buffer: [UInt8] = []
 
@@ -22,18 +22,22 @@ while true {
 
     // Match the message and change the LED state.
     if buffer.count > 0 {
+        // Add a null symbol at the end.
+        buffer.append(0)
+
         // The message from another board is sent in cString 
         // which means the last data is 0, so you need to convert
         // the data in buffer to string using the given encoding. 
         let command = String(cString: buffer)
+        print("Received command: " + command)
         
         buffer.removeAll()
 
         switch command {
         case "on": 
-            led.high()
-        case "off": 
             led.low()
+        case "off": 
+            led.high()
         default: break
         }
     }

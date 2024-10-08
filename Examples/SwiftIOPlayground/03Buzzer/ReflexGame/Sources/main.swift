@@ -34,10 +34,12 @@ while true {
         }
 
         // Calculate the time in ns.
-        let duration = cyclesToNanoseconds(start: startClockCycle, stop: getClockCycle())
+        let ns = cyclesToNanoseconds(start: startClockCycle, stop: getClockCycle())
+        let duration = ns / 1000_000
+
         // Turn off the indicator.
         led.low()
-        print("Reflex time: \(Float(duration) / 1000_000)ms")
+        print("Reflex time: \(duration)ms")
     }
 
     sleep(ms: 10)
