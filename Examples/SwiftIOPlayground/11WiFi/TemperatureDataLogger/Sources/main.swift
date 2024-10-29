@@ -43,8 +43,8 @@ while true {
     if esp.wifiStatus == .ready {
         do {
             // Read temperature and humidity values from the sensor.
-            let temp = humiture.readCelsius()
-            let humidity = humiture.readHumidity()
+            let temp = getFloatString(humiture.readCelsius())
+            let humidity = getFloatString(humiture.readHumidity())
             // Send the values to ThingSpeak using HTTP POST requests to visualize them.
             _ = try esp.httpPost(url: "https://api.thingspeak.com/update?api_key=WCGQWXCBJA2WS03F&field1=\(temp)&field2=\(humidity)", headers: ["Content-Type: application/x-www-form-urlencoded"], timeout: 20000)
         } catch {
@@ -54,4 +54,10 @@ while true {
         _ = try? esp.readLine(timeout: 1000)
         print("WiFi status: \(esp.wifiStatus)")
     }
+}
+
+func getFloatString(_ num: Float) -> String {
+    let int = Int(num)
+    let frac = Int((num - Float(int)) * 100)
+    return "\(int).\(frac)"
 }
