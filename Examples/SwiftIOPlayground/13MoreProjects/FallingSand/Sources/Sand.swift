@@ -162,7 +162,7 @@ struct Colors {
     // The screen needs RGB565 color data, so change color data from UInt32 to UInt16.
     // Besides, the board uses little endian format, so the bytes are swapped.
     static func getRGB565BE(_ color: UInt32) -> UInt16 {
-        return UInt16(((color & 0xF80000) >> 8) | ((color & 0xFC00) >> 5) | ((color & 0xF8) >> 3)).byteSwapped
+        return (UInt16((color & 0xF80000) >> 8) | UInt16((color & 0xFC00) >> 5) | UInt16((color & 0xF8) >> 3)).byteSwapped
     }
 }
 
