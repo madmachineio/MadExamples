@@ -5,8 +5,8 @@ let package = Package(
     name: "Mission4_Potentiometer_RGB",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "develop"),
-        .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "develop"),
+        .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "main"),
+        .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "main"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
