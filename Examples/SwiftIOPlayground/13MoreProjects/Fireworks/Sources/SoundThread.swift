@@ -31,22 +31,15 @@ func soundThread(_ a: UnsafeMutableRawPointer?, _ b: UnsafeMutableRawPointer?, _
 
     func readSoundData(from path: String) -> [UInt8] {
         let headerSize = 0x2C
-
-        guard let file = try? FileDescriptor.open(path) else {
-            print("Read sound data \(path) failed!")
-            return []
-        }
-
         var buffer = [UInt8]()
 
         do {
+            let file = try FileDescriptor.open(path)
             try file.seek(offset: 0, from: FileDescriptor.SeekOrigin.end)
             let size = try file.tell() - headerSize
 
             buffer = [UInt8](repeating: 0, count: size)
-            try buffer.withUnsafeMutableBytes { rawBuffer in 
-                _ = try file.read(fromAbsoluteOffest: headerSize, into: rawBuffer, count: size)
-            }
+            try file.read(fromAbsoluteOffest: headerSize, into: &buffer, count: size)
             try file.close()
         } catch {
             print("File \(path) handle error: \(error)")

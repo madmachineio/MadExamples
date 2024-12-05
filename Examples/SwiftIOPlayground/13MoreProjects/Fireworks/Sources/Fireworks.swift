@@ -42,12 +42,12 @@ public struct Fireworks {
         var fireworks: [Firework] = []
         var exploded = false
 
-        // createThread(
-        //     name: "play_sound",
-        //     priority: 3,
-        //     stackSize: 1024 * 64,
-        //     soundThread
-        // )
+        createThread(
+            name: "play_sound",
+            priority: 3,
+            stackSize: 1024 * 64,
+            soundThread
+        )
 
         sleep(ms: 10)
 
