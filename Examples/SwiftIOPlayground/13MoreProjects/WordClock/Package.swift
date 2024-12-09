@@ -10,7 +10,7 @@ let package = Package(
         .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "develop"),
         .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "develop"),
         .package(url: "https://github.com/madmachineio/MadDrivers.git", branch: "develop"),
-        .package(url: "https://github.com/madmachineio/MadGraphics.git", from: "develop"),
+        .package(url: "https://github.com/madmachineio/MadGraphics.git", branch: "develop"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
