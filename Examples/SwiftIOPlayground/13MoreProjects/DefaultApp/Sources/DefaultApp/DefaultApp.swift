@@ -54,7 +54,6 @@ public struct DefaultApp {
 
         let screen = ST7789(spi: spi, cs: cs, dc: dc, rst: rst, bl: bl, width: 240, rotation: .angle90)
         var screenBuffer = [UInt16](repeating: 0, count: screen.width * screen.height)
-
         var frameBuffer = [UInt32](repeating: 0, count: screen.width * screen.height)
 
         let colors = [
