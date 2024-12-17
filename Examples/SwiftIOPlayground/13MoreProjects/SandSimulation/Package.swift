@@ -10,7 +10,7 @@ let package = Package(
         .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "develop"),
         .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "develop"),
         .package(url: "https://github.com/madmachineio/MadDrivers.git", branch: "develop"),
-        .package(url: "https://github.com/madmachineio/MadGraphics.git", branch: "develop"),
+        .package(url: "https://github.com/madmachineio/CFreeType.git", from: "2.13.2"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -23,7 +23,7 @@ let package = Package(
                 // Use specific library name rather than "MadDrivers" would speed up the build procedure.
                 .product(name: "ST7789", package: "MadDrivers"),
                 .product(name: "LIS3DH", package: "MadDrivers"),
-                "MadGraphics",
+                "CFreeType",
             ]),
     ]
 )
