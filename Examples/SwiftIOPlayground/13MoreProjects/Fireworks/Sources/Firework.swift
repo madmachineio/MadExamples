@@ -32,9 +32,9 @@ struct Firework {
             updateSparks()
             
             for spark in sparks {
-                let color = Color.blend(foreground: color.rawValue, background: Color.black.rawValue, mask: spark.lifespan)
+                let data = Color.blend(foreground: color.rawValue, background: Color.black.rawValue, with: spark.lifespan)
                 layer.draw() { canvas in
-                    canvas.fillCircle(at: spark.pos, radius: size, data: color.rawValue)
+                    canvas.fillCircle(at: spark.pos, radius: size, data: data)
                 }
             }
         } else {
