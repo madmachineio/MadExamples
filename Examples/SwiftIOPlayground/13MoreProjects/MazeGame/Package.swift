@@ -7,9 +7,9 @@ let package = Package(
     name: "MazeGame",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "develop"),
-        .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "develop"),
-        .package(url: "https://github.com/madmachineio/MadDrivers.git", branch: "develop"),
+        .package(url: "https://github.com/madmachineio/SwiftIO.git", branch: "main"),
+        .package(url: "https://github.com/madmachineio/MadBoards.git", branch: "main"),
+        .package(url: "https://github.com/madmachineio/MadDrivers.git", branch: "main"),
         .package(url: "https://github.com/madmachineio/CFreeType", from: "2.13.0"),
     ],
     targets: [

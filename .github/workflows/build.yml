@@ -6,20 +6,14 @@ on:
     branches:
       - 'feature/**'
       - 'fix/**'
-      - develop
-      - main
-      - 'release/**'
     paths:
       - 'Sources/**'
       - 'Examples/**'
       - 'Tests/**'
-  pull_request:
-    branches:
-      - main
-  schedule:
-    - cron: '1 0 * * 4'
 
 
 jobs:
   build:
     uses: madmachineio/actions/.github/workflows/build.yml@main
+    with:
+      runners: '["ubuntu-24.04", "macos-13", "macos-14"]'
