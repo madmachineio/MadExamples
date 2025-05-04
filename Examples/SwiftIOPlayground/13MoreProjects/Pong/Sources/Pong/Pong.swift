@@ -30,7 +30,7 @@ public struct Pong {
         let resetButton = DigitalIn(Id.D1)
 
         // Start the game.
-        var game = PongGame(leftPot: leftPot, rightPot: rightPot, screen: screen, speaker: speaker)
+        let game = PongGame(leftPot: leftPot, rightPot: rightPot, screen: screen, speaker: speaker)
 
         var lastButtonState = false
 
