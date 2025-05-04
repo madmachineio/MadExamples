@@ -22,13 +22,13 @@ public struct HilbertCurve {
         var screenBuffer = [UInt16](repeating: 0, count: width * height)
 
         // layer used to draw the Hilbert curve.
-        let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: width, height: height)
+        let layer = Layer(at: Point.zero, width: width, height: height)
         var frameBuffer = [UInt32](repeating: 0, count: width * height)
 
         var colorIndex = 0
-        let colors: [Color] = [
+        let colors: [Pixel] = [
             .red, .orange, .yellow, .lime, .blue, 
-            Color(UInt32(0x4B0082)), Color(UInt32(0x9400D3))
+            Pixel(0xFF4B_0082), Pixel(0xFF94_00D3)
         ]
 
         let minOrder = 1
@@ -58,7 +58,7 @@ public struct HilbertCurve {
                 hilbert = Hilbert(order: order)
                 // Clear the canvas.
                 layer.draw() { canvas in
-                    canvas.fill(Color.black.rawValue)
+                    canvas.fill(Pixel.black)
                 }
                 drawBorder()
 
@@ -76,7 +76,7 @@ public struct HilbertCurve {
                 sleep(ms: 2)
             }
         
-            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
         }
@@ -89,23 +89,23 @@ public struct HilbertCurve {
             let y2 = hilbert.points[index].y * length + length / 2
 
             layer.draw() { canvas in 
-                canvas.drawLine(from: Point(x1, y1), to: Point(x2, y2), data: colors[colorIndex].rawValue)
+                canvas.drawLine(from: Point(x1, y1), to: Point(x2, y2), data: colors[colorIndex])
             }
         }
 
         // Outline the canvas with a border.
         func drawBorder() {
             layer.draw() { canvas in
-                canvas.drawLine(from: Point(0, 0), to: Point(width - 1, 0), data: Color.silver.rawValue)
+                canvas.drawLine(from: Point(0, 0), to: Point(width - 1, 0), data: Pixel.silver)
             }
             layer.draw() { canvas in
-                canvas.drawLine(from: Point(0, height - 1), to: Point(width - 1, height - 1), data: Color.silver.rawValue)
+                canvas.drawLine(from: Point(0, height - 1), to: Point(width - 1, height - 1), data: Pixel.silver)
             }
             layer.draw() { canvas in
-                canvas.drawLine(from: Point(0, 0), to: Point(0, height - 1), data: Color.silver.rawValue)
+                canvas.drawLine(from: Point(0, 0), to: Point(0, height - 1), data: Pixel.silver)
             }
             layer.draw() { canvas in
-                canvas.drawLine(from: Point(width - 1, 0), to: Point(width - 1, height - 1), data: Color.silver.rawValue)
+                canvas.drawLine(from: Point(width - 1, 0), to: Point(width - 1, height - 1), data: Pixel.silver)
             }
         }
     }

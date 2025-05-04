@@ -71,23 +71,23 @@ public struct MorseCode {
         var buzzerCount = 0
 
         let font = Font(path: "/lfs/Resources/Fonts/Roboto-Regular.ttf" , pointSize: 12, dpi: 220)
-        let rootLayer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: 240, height: 240)
+        let rootLayer = Layer(at: Point.zero, width: 240, height: 240)
 
-        let animationLayer = Layer(at: Point(0, 229), anchorPoint: UnitPoint.zero, width: 240, height: 10)
+        let animationLayer = Layer(at: Point(0, 229), width: 240, height: 10)
         rootLayer.append(animationLayer)
 
         let colors = [
-            Color.red,
-            Color.orange,
-            Color.yellow,
-            Color.lime,
-            Color.cyan,
-            Color.blue,
-            Color.purple
+            Pixel.red,
+            Pixel.orange,
+            Pixel.yellow,
+            Pixel.lime,
+            Pixel.cyan,
+            Pixel.blue,
+            Pixel.purple
         ]
         var colorIndex = 0
 
-        var lineText = TextLayer(at: Point.zero, anchorPoint: UnitPoint.zero, font: font, foregroundColor: colors[colorIndex])
+        var lineText = TextLayer(at: Point.zero, font: font, foregroundColor: colors[colorIndex])
         rootLayer.append(lineText)
 
         // Create a periodic timer that alerts every 10ms.
@@ -140,7 +140,7 @@ public struct MorseCode {
                     colorIndex = colorIndex % colors.count
 
                     let y = lineText.position.y + Int(Float(lineText.frame.size.height) * 1.2)
-                    lineText = TextLayer(at: Point(0, y), anchorPoint: UnitPoint.zero, font: font, foregroundColor: colors[colorIndex])
+                    lineText = TextLayer(at: Point(0, y), font: font, foregroundColor: colors[colorIndex])
                     rootLayer.append(lineText)
                 }
                 morseCode = ""
@@ -194,7 +194,7 @@ public struct MorseCode {
                 drawLine = false
             }
 
-            rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
 
@@ -212,12 +212,12 @@ func drawAnimationLayer(layer: Layer, low: Bool, line: Bool) {
     newContent.merge(from: layer.contents!, in: oldRect, to: Point.zero)
 
     if line {
-        newContent.drawLine(from: Point(layer.bounds.width - 1, 0), to: Point(layer.bounds.width - 1, layer.bounds.height - 1), data: Color.red.rawValue)
+        newContent.drawLine(from: Point(layer.bounds.width - 1, 0), to: Point(layer.bounds.width - 1, layer.bounds.height - 1), data: Pixel.red)
     } else {
         if low {
-            newContent.setPixel(at: Point(layer.bounds.width - 1, layer.bounds.height - 1), Color.red.rawValue)
+            newContent.setPixel(at: Point(layer.bounds.width - 1, layer.bounds.height - 1), Pixel.red)
         } else {
-            newContent.setPixel(at: Point(layer.bounds.width - 1, 0), Color.red.rawValue)
+            newContent.setPixel(at: Point(layer.bounds.width - 1, 0), Pixel.red)
         }
     } 
     

@@ -20,7 +20,7 @@ public struct MazeGame {
         let i2c = I2C(Id.I2C0)
         let accelerometer = LIS3DH(i2c)
 
-        let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: screen.width, height: screen.height)
+        let layer = Layer(at: Point.zero, width: screen.width, height: screen.height)
         let mazeGame = Game(screen: screen, layer: layer)
 
         let resetButton = DigitalIn(Id.D1)

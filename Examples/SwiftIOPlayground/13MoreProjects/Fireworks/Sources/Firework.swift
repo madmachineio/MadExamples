@@ -8,11 +8,11 @@ struct Firework {
     
     var exploded = false
 
-    let color: Color
+    let color: Pixel
     let size = 2
 
     // Create a firework at the bottom of the screen.
-    init(color: Color, maxWidth: Int) {
+    init(color: Pixel, maxWidth: Int) {
         self.color = color
 
         let x = Array(0..<(maxWidth - 1)).shuffled().randomElement()!
@@ -25,27 +25,27 @@ struct Firework {
         if exploded {
             for spark in sparks {
                 layer.draw() { canvas in
-                    canvas.fillCircle(at: spark.pos, radius: size, data: Color.black.rawValue) 
+                    canvas.fillCircle(at: spark.pos, radius: size, data: Pixel.black) 
                 }
             }
 
             updateSparks()
             
             for spark in sparks {
-                let data = Color.blend(foreground: color.rawValue, background: Color.black.rawValue, with: spark.lifespan)
+                let data = Pixel.blend(foreground: color, background: Pixel.black, with: spark.lifespan)
                 layer.draw() { canvas in
                     canvas.fillCircle(at: spark.pos, radius: size, data: data)
                 }
             }
         } else {
             layer.draw() { canvas in
-                canvas.fillCircle(at: particle.pos, radius: size, data: Color.black.rawValue)
+                canvas.fillCircle(at: particle.pos, radius: size, data: Pixel.black)
             }
 
             let playSound = updateParticle()
 
             layer.draw() { canvas in
-                canvas.fillCircle(at: particle.pos, radius: size, data: color.rawValue)
+                canvas.fillCircle(at: particle.pos, radius: size, data: color)
             }
             return playSound
         }

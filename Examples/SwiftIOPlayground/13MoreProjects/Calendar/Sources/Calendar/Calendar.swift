@@ -30,7 +30,7 @@ public struct Calendar {
             minute: 18, second: 0, dayOfWeek: 0)
         rtc.setTime(time)
 
-        let rootLayer = Layer(anchorPoint: UnitPoint.zero, width: screen.width, height: screen.height)
+        let rootLayer = Layer(width: screen.width, height: screen.height)
 
         time = rtc.readTime()
 
@@ -47,8 +47,8 @@ public struct Calendar {
 
         // Fill background.
         rootLayer.draw() { canvas in
-            canvas.fillRectangle(at: Point(0, 0), width: canvas.width, height: yOffset, data: Color.orange.rawValue) 
-            canvas.fillRectangle(at: Point(0, yOffset), width: canvas.width, height: canvas.height - yOffset, data: Color.white.rawValue)
+            canvas.fillRectangle(at: Point(0, 0), width: canvas.width, height: yOffset, data: Pixel.orange) 
+            canvas.fillRectangle(at: Point(0, yOffset), width: canvas.width, height: canvas.height - yOffset, data: Pixel.white)
         }
         
         let font = Font(path: "/lfs/Resources/Fonts/Rye-Regular.ttf", pointSize: 6, dpi: 220)
@@ -57,27 +57,32 @@ public struct Calendar {
         let monthString = months[calendarTime.month - 1] + " " + String(calendarTime.year)
         var rect = font.getRect(monthString)
         var point = Point((rootLayer.frame.width - rect.width) / 2, (yOffset - rect.height) / 2)
-        let monthLayer = TextLayer(at: point, anchorPoint: UnitPoint.zero, string: monthString, font: font, foregroundColor: Color.white)
+        let monthLayer = TextLayer(at: point, string: monthString, font: font, foregroundColor: Pixel.white)
         rootLayer.append(monthLayer)
 
         rect = font.getRect("<")
         point = Point((gridSize - rect.width) / 2 + xOffset, (yOffset - rect.height) / 2)
-        let leftArrow = TextLayer(at: point, anchorPoint: UnitPoint.zero, string: "<", font: font, foregroundColor: Color.white)
+        let leftArrow = TextLayer(at: point, string: "<", font: font, foregroundColor: Pixel.white)
         rootLayer.append(leftArrow)
 
         rect = font.getRect(">")
         point = Point(gridSize * (column - 1) + (gridSize - rect.width) / 2 + xOffset, (yOffset - rect.height) / 2)
-        let rightArrow = TextLayer(at: point, anchorPoint: UnitPoint.zero, string: ">", font: font, foregroundColor: Color.white)
+        let rightArrow = TextLayer(at: point, string: ">", font: font, foregroundColor: Pixel.white)
         rootLayer.append(rightArrow)
         
-        let todayIndicator = Layer(at: Point(0, 0), anchorPoint: UnitPoint.zero, width: gridSize, height: gridSize) 
+        let todayIndicator = Layer(at: Point(0, 0), width: gridSize, height: gridSize) 
         todayIndicator.isOpaque = false
+        todayIndicator.draw() { canvas in
+            canvas.fillCircle(at: Point(gridSize / 2, gridSize / 2), radius: gridSize / 2, data: Pixel.orange)
+            //canvas.fillCircle(at: Point(gridSize / 2, gridSize / 2), radius: gridSize / 2, data: 0xFFFF_0000)
+        }
+
         rootLayer.append(todayIndicator)
         
         var textLayers = [TextLayer]()
 
         initCalendar(calendarGrid: calendarGrid, today: calendarTime, calendarTime: calendarTime)
-        rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
 
@@ -104,7 +109,7 @@ public struct Calendar {
                     calendarTime = Time(year: Int(time.year), month: Int(time.month), day: Int(time.day))
                     calendarGrid = generateCalendar(year: calendarTime.year, month: calendarTime.month)
                     updateCalendar(calendarGrid: calendarGrid, today: calendarTime, calendarTime: calendarTime)
-                    rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+                    rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                         screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
                     }
                 }
@@ -130,7 +135,7 @@ public struct Calendar {
                 calendarGrid = generateCalendar(year: calendarTime.year, month: calendarTime.month)
                 let today = Time(year: Int(time.year), month: Int(time.month), day: Int(time.day))
                 updateCalendar(calendarGrid: calendarGrid, today: today, calendarTime: calendarTime)
-                rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+                rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                     screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
                 }
                 changeMonth = 0
@@ -158,11 +163,11 @@ public struct Calendar {
 
                     // Highlight today's date on the calendar.
                     if day == today.day && calendarTime.month == today.month && calendarTime.year == today.year {
-                        textLayers[y * column + x].foregroundColor = Color.white
+                        textLayers[y * column + x].foregroundColor = Pixel.white
                         todayIndicator.setHidden(false)
                     } else if calendarTime.month != today.month {
                         todayIndicator.setHidden(true)
-                        textLayers[y * column + x].foregroundColor = Color.gray
+                        textLayers[y * column + x].foregroundColor = Pixel.gray
                     }
                 
                     let rect = font.getRect(string)
@@ -179,7 +184,7 @@ public struct Calendar {
             for y in 0..<row {
                 for x in 0..<column {
                     var string = " "
-                    var color = Color.gray
+                    var color = Pixel.gray
                     
                     if y == 0 {
                         string = daysOfWeek[x]
@@ -192,19 +197,16 @@ public struct Calendar {
 
                         // Highlight today's date on the calendar.
                         if day == today.day && calendarTime.month == today.month && calendarTime.year == today.year {
-                            color = Color.white
+                            color = Pixel.white
                             let point = Point(x * gridSize + xOffset, (y) * gridSize + yOffset)
                             todayIndicator.position = point
-                            todayIndicator.draw() { canvas in
-                                canvas.fillCircle(at: Point(gridSize / 2, gridSize / 2), radius: gridSize / 2, data: Color.orange.rawValue)
-                            }
                         }
                     }
                 
                     let rect = font.getRect(string)
                     let point = Point(x * gridSize + (gridSize - rect.width) / 2 + xOffset, y * gridSize + (gridSize - rect.height) / 2 + yOffset)
 
-                    let textLayer = TextLayer(at: point, anchorPoint: UnitPoint.zero, string: string, font: font, foregroundColor: color)
+                    let textLayer = TextLayer(at: point, string: string, font: font, foregroundColor: color)
                     rootLayer.append(textLayer)
                     textLayers.append(textLayer)
                 }

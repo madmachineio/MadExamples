@@ -32,7 +32,7 @@ public struct WordClock {
         sleep(ms: 500)
         rtc.setTime(currentTime)
 
-        let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: screen.width, height: screen.height)
+        let layer = Layer(at: Point.zero, width: screen.width, height: screen.height)
 
         // Calculate the point size for each character.
         // Get masks from the font file for all characters of the word clock.
@@ -43,7 +43,7 @@ public struct WordClock {
         let clock = WordView(layer: layer, characterMasks: characterMasks)
 
         // Define the colors to be used for displaying the words.
-        let colors: [Color] = [.red, .orange, .yellow, .lime, .blue, .magenta, .cyan, Color(UInt32(0xFE679A))]
+        let colors: [Pixel] = [.red, .orange, .yellow, .lime, .blue, .magenta, .cyan, Pixel(UInt32(0xFE679A))]
         
         // Highlight each column with different colors in turn.
         var index = 0
@@ -53,16 +53,16 @@ public struct WordClock {
             }
 
             index += 1
-            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
 
             sleep(ms: 100)
             for y in 0..<characterMasks.count {
-                clock.showCharacter(point: Point(x, y), color: Color.gray)
+                clock.showCharacter(point: Point(x, y), color: Pixel.gray)
             }
         }
-        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
 
@@ -75,10 +75,10 @@ public struct WordClock {
             if rtcTime.second != lastSecond {
                 index = (index + 1) % colors.count
                 clock.showTime(hour: Int(rtcTime.hour), minute:  Int(rtcTime.minute), color: colors[index]) 
-                layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+                layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                     screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
                 }
-                clock.showTime(hour: Int(rtcTime.hour), minute:  Int(rtcTime.minute), color: Color.gray)  
+                clock.showTime(hour: Int(rtcTime.hour), minute:  Int(rtcTime.minute), color: Pixel.gray)  
             }
 
             lastSecond = rtcTime.second

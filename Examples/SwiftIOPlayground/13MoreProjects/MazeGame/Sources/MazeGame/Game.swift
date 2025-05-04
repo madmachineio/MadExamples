@@ -8,7 +8,7 @@ import SwiftIO
 class Game {
     var maze: Maze
     var ball: Ball
-    let ballColor = Color(UInt32(0xEFE891))
+    let ballColor = Pixel(0xFFEF_E891)
 
     let width = 20
     var speed = 2
@@ -29,10 +29,10 @@ class Game {
         maze.generate(layer)
 
         layer.draw() { canvas in
-            canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: ballColor.rawValue)
+            canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: ballColor)
         }
 
-        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
     }
@@ -43,15 +43,15 @@ class Game {
         maze.generate(layer)
 
         layer.draw() { canvas in
-            canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: maze.bgColor.rawValue)
+            canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: maze.bgColor)
         }
         ball = Ball(at: Point(x: 1, y: 1), size: 7)
 
         layer.draw() { canvas in
-            canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: ballColor.rawValue)
+            canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: ballColor)
         }
 
-        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
     }
@@ -59,20 +59,20 @@ class Game {
     // Update the display to show that the game has finished.
     func finishGame() {
         layer.draw() { canvas in
-            canvas.fillRectangle(at: Point(0, 0), width: canvas.width, height: canvas.height, data: Color.red.rawValue)
+            canvas.fillRectangle(at: Point(0, 0), width: canvas.width, height: canvas.height, data: Pixel.red)
         }
 
         let font = Font(path: "/lfs/Resources/Fonts/Roboto-Regular.ttf", pointSize: 10, dpi: 220)
 
-        let text1 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 60), anchorPoint: UnitPoint.center, string: "Good Job!", font: font, foregroundColor: Color.white)
+        let text1 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 60), anchorPoint: UnitPoint.center, string: "Good Job!", font: font, foregroundColor: Pixel.white)
 
         font.setSize(pointSize: 6)
-        let text2 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 140), anchorPoint: UnitPoint.center, string: "Press D1 to continue", font: font, foregroundColor: Color.white)
+        let text2 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 140), anchorPoint: UnitPoint.center, string: "Press D1 to continue", font: font, foregroundColor: Pixel.white)
         
         layer.append(text1)
         layer.append(text2)
 
-        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
 
@@ -194,12 +194,12 @@ class Game {
         // If the ball's position has changed, update the display.
         if lastBallPos.x != ball.x1 || lastBallPos.y != ball.y1 {
             layer.draw() { canvas in
-                canvas.fillRectangle(at: lastBallPos, width: ball.size, height: ball.size, data: maze.bgColor.rawValue)
+                canvas.fillRectangle(at: lastBallPos, width: ball.size, height: ball.size, data: maze.bgColor)
             }
             layer.draw() { canvas in
-                canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: ballColor.rawValue)
+                canvas.fillRectangle(at: Point(ball.x1, ball.y1), width: ball.size, height: ball.size, data: ballColor)
             }
-            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
         }

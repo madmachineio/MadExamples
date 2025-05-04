@@ -2,7 +2,7 @@ import SwiftIO
 import MadBoard
 import MadGraphics
 import ST7789
-    
+ 
 
 @main
 public struct AnimatedEyes {

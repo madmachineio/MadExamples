@@ -8,8 +8,8 @@ struct Maze {
     let column: Int
     let row: Int
 
-    let bgColor = Color(UInt32(0x3F52E3))
-    let wallColor = Color.white
+    let bgColor = Pixel(0xFF3F_52E3)
+    let wallColor = Pixel.white
     let canvasSize: Size
 
     var current = Point(0, 0)
@@ -39,27 +39,27 @@ struct Maze {
 
         // Draw background.
         layer.draw() { canvas in
-            canvas.fillRectangle(at: Point(0, 0), width: canvasSize.width, height: canvasSize.height, data: bgColor.rawValue)
+            canvas.fillRectangle(at: Point(0, 0), width: canvasSize.width, height: canvasSize.height, data: bgColor)
         }
 
         // Draw all walls.
         for y in 0..<row {
             layer.draw() { canvas in
-                canvas.drawLine(from: Point(0, y * width), to: Point(canvasSize.width - 1, y * width), data: wallColor.rawValue)
+                canvas.drawLine(from: Point(0, y * width), to: Point(canvasSize.width - 1, y * width), data: wallColor)
             }
         }
 
         for x in 0..<column {
             layer.draw() { canvas in
-                canvas.drawLine(from: Point(x * width, 0), to: Point(x * width, canvasSize.height - 1), data: wallColor.rawValue)
+                canvas.drawLine(from: Point(x * width, 0), to: Point(x * width, canvasSize.height - 1), data: wallColor)
             }
         }
 
         layer.draw() { canvas in
-            canvas.drawLine(from: Point(0, canvasSize.height - 1), to: Point(canvasSize.width - 1, canvasSize.height - 1), data: wallColor.rawValue)
+            canvas.drawLine(from: Point(0, canvasSize.height - 1), to: Point(canvasSize.width - 1, canvasSize.height - 1), data: wallColor)
         }
         layer.draw() { canvas in
-            canvas.drawLine(from: Point(canvasSize.width - 1, 0), to: Point(canvasSize.width - 1, canvasSize.height - 1), data: wallColor.rawValue)
+            canvas.drawLine(from: Point(canvasSize.width - 1, 0), to: Point(canvasSize.width - 1, canvasSize.height - 1), data: wallColor)
         }
     }
 
@@ -91,25 +91,25 @@ struct Maze {
         for grid in grids {
             if !grid.walls.top {
                 layer.draw() { canvas in
-                    canvas.drawLine(from: Point(grid.x * width + 1, grid.y * width), to: Point((grid.x + 1) * width - 1, grid.y * width), data: bgColor.rawValue)
+                    canvas.drawLine(from: Point(grid.x * width + 1, grid.y * width), to: Point((grid.x + 1) * width - 1, grid.y * width), data: bgColor)
                 }
             }
 
             if !grid.walls.right {
                 layer.draw() { canvas in
-                    canvas.drawLine(from: Point((grid.x + 1) * width, grid.y * width + 1), to: Point((grid.x + 1) * width, (grid.y + 1) * width - 1), data: bgColor.rawValue)
+                    canvas.drawLine(from: Point((grid.x + 1) * width, grid.y * width + 1), to: Point((grid.x + 1) * width, (grid.y + 1) * width - 1), data: bgColor)
                 }
             }
 
             if !grid.walls.bottom {
                 layer.draw() { canvas in
-                    canvas.drawLine(from: Point(grid.x * width + 1, (grid.y + 1) * width), to: Point((grid.x + 1) * width - 1, (grid.y + 1) * width), data: bgColor.rawValue)
+                    canvas.drawLine(from: Point(grid.x * width + 1, (grid.y + 1) * width), to: Point((grid.x + 1) * width - 1, (grid.y + 1) * width), data: bgColor)
                 }
             }
 
             if !grid.walls.left {
                 layer.draw() { canvas in
-                    canvas.drawLine(from: Point(grid.x * width, grid.y * width + 1), to: Point(grid.x * width, (grid.y + 1) * width - 1), data: bgColor.rawValue)
+                    canvas.drawLine(from: Point(grid.x * width, grid.y * width + 1), to: Point(grid.x * width, (grid.y + 1) * width - 1), data: bgColor)
                 }
             }
         }

@@ -18,14 +18,14 @@ class WordView {
             for x in 0..<Words.column {
                 let textMask = characterMasks[y][x]
                 layer.draw() { canvas in
-                    canvas.blend(from: textMask, foregroundColor: Color.gray, to: Point(x: x * width + (width - textMask.width) / 2, y: y * height + (height - textMask.height) / 2))
+                    canvas.blend(from: textMask, foregroundColor: Pixel.gray, to: Point(x: x * width + (width - textMask.width) / 2, y: y * height + (height - textMask.height) / 2))
                 }
             }
         }
     }
 
     // Display the words representing the current hour and minute.
-    func showTime(hour: Int, minute: Int, color: Color) {
+    func showTime(hour: Int, minute: Int, color: Pixel) {
         let words = Words.getWords(hourNumber: hour, minuteNumber: minute)
 
         for word in words.minuteWord {
@@ -38,18 +38,18 @@ class WordView {
     }
 
     // Display a single word by defining the positions of its characters on the display.
-    func showWord(points: [Point], color: Color) {
+    func showWord(points: [Point], color: Pixel) {
         for point in points {
             showCharacter(point: point, color: color)
         }
     }
 
     // Display a character by specifying its position on the display.
-    func showCharacter(point: Point, color: Color) {
+    func showCharacter(point: Point, color: Pixel) {
         let text = characterMasks[point.y][point.x]
         let point = Point(x: point.x * width + (width - text.width) / 2, y: point.y * height + (height - text.height) / 2)
         layer.draw() { canvas in
-            canvas.fillRectangle(at: point, width: text.width, height: text.height, data: Color.black.rawValue)
+            canvas.fillRectangle(at: point, width: text.width, height: text.height, data: Pixel.black)
             canvas.blend(from: text, foregroundColor: color, to: point)
         }
     }

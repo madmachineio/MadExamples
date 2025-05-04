@@ -5,7 +5,7 @@ struct Particle {
     var y: Int
     var xSpeed: Float
     var ySpeed: Float
-    let color: Color
+    let color: Pixel
 }
 
 struct Sand {
@@ -13,7 +13,7 @@ struct Sand {
     let size = 3
     var particles: [Particle] = []
 
-    let colors: [Color] = [.red, .orange, .yellow, .lime, .cyan, .blue, .purple, .magenta]
+    let colors: [Pixel] = [.red, .orange, .yellow, .lime, .cyan, .blue, .purple, .magenta]
     var grid: [Bool]
 
     let column: Int
@@ -33,7 +33,7 @@ struct Sand {
 
             particles.append(Particle(x: x, y: y, xSpeed: 0, ySpeed: 0, color: colors.randomElement()!))
             layer.draw() { canvas in
-                canvas.fillRectangle(at: Point(x * size, y * size), width: size, height: size, data: particles[y * column + x].color.rawValue)
+                canvas.fillRectangle(at: Point(x * size, y * size), width: size, height: size, data: particles[y * column + x].color)
             }
             grid[y * column + x] = true
 
@@ -131,10 +131,10 @@ struct Sand {
             grid[lastY * column + lastX] = false
             grid[newY * column + newX] = true
             layer.draw() { canvas in
-                canvas.fillRectangle(at: Point(lastX * size, lastY * size), width: size, height: size, data: Color.black.rawValue)
+                canvas.fillRectangle(at: Point(lastX * size, lastY * size), width: size, height: size, data: Pixel.black)
             }
             layer.draw() { canvas in
-                canvas.fillRectangle(at: Point(newX * size, newY * size), width: size, height: size, data: particles[i].color.rawValue)
+                canvas.fillRectangle(at: Point(newX * size, newY * size), width: size, height: size, data: particles[i].color)
             }
         }
     }

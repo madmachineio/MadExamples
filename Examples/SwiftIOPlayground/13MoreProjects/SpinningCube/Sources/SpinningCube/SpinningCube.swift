@@ -18,10 +18,10 @@ public struct SpinningCube {
         let screen = ST7789(spi: spi, cs: cs, dc: dc, rst: rst, bl: bl, rotation: .angle90)
         var screenBuffer = [UInt16](repeating: 0, count: screen.width * screen.height)
 
-        let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: screen.width, height: screen.height)
+        let layer = Layer(at: Point.zero, width: screen.width, height: screen.height)
         var frameBuffer = [UInt32](repeating: 0, count: screen.width * screen.height)
 
-        let colors: [Color] = [.red, .orange, .yellow, .lime, .blue, Color(0x4B0082), .purple]
+        let colors: [Pixel] = [.red, .orange, .yellow, .lime, .blue, Pixel(0xFF4B_0082), .purple]
 
         // The vertices of the cube in 3D space.
         let points: [[Float]] = [
@@ -57,19 +57,19 @@ public struct SpinningCube {
                 layer.draw() { canvas in
                     canvas.drawLine(from: lastProjectedPoints[i] + offset,
                                     to: lastProjectedPoints[(i + 1) % 4] + offset,
-                                    data: colors[(3 * i) % colors.count].rawValue)
+                                    data: colors[(3 * i) % colors.count])
 
                     canvas.drawLine(from: lastProjectedPoints[i + 4] + offset,
                                     to: lastProjectedPoints[(i + 1) % 4 + 4] + offset,
-                                    data: colors[(3 * i + 1) % colors.count].rawValue)
+                                    data: colors[(3 * i + 1) % colors.count])
 
                     canvas.drawLine(from: lastProjectedPoints[i] + offset,
                                     to: lastProjectedPoints[i + 4] + offset,
-                                    data: colors[(3 * i + 2) % colors.count].rawValue)
+                                    data: colors[(3 * i + 2) % colors.count])
                 }
             }
             
-            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
             
@@ -80,15 +80,15 @@ public struct SpinningCube {
                 layer.draw() { canvas in
                     canvas.drawLine(from: lastProjectedPoints[i] + offset,
                                     to: lastProjectedPoints[(i + 1) % 4] + offset,
-                                    data: Color.black.rawValue)
+                                    data: Pixel.black)
 
                     canvas.drawLine(from: lastProjectedPoints[i + 4] + offset,
                                     to: lastProjectedPoints[(i + 1) % 4 + 4] + offset,
-                                    data: Color.black.rawValue)
+                                    data: Pixel.black)
 
                     canvas.drawLine(from: lastProjectedPoints[i] + offset,
                                     to: lastProjectedPoints[i + 4] + offset,
-                                    data: Color.black.rawValue)
+                                    data: Pixel.black)
                 }
             }
 

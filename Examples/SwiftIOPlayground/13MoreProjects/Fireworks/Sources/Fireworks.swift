@@ -24,17 +24,17 @@ public struct Fireworks {
         var frameBuffer = [UInt32](repeating: 0, count: screen.width * screen.width)
 
         var colorIndex = 0
-        let colors: [Color] = [
+        let colors: [Pixel] = [
             .pink, .red, .lime, .blue, .cyan, 
             .purple, .magenta, .orange, .yellow
         ]
 
-        let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: screen.width, height: screen.height)
+        let layer = Layer(at: Point.zero, width: screen.width, height: screen.height)
 
 
         let font = Font(path: "/lfs/Resources/Fonts/Roboto-Regular.ttf", pointSize: 10, dpi: 220)
-        let text1 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 40), anchorPoint: UnitPoint.center, string: "Happy", font: font, foregroundColor: Color.red)
-        let text2 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 80), anchorPoint: UnitPoint.center, string: "Christmas", font: font, foregroundColor: Color.red)
+        let text1 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 40), anchorPoint: UnitPoint.center, string: "Happy", font: font, foregroundColor: Pixel.red)
+        let text2 = TextLayer(at: Point(x: layer.bounds.size.halfWidth, y: 80), anchorPoint: UnitPoint.center, string: "Christmas", font: font, foregroundColor: Pixel.red)
 
         layer.append(text1)
         layer.append(text2)
@@ -84,7 +84,7 @@ public struct Fireworks {
                 exploded = false
             }
 
-            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
 

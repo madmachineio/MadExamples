@@ -157,11 +157,11 @@ struct Colors {
     static let violet: UInt32 = 0x9400D3
     static let colors888 = [red, orange, yellow, green, blue, indigo, violet]
     // Get 16bit color data.
-    static let colors565: [UInt16] = colors888.map { getRGB565BE($0) }
+    static let colors565: [UInt16] = colors888.map { toRGB565BE($0) }
 
     // The screen needs RGB565 color data, so change color data from UInt32 to UInt16.
     // Besides, the board uses little endian format, so the bytes are swapped.
-    static func getRGB565BE(_ color: UInt32) -> UInt16 {
+    static func toRGB565BE(_ color: UInt32) -> UInt16 {
         return (UInt16((color & 0xF80000) >> 8) | UInt16((color & 0xFC00) >> 5) | UInt16((color & 0xF8) >> 3)).byteSwapped
     }
 }

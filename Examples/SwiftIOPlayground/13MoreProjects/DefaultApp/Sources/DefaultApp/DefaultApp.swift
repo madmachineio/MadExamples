@@ -57,25 +57,25 @@ public struct DefaultApp {
         var frameBuffer = [UInt32](repeating: 0, count: screen.width * screen.height)
 
         let colors = [
-            Color.black,
-            Color.gray,
-            Color.silver,
-            Color.red,
-            Color.pink,
-            Color.maroon,
-            Color.lime,
-            Color.green,
-            Color.olive,
-            Color.blue,
-            Color.navy,
-            Color.teal,
-            Color.cyan,
-            Color.aqua,
-            Color.purple,
-            Color.magenta,
-            Color.orange,
-            Color.yellow,
-            Color.white,
+            Pixel.black,
+            Pixel.gray,
+            Pixel.silver,
+            Pixel.red,
+            Pixel.pink,
+            Pixel.maroon,
+            Pixel.lime,
+            Pixel.green,
+            Pixel.olive,
+            Pixel.blue,
+            Pixel.navy,
+            Pixel.teal,
+            Pixel.cyan,
+            Pixel.aqua,
+            Pixel.purple,
+            Pixel.magenta,
+            Pixel.orange,
+            Pixel.yellow,
+            Pixel.white,
         ]
         var colorIndex = 0
 
@@ -84,33 +84,33 @@ public struct DefaultApp {
         let robotoFont = Font(path: "/lfs/Resources/Fonts/Roboto-Regular.ttf" , pointSize: 6, dpi: 220)
 
         let rootLayer = rootBackgroundInit(font: robotoFont)
-        rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
 
 
-        let temperatureText = TextLayer(at: Point(10, 12), anchorPoint: UnitPoint.zero, string: "°C", font: robotoFont, foregroundColor: Color(0x39E910))
+        let temperatureText = TextLayer(at: Point(10, 12), string: "°C", font: robotoFont, foregroundColor: Pixel(0xFF39E910))
         temperatureText.pointSize = 10
         rootLayer.append(temperatureText)
 
-        let humidityText = TextLayer(at: Point(10, 48), anchorPoint: UnitPoint.zero, string: "%", font: robotoFont, foregroundColor: Color(0x1e9cf4))
+        let humidityText = TextLayer(at: Point(10, 48), string: "%", font: robotoFont, foregroundColor: Pixel(0xFF1e9cf4))
         humidityText.pointSize = 10
         rootLayer.append(humidityText)
 
-        let colorBar = Layer(at: Point(10, 185), anchorPoint: UnitPoint.zero, width: 100, height: 30, backgroundColor: Color.white)
+        let colorBar = Layer(at: Point(10, 185), width: 100, height: 30, backgroundColor: Pixel.white)
         rootLayer.append(colorBar)
 
 
-        let timeText = TextLayer(at: Point(124, 22), anchorPoint: UnitPoint.zero, string: " ", font: robotoFont, foregroundColor: Color.purple)
+        let timeText = TextLayer(at: Point(124, 22), string: " ", font: robotoFont, foregroundColor: Pixel.purple)
         rootLayer.append(timeText)
 
-        let soundState = TextLayer(at: Point(124, 42), anchorPoint: UnitPoint.zero, string: "Play sound", font: robotoFont, foregroundColor: Color.red)
+        let soundState = TextLayer(at: Point(124, 42), string: "Play sound", font: robotoFont, foregroundColor: Pixel.red)
         rootLayer.append(soundState)
         
-        let buzzerBar = Layer(at: Point(130, 106), anchorPoint: UnitPoint.zero, width: 1, height: 28, backgroundColor: Color(0xFFF568))
+        let buzzerBar = Layer(at: Point(130, 106), width: 1, height: 28, backgroundColor: Pixel(0xFFFFF568))
         rootLayer.append(buzzerBar)
         
-        let accBar = Layer(at: Point(130, 186), anchorPoint: UnitPoint.zero, width: 5, height: 27, backgroundColor: Color.orange)
+        let accBar = Layer(at: Point(130, 186), width: 5, height: 27, backgroundColor: Pixel.orange)
         rootLayer.append(accBar)
 
 
@@ -154,11 +154,11 @@ public struct DefaultApp {
                     let dutycycle = Float(value) / 100.0
                     led.setDutycycle(dutycycle)
                     rootLayer.draw() { canvas in
-                        canvas.fillRectangle(at: Point(x: 10, y: 106), width: 100, height: 28, data: Color.white.rawValue)
+                        canvas.fillRectangle(at: Point(x: 10, y: 106), width: 100, height: 28, data: Pixel.white)
                     }
                     if value != 0 {
                         rootLayer.draw() { canvas in
-                            canvas.fillRectangle(at: Point(x: 10, y: 106), width: value, height: 28, data: Color(0xFF5E5E).rawValue)
+                            canvas.fillRectangle(at: Point(x: 10, y: 106), width: value, height: 28, data: Pixel(0xFFFF5E5E))
                         }
                     }
                 }
@@ -184,11 +184,11 @@ public struct DefaultApp {
                 }
 
                 if key == d19Module && value == 2 {
-                    soundState.foregroundColor = Color.lime
+                    soundState.foregroundColor = Pixel.lime
                 }
 
                 if key == d19Module && value == 0 {
-                    soundState.foregroundColor = Color.red
+                    soundState.foregroundColor = Pixel.red
                 }
             }
 
@@ -248,7 +248,7 @@ public struct DefaultApp {
                 timeText.string = hourStr + minStr + secStr
             }
 
-            rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            rootLayer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
         }
@@ -257,60 +257,60 @@ public struct DefaultApp {
 
 
 func rootBackgroundInit(font: Font) -> Layer {
-    let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: 240, height: 240)
+    let layer = Layer(at: Point.zero, width: 240, height: 240)
 
     layer.draw() { canvas in
-        canvas.fill(Color.white.rawValue)
-        canvas.drawLine(from: Point(x: 120, y: 0), to: Point(x: 120, y: 239), stroke: 2, data: Color.pink.rawValue)
-        canvas.drawLine(from: Point(x: 120, y: 40), to: Point(x: 239, y: 40), stroke: 2, data: Color.pink.rawValue)
-        canvas.drawLine(from: Point(x: 0, y: 80), to: Point(x: 239, y: 80), stroke: 2, data: Color.pink.rawValue)
-        canvas.drawLine(from: Point(x: 0, y: 160), to: Point(x: 239, y: 160), stroke: 2, data: Color.pink.rawValue)
+        canvas.fill(Pixel.white)
+        canvas.drawLine(from: Point(x: 120, y: 0), to: Point(x: 120, y: 239), stroke: 2, data: Pixel.pink)
+        canvas.drawLine(from: Point(x: 120, y: 40), to: Point(x: 239, y: 40), stroke: 2, data: Pixel.pink)
+        canvas.drawLine(from: Point(x: 0, y: 80), to: Point(x: 239, y: 80), stroke: 2, data: Pixel.pink)
+        canvas.drawLine(from: Point(x: 0, y: 160), to: Point(x: 239, y: 160), stroke: 2, data: Pixel.pink)
     }
 
     layer.draw() { canvas in
-        canvas.drawRectangle(at: Point(x: 10, y: 105), width: 100, height: 30, stroke: 3, data: Color(0x252525).rawValue)
-        canvas.drawRectangle(at: Point(x: 130, y: 105), width: 100, height: 30, stroke: 3, data: Color(0x252525).rawValue)
-        canvas.drawRectangle(at: Point(x: 130, y: 185), width: 100, height: 30, stroke: 2, data: Color(0x252525).rawValue)
+        canvas.drawRectangle(at: Point(x: 10, y: 105), width: 100, height: 30, stroke: 3, data: Pixel(0xFF252525))
+        canvas.drawRectangle(at: Point(x: 130, y: 105), width: 100, height: 30, stroke: 3, data: Pixel(0xFF252525))
+        canvas.drawRectangle(at: Point(x: 130, y: 185), width: 100, height: 30, stroke: 2, data: Pixel(0xFF252525))
     }
 
     print("display init 0")
-    let time = TextLayer(at: Point(124, 2), anchorPoint: UnitPoint.zero, string: "Uptime", font: font, foregroundColor: Color.black)
+    let time = TextLayer(at: Point(124, 2), string: "Uptime", font: font, foregroundColor: Pixel.black)
     layer.append(time)
 
     print("display init 1")
-    let soundAction = TextLayer(at: Point(124, 65), anchorPoint: UnitPoint.zero, string: "Press Button D19", font: font, foregroundColor: Color.gray)
+    let soundAction = TextLayer(at: Point(124, 65), string: "Press Button D19", font: font, foregroundColor: Pixel.gray)
     soundAction.pointSize = 5
     layer.append(soundAction)
 
 
     print("display init 2")
-    let led = TextLayer(at: Point(0, 82), anchorPoint: UnitPoint.zero, string: "LED brightness", font: font, foregroundColor: Color(0x252525))
-    let ledAction = TextLayer(at: Point(0, 142), anchorPoint: UnitPoint.zero, string: "Rotate Knob A0", font: font, foregroundColor: Color.gray)
+    let led = TextLayer(at: Point(0, 82), string: "LED brightness", font: font, foregroundColor: Pixel(0xFF252525))
+    let ledAction = TextLayer(at: Point(0, 142), string: "Rotate Knob A0", font: font, foregroundColor: Pixel.gray)
     ledAction.pointSize = 5
     layer.append(led)
     layer.append(ledAction)
 
     print("display init 3")
-    let buzzer = TextLayer(at: Point(124, 82), anchorPoint: UnitPoint.zero, string: "Buzzer pitch", font: font, foregroundColor: Color(0x252525))
-    let buzzerAction = TextLayer(at: Point(124, 142), anchorPoint: UnitPoint.zero, string: "Rotate Knob A11", font: font, foregroundColor: Color.gray)
+    let buzzer = TextLayer(at: Point(124, 82), string: "Buzzer pitch", font: font, foregroundColor: Pixel(0xFF252525))
+    let buzzerAction = TextLayer(at: Point(124, 142), string: "Rotate Knob A11", font: font, foregroundColor: Pixel.gray)
     buzzerAction.pointSize = 5
     layer.append(buzzer)
     layer.append(buzzerAction)
 
 
     print("display init 4")
-    let color = TextLayer(at: Point(0, 165), anchorPoint: UnitPoint.zero, string: "Color picker", font: font, foregroundColor: Color(0x252525))
-    let colorAction = TextLayer(at: Point(0, 225), anchorPoint: UnitPoint.zero, string: "Press Button D1", font: font, foregroundColor: Color.gray)
+    let color = TextLayer(at: Point(0, 165), string: "Color picker", font: font, foregroundColor: Pixel(0xFF252525))
+    let colorAction = TextLayer(at: Point(0, 225), string: "Press Button D1", font: font, foregroundColor: Pixel.gray)
     colorAction.pointSize = 5
     layer.append(color)
     layer.append(colorAction)
 
     print("display init 5")
-    let acc = TextLayer(at: Point(124, 165), anchorPoint: UnitPoint.zero, string: "Acceleration", font: font, foregroundColor: Color(0x252525))
-    let accAction = TextLayer(at: Point(124, 225), anchorPoint: UnitPoint.zero, string: "Tilt the board", font: font, foregroundColor: Color.gray)
+    let acc = TextLayer(at: Point(124, 165), string: "Acceleration", font: font, foregroundColor: Pixel(0xFF252525))
+    let accAction = TextLayer(at: Point(124, 225), string: "Tilt the board", font: font, foregroundColor: Pixel.gray)
     accAction.pointSize = 5
     layer.append(acc)
     layer.append(accAction)
 
-    return layer.presentation
+    return layer.presentation()
 }

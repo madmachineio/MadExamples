@@ -3,7 +3,7 @@ import SwiftIO
 
 typealias Point = (x: Int, y: Int)
 
-struct PongGame {
+class PongGame {
     var leftPlayer: Paddle
     var rightPlayer: Paddle
 
@@ -89,7 +89,7 @@ struct PongGame {
     }
 
 
-    mutating func play() {
+    func play() {
         if leftPlayer.score < Constants.targetScore &&
             rightPlayer.score < Constants.targetScore
         {
@@ -253,7 +253,7 @@ struct PongGame {
     }
 
     // Reset the game.
-    mutating func reset() {
+    func reset() {
         screen.clearScreen(Constants.bgColor)
 
         window.draw()

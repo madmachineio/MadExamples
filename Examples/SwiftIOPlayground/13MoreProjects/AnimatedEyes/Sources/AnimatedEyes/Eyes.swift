@@ -19,15 +19,15 @@ class EyesAnimation {
     let screen: ST7789
     var screenBuffer: [UInt16]
     let canvas: Canvas
-    let eyeColor: Color
-    let backgroundColor: Color
+    let eyeColor: Pixel
+    let backgroundColor: Pixel
 
     init(screen: ST7789) {
         self.screen = screen
         canvas = Canvas(width: screen.width, height: screen.height)
         screenBuffer = [UInt16](repeating: 0, count: screen.width * screen.height)
-        backgroundColor = Color.black
-        eyeColor = Color.aqua
+        backgroundColor = Pixel.black
+        eyeColor = Pixel.aqua
     }
 
     func draw(eyes: Eyes) {
@@ -67,15 +67,15 @@ class EyesAnimation {
     }
 
     func close() {
-        _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor.rawValue)
-        _ = canvas.fillRoundedRectangle(at: Point(10, 105), width: 100, height: 30, radius: 10, data: eyeColor.rawValue)
-        _ = canvas.fillRoundedRectangle(at: Point(130, 105), width: 100, height: 30, radius: 10, data: eyeColor.rawValue) 
+        _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor)
+        _ = canvas.fillRoundedRectangle(at: Point(10, 105), width: 100, height: 30, radius: 10, data: eyeColor)
+        _ = canvas.fillRoundedRectangle(at: Point(130, 105), width: 100, height: 30, radius: 10, data: eyeColor) 
     }
 
     func normal() {
-        _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor.rawValue)
-        _ = canvas.fillRoundedRectangle(at: Point(20, 85), width: 80, height: 70, radius: 24, data: eyeColor.rawValue)
-        _ = canvas.fillRoundedRectangle(at: Point(140, 85), width: 80, height: 70, radius: 24, data: eyeColor.rawValue) 
+        _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor)
+        _ = canvas.fillRoundedRectangle(at: Point(20, 85), width: 80, height: 70, radius: 24, data: eyeColor)
+        _ = canvas.fillRoundedRectangle(at: Point(140, 85), width: 80, height: 70, radius: 24, data: eyeColor) 
     }
 
     func blink() {
@@ -94,8 +94,8 @@ class EyesAnimation {
     func happy() {
         for i in 0...5 {
             normal()
-            _ = canvas.fillCircle(at: Point(60, 200 - i * 5), radius: 60, data: backgroundColor.rawValue) 
-            _ = canvas.fillCircle(at: Point(180, 200 - i * 5), radius: 60, data: backgroundColor.rawValue) 
+            _ = canvas.fillCircle(at: Point(60, 200 - i * 5), radius: 60, data: backgroundColor) 
+            _ = canvas.fillCircle(at: Point(180, 200 - i * 5), radius: 60, data: backgroundColor) 
             updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
             sleep(ms: 50)
         }
@@ -104,8 +104,8 @@ class EyesAnimation {
     func sad() {
         for i in 0...5 {
             normal()
-            _ = canvas.fillTriangle(Point(15, 85), Point(120, 85), Point(15, 90 + i * 6), data: backgroundColor.rawValue)
-            _ = canvas.fillTriangle(Point(120, 85), Point(225, 85), Point(225, 90 + i * 6), data: backgroundColor.rawValue)
+            _ = canvas.fillTriangle(Point(15, 85), Point(120, 85), Point(15, 90 + i * 6), data: backgroundColor)
+            _ = canvas.fillTriangle(Point(120, 85), Point(225, 85), Point(225, 90 + i * 6), data: backgroundColor)
             updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
             sleep(ms: 50)
         }
@@ -114,8 +114,8 @@ class EyesAnimation {
     func upset() {
         for i in 0...5 {
             normal()
-            _ = canvas.fillRectangle(at: Point(20, 85), width: 85, height: 10 + i * 5, data: backgroundColor.rawValue)
-            _ = canvas.fillRectangle(at: Point(140, 85), width: 85, height: 10 + i * 5, data: backgroundColor.rawValue)
+            _ = canvas.fillRectangle(at: Point(20, 85), width: 85, height: 10 + i * 5, data: backgroundColor)
+            _ = canvas.fillRectangle(at: Point(140, 85), width: 85, height: 10 + i * 5, data: backgroundColor)
             updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
             sleep(ms: 50)
         }
@@ -124,7 +124,7 @@ class EyesAnimation {
     func angry() {
         for i in 0...5 {
             normal()
-            _ = canvas.fillTriangle(Point(15, 85), Point(225, 85), Point(120, 90 + i * 6), data: backgroundColor.rawValue)
+            _ = canvas.fillTriangle(Point(15, 85), Point(225, 85), Point(120, 90 + i * 6), data: backgroundColor)
             updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
             sleep(ms: 50)
         }   
@@ -132,19 +132,19 @@ class EyesAnimation {
 
     func wonder() {
         for i in 0...5 {
-            _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor.rawValue)
+            _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor)
             let change = i * 4
-            _ = canvas.fillRoundedRectangle(at: Point(20, 105 - change), width: 80, height: 50 + change, radius: 20, data: eyeColor.rawValue)
-            _ = canvas.fillRoundedRectangle(at: Point(140, 85 + change), width: 80, height: 70 - change, radius: 20, data: eyeColor.rawValue) 
+            _ = canvas.fillRoundedRectangle(at: Point(20, 105 - change), width: 80, height: 50 + change, radius: 20, data: eyeColor)
+            _ = canvas.fillRoundedRectangle(at: Point(140, 85 + change), width: 80, height: 70 - change, radius: 20, data: eyeColor) 
             updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
             sleep(ms: 50)
         }
 
         for i in 0...5 {
-            _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor.rawValue)
+            _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor)
             let change = i * 4
-            _ = canvas.fillRoundedRectangle(at: Point(20, 85 + change), width: 80, height: 70 - change, radius: 20, data: eyeColor.rawValue)
-            _ = canvas.fillRoundedRectangle(at: Point(140, 85), width: 80, height: 70, radius: 20, data: eyeColor.rawValue) 
+            _ = canvas.fillRoundedRectangle(at: Point(20, 85 + change), width: 80, height: 70 - change, radius: 20, data: eyeColor)
+            _ = canvas.fillRoundedRectangle(at: Point(140, 85), width: 80, height: 70, radius: 20, data: eyeColor) 
             updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
             sleep(ms: 50)
         }
@@ -176,7 +176,7 @@ class EyesAnimation {
             leftEyePos.y = (canvas.height - leftEyeSize.height) / 2
             rightEyePos.y = (canvas.height - rightEyeSize.height) / 2
 
-            _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor.rawValue)
+            _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor)
             drawEyes(leftEyePos: leftEyePos, leftEyeSize: leftEyeSize, rightEyePos: rightEyePos, rightEyeSize: rightEyeSize)
             sleep(ms: 100)
         }
@@ -246,9 +246,9 @@ class EyesAnimation {
     }
 
     func drawEyes(leftEyePos: Point, leftEyeSize: Size, rightEyePos: Point, rightEyeSize: Size) {
-        _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor.rawValue)
-        _ = canvas.fillRoundedRectangle(at: leftEyePos, width: leftEyeSize.width, height: leftEyeSize.height, radius: 24, data: eyeColor.rawValue)
-        _ = canvas.fillRoundedRectangle(at: rightEyePos, width: rightEyeSize.width, height: rightEyeSize.height, radius: 24, data: eyeColor.rawValue)
+        _ = canvas.fillRectangle(at: Point.zero, width: canvas.width, height: canvas.height, data: backgroundColor)
+        _ = canvas.fillRoundedRectangle(at: leftEyePos, width: leftEyeSize.width, height: leftEyeSize.height, radius: 24, data: eyeColor)
+        _ = canvas.fillRoundedRectangle(at: rightEyePos, width: rightEyeSize.width, height: rightEyeSize.height, radius: 24, data: eyeColor)
         updateDisplay(canvas: canvas, screenBuffer: &screenBuffer, screen: screen)
     }
 
@@ -313,7 +313,7 @@ class EyesAnimation {
 
         for y in dirty.minY..<dirty.maxY {
             for x in dirty.minX..<dirty.maxX {
-                screenBuffer[index] = Color.getRGB565LE(canvasBuffer[y * stride + x])
+                screenBuffer[index] = Pixel.toRGB565LE(canvasBuffer[y * stride + x])
                 index += 1
             }
         }

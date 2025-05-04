@@ -19,7 +19,7 @@ public struct SandSimulation {
         var screenBuffer = [UInt16](repeating: 0, count: screen.width * screen.width)
         var frameBuffer = [UInt32](repeating: 0, count: screen.width * screen.width)
 
-        let layer = Layer(at: Point.zero, anchorPoint: UnitPoint.zero, width: screen.width, height: screen.height)
+        let layer = Layer(at: Point.zero, width: screen.width, height: screen.height)
 
         // Initialize the accelerometer.
         let i2c = I2C(Id.I2C0)
@@ -27,14 +27,14 @@ public struct SandSimulation {
 
         // Draw the sand particle.
         var sand = Sand(layer: layer, accelerometer.readXYZ())
-        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+        layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
             screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
         }
 
         // Update sand particle positions based on movement.
         while true {
             sand.update(layer: layer, accelerometer.readXYZ())
-            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Color.getRGB565LE) { dirty, data in
+            layer.render(into: &frameBuffer, output: &screenBuffer, transform: Pixel.toRGB565LE) { dirty, data in
                 screen.writeBitmap(x: dirty.x, y: dirty.y, width: dirty.width, height: dirty.height, data: data)
             }
             sleep(ms: 1)
